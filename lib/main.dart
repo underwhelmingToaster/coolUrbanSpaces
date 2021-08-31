@@ -52,12 +52,13 @@ class _MapFragment extends State<StatefulMapFragment> {
 
         ),
         MarkerClusterLayerOptions(
-          markers: new SuggestionManager().formatSuggestions(), builder: (BuildContext context, List<Marker> markers) {
+          markers: new SuggestionManager().formatSuggestions(),
+          builder: (BuildContext context, List<Marker> markers) {
             return FloatingActionButton(
               child: Text(markers.length.toString()),
               onPressed: null
             );
-          }
+          },
         ),
       ],
     );
