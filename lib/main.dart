@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:latlong2/latlong.dart';
 import 'api/suggestionManager.dart';
 
@@ -39,7 +40,10 @@ class _MapFragment extends State<StatefulMapFragment> {
       options: new MapOptions(
         center: new LatLng(51.5, -0.09),
         zoom: 13.0,
-        controller: mc
+        controller: mc,
+        plugins: [
+          MarkerClusterPlugin()
+        ]
       ),
       layers: [
         new TileLayerOptions(
@@ -47,8 +51,13 @@ class _MapFragment extends State<StatefulMapFragment> {
             subdomains: ['a', 'b', 'c'],
 
         ),
-        MarkerLayerOptions(
-          markers: new SuggestionManager().formatSuggestions()
+        MarkerClusterLayerOptions(
+          markers: new SuggestionManager().formatSuggestions(), builder: (BuildContext context, List<Marker> markers) {
+            return FloatingActionButton(
+              child: Text(markers.length.toString()),
+              onPressed: null
+            );
+          }
         ),
       ],
     );
