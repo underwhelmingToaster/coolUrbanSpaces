@@ -15,6 +15,7 @@ class SuggestionManager {
     List<Marker> markers = [];
     var suggestions = getSuggestions();
     for (int i = 0; i < suggestions.length; i++){
+      if()
       markers.add(
           Marker(
             width: 80.0,
