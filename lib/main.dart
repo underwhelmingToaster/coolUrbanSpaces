@@ -36,7 +36,14 @@ class _MapFragment extends State<StatefulMapFragment> {
 
   @override
   Widget build(BuildContext context) {
-    return new FlutterMap(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Cool Urban Spaces'),
+
+      ),
+      body:
+
+      new FlutterMap(
       options: new MapOptions(
         center: new LatLng(51.5, -0.09),
         zoom: 13.0,
@@ -61,6 +68,7 @@ class _MapFragment extends State<StatefulMapFragment> {
           },
         ),
       ],
+    )
     );
   }
 }
