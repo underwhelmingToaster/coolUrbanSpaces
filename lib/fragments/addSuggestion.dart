@@ -54,6 +54,8 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
                   return null;
                 },
               ),
+              // TODO Radio Buttons for types
+
               Padding(padding: EdgeInsets.all(10),
                 child: ElevatedButton(
                   onPressed: () {
