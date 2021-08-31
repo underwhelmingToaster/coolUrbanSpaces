@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'api/suggestionManager.dart';
 
 void main() {
   runApp(MyApp());
@@ -47,17 +48,7 @@ class _MapFragment extends State<StatefulMapFragment> {
 
         ),
         MarkerLayerOptions(
-          markers: [
-            Marker(
-              width: 80.0,
-              height: 80.0,
-              point: LatLng(51.5, -0.09),
-              builder: (ctx) =>
-                  Container(
-                    child: Icon(Icons.location_pin)
-                  ),
-            ),
-          ],
+          markers: new SuggestionManager().formatSuggestions()
         ),
       ],
     );
