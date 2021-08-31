@@ -31,8 +31,8 @@ jobs:
         with:
           personal_token: ${{ secrets.PERSONAL_TOKEN }}
           src_path: web/
-          dst_path: static/
-          dst_owner: lbuchli
+          dst_path: /static/
+          dst_owner: lbuchli 
           dst_repo_name: cool_urban_spaces_backend
           
           
