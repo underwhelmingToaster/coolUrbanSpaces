@@ -6,6 +6,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:latlong2/latlong.dart';
 import 'api/suggestionManager.dart';
+import 'fragments/addSuggestion.dart' as addSuggestion;
 
 void main() {
   runApp(MyApp());
@@ -41,7 +42,11 @@ class _MapFragment extends State<StatefulMapFragment> {
         title: const Text('Cool Urban Spaces'),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {  },
+        onPressed: () { Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => addSuggestion.StatefulAddSuggestionFragment() ),
+        ); },
         child: const Icon(Icons.add),
       ),
       body:
@@ -66,7 +71,9 @@ class _MapFragment extends State<StatefulMapFragment> {
           builder: (BuildContext context, List<Marker> markers) {
             return FloatingActionButton(
               child: Text(markers.length.toString()),
-              onPressed: null
+              onPressed: () {
+
+              }
             );
           },
         ),
