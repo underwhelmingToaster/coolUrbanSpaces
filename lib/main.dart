@@ -39,7 +39,10 @@ class _MapFragment extends State<StatefulMapFragment> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cool Urban Spaces'),
-
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {  },
+        child: const Icon(Icons.add),
       ),
       body:
 
