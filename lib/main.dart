@@ -39,6 +39,11 @@ class _MapFragment extends State<StatefulMapFragment> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset("assets/images/Coolcity.png",
+          ),
+        ),
         title: const Text('Cool Urban Spaces'),
       ),
       floatingActionButton: FloatingActionButton(
