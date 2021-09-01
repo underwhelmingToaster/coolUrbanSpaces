@@ -73,9 +73,6 @@ class UrbanMapView extends StatelessWidget{
           },
         ),
       ],
-      nonRotatedLayers: [
-
-      ],
     );
   }
 

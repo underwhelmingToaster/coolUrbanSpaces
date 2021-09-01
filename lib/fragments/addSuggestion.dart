@@ -74,7 +74,7 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
                 child: Text("Type of Suggestion:")),
               DropdownButton(
                 isExpanded: true,
-                value: typeData = 0,
+                value: typeData,
                 items: [
                   DropdownMenuItem(
                     child: Text("General"), value: 0, ),
