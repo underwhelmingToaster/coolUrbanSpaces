@@ -13,8 +13,7 @@ class _ViewSuggestionFragment extends State<StatefulViewSuggestionFragment> {
   @override
   Widget build(BuildContext context) {
     int id = 1; // TODO hilfe ka wie
-    SuggestionManager sm = new SuggestionManager();
-    Suggestion selectedSuggestion = sm.getSuggestion(id) as Suggestion;
+    Suggestion selectedSuggestion = SuggestionManager.getSuggestion(id) as Suggestion;
     return Scaffold(
       appBar: AppBar(
         title: Text(selectedSuggestion.title),

@@ -46,7 +46,7 @@ class SuggestionManager{
 
   static Future<List<Marker>> formatSuggestions() async{
     List<Marker> markers = [];
-    List<Suggestion> suggestions = await getAllSuggestions();
+    List<Suggestion> suggestions = await getAllSugestions();
 
     for (int i = 0; i < suggestions.length; i++){
       Widget icon = SvgPicture.asset("icons/shade.svg");
