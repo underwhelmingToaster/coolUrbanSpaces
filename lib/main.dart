@@ -40,7 +40,6 @@ class StatefulMapFragment extends StatefulWidget {
 }
 
 class _MapFragment extends State<StatefulMapFragment> {
-  //var mc = new MapController();
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +79,7 @@ class _MapFragment extends State<StatefulMapFragment> {
   }
 
   void reloadDataScheduler(var interval, MarkerController controller){
+    SuggestionManager.formatSuggestions().then((value) => controller.markerList = value);
     Timer.periodic(interval, (Timer timer) {
       SuggestionManager.formatSuggestions().then((value) => controller.markerList = value);
     });

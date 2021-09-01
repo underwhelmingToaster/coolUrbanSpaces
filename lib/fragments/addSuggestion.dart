@@ -48,7 +48,7 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
                   }
                   return null;
                 },
-                onSaved: (value) {
+                onChanged: (value) {
                   this.titleData = value!;
                 }
               ),
@@ -66,7 +66,7 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
                   }
                   return null;
                 },
-                onSaved: (value) {
+                onChanged: (value) {
                   this.descData = (value)!;
                 }
               ),
