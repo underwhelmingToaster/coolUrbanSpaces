@@ -2,6 +2,7 @@ import 'package:cool_urban_spaces/Controller/markerController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_location/flutter_map_location.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:provider/provider.dart';
 import 'package:latlong2/latlong.dart';
@@ -19,19 +20,20 @@ class UrbanMapView extends StatelessWidget{
     var controller = Provider.of<MarkerController>(context);
     return new FlutterMap(
       options: new MapOptions(
-        center: new LatLng(51.5, -0.09),
+        center: new LatLng(47.0, 8.0),
         zoom: 13.0,
         controller: mc,
         plugins: [
-          MarkerClusterPlugin()
+          MarkerClusterPlugin(),
+          LocationPlugin(),
         ],
         onTap: (point) {
           lastLatTap = point.latitude;
           lastLngTap = point.longitude;
         },
         onLongPress: (point) {
-          point.latitude = lastLngTap;
-          point.longitude = lastLngTap;
+          lastLngTap = point.latitude;
+          lastLngTap = point.longitude;
           Navigator.push(context, MaterialPageRoute(
               builder: (context) => addSuggestion.StatefulAddSuggestionFragment()));
         },
@@ -57,7 +59,53 @@ class UrbanMapView extends StatelessWidget{
             );
           },
         ),
+        LocationOptions(
+          locationButton(),
+          onLocationUpdate: (LatLngData? ld) {
+            print(
+                'Location updated: ${ld?.location} (accuracy: ${ld?.accuracy})');
+          },
+          onLocationRequested: (LatLngData? ld) {
+            if (ld == null) {
+              return;
+            }
+            mc.move(ld.location, 16.0);
+          },
+        ),
       ],
     );
+  }
+
+  LocationButtonBuilder locationButton() {
+    return (BuildContext context, ValueNotifier<LocationServiceStatus> status,
+        Function onPressed) {
+      return Align(
+        alignment: Alignment.bottomRight,
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 16.0, right: 16.0),
+          child: FloatingActionButton(
+              child: ValueListenableBuilder<LocationServiceStatus>(
+                  valueListenable: status,
+                  builder: (BuildContext context, LocationServiceStatus value,
+                      Widget? child) {
+                    switch (value) {
+                      case LocationServiceStatus.disabled:
+                      case LocationServiceStatus.permissionDenied:
+                      case LocationServiceStatus.unsubscribed:
+                        return const Icon(
+                          Icons.location_disabled,
+                          color: Colors.white,
+                        );
+                      default:
+                        return const Icon(
+                          Icons.location_searching,
+                          color: Colors.white,
+                        );
+                    }
+                  }),
+              onPressed: () => onPressed()),
+        ),
+      );
+    };
   }
 }

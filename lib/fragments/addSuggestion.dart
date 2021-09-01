@@ -48,8 +48,8 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
                   }
                   return null;
                 },
-                onSaved: (value) {
-                  this.titleData = value!;
+                onChanged: (value) {
+                  this.titleData = value;
                 }
               ),
               TextFormField(
@@ -66,15 +66,15 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
                   }
                   return null;
                 },
-                onSaved: (value) {
-                  this.descData = (value)!;
+                onChanged: (value) {
+                  this.descData = value;
                 }
               ),
               Padding(padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
                 child: Text("Type of Suggestion:")),
               DropdownButton(
                 isExpanded: true,
-                value: typeData = 0,
+                value: typeData,
                 items: [
                   DropdownMenuItem(
                     child: Text("General"), value: 0, ),

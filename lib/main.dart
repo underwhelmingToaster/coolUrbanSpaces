@@ -54,8 +54,7 @@ class _MapFragment extends State<StatefulMapFragment> {
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Image.asset("assets/images/Coolcity.png",
-          ),
+          child: Image.asset("assets/images/Coolcity.png",),
         ),
         title: const Text('Cool Urban Spaces'),
           backgroundColor: Color(0xff92d396
