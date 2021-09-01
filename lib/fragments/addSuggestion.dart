@@ -22,7 +22,6 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
 
   void submit(){
     new SuggestionManager().postSuggestion(new Suggestion(titleData, descData, typeData,  lastLatTap, lastLngTap));
-
   }
 
   @override
@@ -30,9 +29,6 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Add a Suggestion"),
-        actions: <Widget> [
-          IconButton(onPressed: () { null; }, icon: Icon(Icons.add)) // TODO implement onpressed
-        ],
       ),
       body: Form (
         key: _formKey,
@@ -80,38 +76,22 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
                 value: typeData = 0,
                 items: [
                   DropdownMenuItem(
-                    child: Text("General"),
-                    value: 0,
-                  ),
+                    child: Text("General"), value: 0, ),
                   DropdownMenuItem(
-                    child: Text("Shading"),
-                    value: 1,
-                  ),
+                    child: Text("Shading"), value: 1, ),
                   DropdownMenuItem(
-                    child: Text("Seating"),
-                    value: 2,
-                  ),
+                    child: Text("Seating"), value: 2, ),
                   DropdownMenuItem(
-                    child: Text("Gardening"),
-                    value: 3,
-                  ),
+                    child: Text("Gardening"), value: 3, ),
                   DropdownMenuItem(
-                    child: Text("Social"),
-                    value: 4,
-                  ),
+                    child: Text("Social"), value: 4, ),
                   DropdownMenuItem(
-                    child: Text("Water"),
-                    value: 5,
-                  ),
+                    child: Text("Water"), value: 5, ),
                   DropdownMenuItem(
-                    child: Text("Plants"),
-                    value: 6,
-                  ),
+                    child: Text("Plants"), value: 6, ),
                 ],
                 onChanged: (value) {
-                  setState(() {
-                    typeData = value as int;
-                  });
+                  setState(() { typeData = value as int; });
                 }
               ),
               Padding(padding: EdgeInsets.all(30),
