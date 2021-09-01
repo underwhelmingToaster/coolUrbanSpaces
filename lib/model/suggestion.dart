@@ -14,6 +14,16 @@ class Suggestion {
       text = json['text'],
       type = json['type'],
       lat = json['lat'],
-      lng = json['lng'],
+      lng = json['lon'],
       id = json['id'];
+
+  Map<String, dynamic> toJson() => {
+    'title' : title,
+    'text' : text,
+    'type' : type,
+    'lat' : lat,
+    'lon' : lng,
+    'id' : id,
+  };
+
 }
