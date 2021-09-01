@@ -20,9 +20,7 @@ class SuggestionManager {
         suggestions.add(element);
       });
 
-
       return suggestions;
-      //TOOD: Loop
     }else{
       throw Exception('Failed to load suggestions');
     }
@@ -71,6 +69,6 @@ class SuggestionManager {
     return markers;
     }
 
-  }
-
 }
+
+
