@@ -18,7 +18,7 @@ class _ViewSuggestionFragment extends State<StatefulViewSuggestionFragment> {
   Widget build(BuildContext context) {
     var controller = Provider.of<MarkerController>(context);
     var selectedSuggestion;
-    SuggestionManager.getAllSugestions().then((value) => {
+    SuggestionManager.getAllSuggestions().then((value) => {
       value.forEach((element) {
         var pos = new LatLng(element.lat, element.lng);
         if(pos.latitude == element.lat && pos.longitude == element.lng){
