@@ -20,6 +20,8 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
 
   void submit(){
     SuggestionManager.postSuggestion(new Suggestion(titleData, descData, typeData,  lastLatTap, lastLngTap));
+    Navigator.pop(context, MaterialPageRoute(
+        builder: (context) => StatefulMapFragment()));
   }
 
   @override
@@ -96,10 +98,11 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
+                      submit();
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Processing Data')),
                       );
-                      this.submit;
+
                     }
                   },
                   child: const Text('Submit'),
