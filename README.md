@@ -1,8 +1,14 @@
-Cool City
+## Cool City
 
-The goal of the mobile/web application is to formulate and rate citizen suggestions on how to improve public and (semi-)private urban open spaces throughout Switzerland in terms of the city climate and general living conditions. The initial idea was focused on suggestions concerning urban heat including infrastructure such as shade structures (tents), trees, water points and green facades. However, the concept of suggestions to improve the neighborhood can easily and intuitively be expanded to include suggestions about social and ecological topics in general.
+This project has been created for the [Opendata Hackaton 2021](https://hack.opendata.ch/event/36#top "Opendata Hackaton 2021") by Felix Reiniger, Lucas Buchli, Fabio Zahner, Remo Steiner, Jurek Müller under the lead of Stefan Keller.
 
-The application will be map based, where users can add suggestions, represented by different icons, to a specific location and be able to see and participate in active suggestions in their neighborhood. A mockup has been created and can be seen in the header slides.
+
+<details>
+  <summary>Project Description by Stefan F. Keller</summary>
+  
+The goal of the mobile/web application is to formulate and rate citizen suggestions on how to improve public and (semi-)private urban open spaces throughout Switzerland in terms of the city climate and general living conditions. The initial idea was focused on suggestions concerning urban heat including infrastructure such as shade structures (tents), trees, water points and green facades. However, the concept of suggestions to improve the neigborhood can easily and intuitivly be expanded to include suggestions about social and ecological topics in general.
+
+The application is map based, where users can add suggestions, represented by different icons, to a specific location and be able to see and participate in active suggestions in their neighborhood. A mockup has been created and can be seen in the header slides.
 
 The application has the goal to facilitate active discussion between the users around the presented ideas and to enable direct action to be taken.
 
@@ -12,6 +18,12 @@ One crucial part of implementing a suggestion is to convince the owners of the r
 
 This application is similar to "Züri wie neu" (mySociety's popular map-based reporting platform), but includes proposals in/for urban spaces. It must be) privacy preserving and is (will be) implemented based on open source software and open data, in particular OpenStreetMap data as well as Open Government Data from the City of Zurich and SwissTopo.
 
-For more info about the challenge visit https://etherpad.wikimedia.org/p/CoolUrbanSpaces For more info about data and services on OpenStreetMap (OSM) see https://etherpad.wikimedia.org/p/OSM (especially useful also for challenge 5,6 and 8.)
+For more info about the challenge visit https://etherpad.wikimedia.org/p/CoolUrbanSpaces For more info about data and services on OpenStreetMap (OSM) see https://etherpad.wikimedia.org/p/OSM 
+</details>
 
-Source code back end: https://github.com/lbuchli/cool_urban_spaces_backend
+------------
+
+
+GitHub Repository for Backend Code: https://github.com/lbuchli/cool_urban_spaces_backend
+
+Final Project Presentation: [Google Slides](https://docs.google.com/presentation/d/1gYXR3Hr03T3v8YOBjuL17Dgy2pBqWmk4dss8XZobG0Y/edit#slide=id.gec934c3aab_8_0 "Google Slides")
