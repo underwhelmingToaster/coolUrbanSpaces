@@ -64,6 +64,15 @@ class _MapFragment extends State<StatefulMapFragment> {
           ),
         ),
         title: const Text('Cool Urban Spaces'),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.menu),
+              tooltip: 'Show Menu',
+              onPressed: () {
+                // TODO menu
+              },
+            ),
+          ]
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -108,6 +117,7 @@ class _MapFragment extends State<StatefulMapFragment> {
             return FloatingActionButton(
               child: Text(markers.length.toString()),
               onPressed: () {
+                // TODO au hilfe zämme mit em andere todo
               }
             );
           },
