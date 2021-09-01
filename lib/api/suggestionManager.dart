@@ -67,7 +67,7 @@ class SuggestionManager{
               point: LatLng(suggestions[i].lat, suggestions[i].lng),
               builder: (ctx) =>
                   Container(
-                      child: Icon(Icons.sd) // TODO get icons to work?
+                      child: icon
                   ))
       );
     }
