@@ -13,7 +13,12 @@ class SuggestionManager {
     final response = await http.get(Uri.parse('/api/suggestion'));
 
     if(response.statusCode == 200) {
-      var suggestions;
+      List<Suggestion> suggestions = [];
+      Map<String, dynamic> json = jsonDecode(response.body);
+      List<dynamic> suggestionList = json['suggestions'];
+      suggestionList.forEach((element) {
+        suggestions.add(element);
+      });
 
 
       return suggestions;
@@ -32,7 +37,7 @@ class SuggestionManager {
     }
   }
 
-  void pushSuggestion(Suggestion suggestion){
+  void postSuggestion(Suggestion suggestion){
     http.post(Uri.parse('/api/suggestion/'), body: suggestion);
   }
 
