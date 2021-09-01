@@ -59,8 +59,6 @@ class UrbanMapView extends StatelessWidget{
             );
           },
         ),
-      ],
-      nonRotatedLayers: [
         LocationOptions(
           locationButton(),
           onLocationUpdate: (LatLngData? ld) {
@@ -74,6 +72,9 @@ class UrbanMapView extends StatelessWidget{
             mc.move(ld.location, 16.0);
           },
         ),
+      ],
+      nonRotatedLayers: [
+
       ],
     );
   }
