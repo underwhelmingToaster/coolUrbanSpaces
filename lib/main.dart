@@ -64,6 +64,15 @@ class _MapFragment extends State<StatefulMapFragment> {
           ),
         ),
         title: const Text('Cool Urban Spaces'),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.menu),
+              tooltip: 'Show Snackbar',
+              onPressed: () {
+                // TODO snackbar
+              },
+            ),
+          ]
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
