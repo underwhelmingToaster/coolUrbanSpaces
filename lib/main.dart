@@ -12,8 +12,10 @@ void main() {
   runApp(MyApp());
 }
 
+double lastLatTap = 0.0;
+double lastLngTap = 0.0;
+
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -47,15 +49,13 @@ class _MapFragment extends State<StatefulMapFragment> {
         title: const Text('Cool Urban Spaces'),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () { Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => addSuggestion.StatefulAddSuggestionFragment() ),
-        ); },
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(
+              builder: (context) => addSuggestion.StatefulAddSuggestionFragment()));
+          },
         child: const Icon(Icons.add),
       ),
       body:
-
       new FlutterMap(
       options: new MapOptions(
         center: new LatLng(51.5, -0.09),
@@ -63,13 +63,22 @@ class _MapFragment extends State<StatefulMapFragment> {
         controller: mc,
         plugins: [
           MarkerClusterPlugin()
-        ]
-      ),
-      layers: [
+        ],
+        onTap: (point) {
+          lastLatTap = point.latitude;
+          lastLngTap = point.longitude;
+        },
+        onLongPress: (point) {
+          point.latitude = lastLngTap;
+          point.longitude = lastLngTap;
+          Navigator.push(context, MaterialPageRoute(
+          builder: (context) => addSuggestion.StatefulAddSuggestionFragment()));
+        },
+          ),
+        layers: [
         new TileLayerOptions(
-            urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-            subdomains: ['a', 'b', 'c'],
-
+          urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          subdomains: ['a', 'b', 'c'],
         ),
         MarkerClusterLayerOptions(
           /*markers: new SuggestionManager().formatSuggestions(),*/

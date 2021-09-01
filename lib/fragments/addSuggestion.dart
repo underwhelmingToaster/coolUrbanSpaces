@@ -1,6 +1,10 @@
+import 'package:cool_urban_spaces/main.dart';
+import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:cool_urban_spaces/api/suggestionManager.dart';
+import 'package:cool_urban_spaces/main.dart';
 
 class StatefulAddSuggestionFragment extends StatefulWidget {
   const StatefulAddSuggestionFragment({Key? key}) : super(key: key);
@@ -11,7 +15,15 @@ class StatefulAddSuggestionFragment extends StatefulWidget {
 
 class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
   final _formKey = GlobalKey<FormState>();
-  int selectedType = 1;
+
+  String titleData = "";
+  String descData = "";
+  int typeData = 1;
+
+  void submit(){
+    new SuggestionManager().postSuggestion(new Suggestion(titleData, descData, typeData,  lastLatTap, lastLngTap));
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +51,9 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
                   }
                   return null;
                 },
+                onSaved: (value) {
+                  this.titleData = value!;
+                }
               ),
               TextFormField(
                 decoration: InputDecoration(
@@ -54,12 +69,15 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
                   }
                   return null;
                 },
+                onSaved: (value) {
+                  this.descData = (value)!;
+                }
               ),
               Padding(padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
                 child: Text("Type of Suggestion:")),
               DropdownButton(
                 isExpanded: true,
-                value: selectedType = 0,
+                value: typeData = 0,
                 items: [
                   DropdownMenuItem(
                     child: Text("General"),
@@ -92,7 +110,7 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
                 ],
                 onChanged: (value) {
                   setState(() {
-                    selectedType = value as int;
+                    typeData = value as int;
                   });
                 }
               ),
@@ -102,8 +120,8 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
                     if (_formKey.currentState!.validate()) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Processing Data')),
-
                       );
+                      this.submit;
                     }
                   },
                   child: const Text('Submit'),

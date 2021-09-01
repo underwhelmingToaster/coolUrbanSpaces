@@ -39,6 +39,7 @@ class SuggestionManager {
     http.post(Uri.parse('/api/suggestion/'), body: suggestion);
   }
 
+
   Future<List<Marker>> formatSuggestions() async{
     List<Marker> markers = [];
     List<Suggestion> suggestions = await getAllSugestions();
@@ -52,7 +53,7 @@ class SuggestionManager {
         case 4: icon = SvgPicture.asset("../icons/social.svg"); break;
         case 5: icon = SvgPicture.asset("../icons/water.svg"); break;
         case 6: icon = SvgPicture.asset("../icons/plants.svg"); break;
-        case 7: icon = SvgPicture.asset("../icons/general.svg"); break;
+        case 0: icon = SvgPicture.asset("../icons/general.svg"); break;
         default: print("Could not assign type of suggestion.dart");
       }
       markers.add(
