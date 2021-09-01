@@ -69,7 +69,7 @@ class _MapFragment extends State<StatefulMapFragment> {
               icon: const Icon(Icons.menu),
               tooltip: 'Show Snackbar',
               onPressed: () {
-                // TODO snackbar
+                // TODO menu
               },
             ),
           ]

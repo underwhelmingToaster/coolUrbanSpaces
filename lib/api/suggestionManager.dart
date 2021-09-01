@@ -27,7 +27,7 @@ class SuggestionManager{
 
       return suggestions;
     }else{
-      throw Exception('Failed to load suggestions');
+      throw Exception('Failed to load all suggestions. Status: ' + response.statusCode.toString());
     }
   }
 
@@ -36,12 +36,17 @@ class SuggestionManager{
     if(response.statusCode == 200){
       return Suggestion.fromJson(jsonDecode(response.body));
     }else{
-      throw Exception('Failed to load suggestion');
+      throw Exception('Failed to load single suggestion. Status: ' + response.statusCode.toString());
     }
   }
 
-  static void postSuggestion(Suggestion suggestion){
-    http.post(Uri.parse('/api/suggestion/add/'), body: suggestion);
+  static Future<void> postSuggestion(Suggestion suggestion) async {
+    final response = await http.post(Uri.parse('/api/suggestion/add/'), body: suggestion);
+    if(response.statusCode == 200){
+      return;
+    }else{
+      throw Exception('Failed to post new Suggestion. Status: ' + response.statusCode.toString());
+    }
   }
 
   static Future<List<Marker>> formatSuggestions() async{
