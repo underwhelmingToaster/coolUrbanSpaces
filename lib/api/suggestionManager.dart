@@ -39,7 +39,6 @@ class SuggestionManager {
     http.post(Uri.parse('/api/suggestion/'), body: suggestion);
   }
 
-
   Future<List<Marker>> formatSuggestions() async{
     List<Marker> markers = [];
     List<Suggestion> suggestions = await getAllSuggestions();
@@ -47,13 +46,13 @@ class SuggestionManager {
     for (int i = 0; i < suggestions.length; i++){
       Widget icon = SvgPicture.asset("icons/shade.svg");
       switch(suggestions[i].type) {
-        case 1: icon = SvgPicture.asset("../icons/shade.svg"); break;
-        case 2: icon = SvgPicture.asset("../icons/seating.svg"); break;
-        case 3: icon = SvgPicture.asset("../icons/gardening.svg"); break;
-        case 4: icon = SvgPicture.asset("../icons/social.svg"); break;
-        case 5: icon = SvgPicture.asset("../icons/water.svg"); break;
-        case 6: icon = SvgPicture.asset("../icons/plants.svg"); break;
-        case 0: icon = SvgPicture.asset("../icons/general.svg"); break;
+        case 1: icon = Icon(Icons.wb_sunny_outlined); break;
+        case 2: icon = Icon(Icons.event_seat_outlined); break;
+        case 3: icon = Icon(Icons.local_florist_outlined); break;
+        case 4: icon = Icon(Icons.person_outline); break;
+        case 5: icon = Icon(Icons.waves_outlined); break;
+        case 6: icon = Icon(Icons.account_tree_outlined); break;
+        case 7: icon = Icon(Icons.lightbulb_outline); break;
         default: print("Could not assign type of suggestion.dart");
       }
       markers.add(
