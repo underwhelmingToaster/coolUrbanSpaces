@@ -35,7 +35,7 @@ class SuggestionManager{
   }
 
   static Future<void> postSuggestion(Suggestion suggestion) async {
-    final response = await http.post(Uri.parse('/api/suggestion/add'), body: suggestion);
+    final response = await http.post(Uri.parse('/api/suggestion/add/'), body: jsonEncode(suggestion));
     if(response.statusCode == 200){
       return;
     }else{
@@ -50,13 +50,13 @@ class SuggestionManager{
     for (int i = 0; i < suggestions.length; i++){
       Widget icon = SvgPicture.asset("icons/shade.svg");
       switch(suggestions[i].type) {
-        case 1: icon = Icon(Icons.wb_sunny_outlined); break;
-        case 2: icon = Icon(Icons.event_seat_outlined); break;
-        case 3: icon = Icon(Icons.local_florist_outlined); break;
-        case 4: icon = Icon(Icons.person_outline); break;
-        case 5: icon = Icon(Icons.waves_outlined); break;
-        case 6: icon = Icon(Icons.account_tree_outlined); break;
-        case 7: icon = Icon(Icons.lightbulb_outline); break;
+        case 1: icon = Icon(Icons.wb_sunny_outlined, color: Colors.yellow,); break;
+        case 2: icon = Icon(Icons.event_seat_outlined, color: Colors.grey,); break;
+        case 3: icon = Icon(Icons.local_florist_outlined, color: Colors.green,); break;
+        case 4: icon = Icon(Icons.person_outline, color: Colors.orange,); break;
+        case 5: icon = Icon(Icons.waves_outlined, color: Colors.blue,); break;
+        case 6: icon = Icon(Icons.account_tree_outlined, color: Colors.green,); break;
+        case 7: icon = Icon(Icons.lightbulb_outline, color: Colors.yellow,); break;
         default: print("Could not assign type of suggestion.dart");
       }
       markers.add(

@@ -61,13 +61,16 @@ class _MapFragment extends State<StatefulMapFragment> {
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Image.asset("assets/images/Coolcity.png",
+
           ),
         ),
         title: const Text('Cool Urban Spaces'),
+          backgroundColor: Color(0xff92d396
+          ),
           actions: <Widget>[
             IconButton(
               icon: const Icon(Icons.menu),
-              tooltip: 'Show Snackbar',
+              tooltip: 'Show Menu',
               onPressed: () {
                 // TODO menu
               },
@@ -109,6 +112,10 @@ class _MapFragment extends State<StatefulMapFragment> {
         ),
         MarkerClusterLayerOptions(
           markers: marker.markerList,
+          onMarkerTap: (value) {
+            var controller = Provider.of<MarkerController>(context);
+            controller.selectedMarker = value;
+          },
           builder: (BuildContext context, List<Marker> markers) {
             return FloatingActionButton(
               child: Text(markers.length.toString()),
