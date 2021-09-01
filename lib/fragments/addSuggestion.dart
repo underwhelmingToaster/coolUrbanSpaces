@@ -49,7 +49,7 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
                   return null;
                 },
                 onChanged: (value) {
-                  this.titleData = value!;
+                  this.titleData = value;
                 }
               ),
               TextFormField(
@@ -67,7 +67,7 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
                   return null;
                 },
                 onChanged: (value) {
-                  this.descData = (value)!;
+                  this.descData = value;
                 }
               ),
               Padding(padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
