@@ -70,6 +70,7 @@ class _MapFragment extends State<StatefulMapFragment> {
           ]
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xff92d396),
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(
               builder: (context) => addSuggestion.StatefulAddSuggestionFragment()));

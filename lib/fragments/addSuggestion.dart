@@ -32,6 +32,8 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Add a Suggestion"),
+        backgroundColor: Color(0xff92d396
+        ),
       ),
       body: Form (
         key: _formKey,
