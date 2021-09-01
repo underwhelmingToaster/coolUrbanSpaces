@@ -100,11 +100,14 @@ class _MapFragment extends State<StatefulMapFragment> {
         ),
         MarkerClusterLayerOptions(
           markers: marker.markerList,
+          onMarkerTap: (value) {
+            var controller = Provider.of<MarkerController>(context);
+            controller.selectedMarker = value;
+          },
           builder: (BuildContext context, List<Marker> markers) {
             return FloatingActionButton(
               child: Text(markers.length.toString()),
               onPressed: () {
-                // TODO au hilfe zämme mit em andere todo
               }
             );
           },
