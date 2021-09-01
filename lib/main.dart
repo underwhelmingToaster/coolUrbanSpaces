@@ -14,6 +14,7 @@ import 'fragments/addSuggestion.dart' as addSuggestion;
 
 void main() {
   runApp(MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -40,6 +41,7 @@ class StatefulMapFragment extends StatefulWidget {
 }
 
 class _MapFragment extends State<StatefulMapFragment> {
+  static bool started = false;
 
   @override
   Widget build(BuildContext context) {
@@ -79,10 +81,15 @@ class _MapFragment extends State<StatefulMapFragment> {
   }
 
   void reloadDataScheduler(var interval, MarkerController controller){
-    SuggestionManager.formatSuggestions().then((value) => controller.markerList = value);
-    Timer.periodic(interval, (Timer timer) {
-      SuggestionManager.formatSuggestions().then((value) => controller.markerList = value);
-    });
+    if(!started) {
+      started = true;
+      SuggestionManager.formatSuggestions().then((value) =>
+      controller.markerList = value);
+      Timer.periodic(interval, (Timer timer) {
+        SuggestionManager.formatSuggestions().then((value) =>
+        controller.markerList = value);
+      });
+    }
   }
 }
 
