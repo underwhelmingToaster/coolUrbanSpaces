@@ -1,5 +1,6 @@
 import 'package:cool_urban_spaces/main.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
+import 'package:cool_urban_spaces/view/urbanMapView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,7 +20,7 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
   int typeData = 1;
 
   void submit(){
-    SuggestionManager.postSuggestion(new Suggestion(titleData, descData, typeData,  lastLatTap, lastLngTap));
+    SuggestionManager.postSuggestion(new Suggestion(titleData, descData, typeData,  UrbanMapView.lastLatTap, UrbanMapView.lastLngTap));
     Navigator.pop(context, MaterialPageRoute(
         builder: (context) => StatefulMapFragment()));
   }
