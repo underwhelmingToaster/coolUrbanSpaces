@@ -21,7 +21,7 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
   int typeData = 1;
 
   void submit(){
-    new SuggestionManager().postSuggestion(new Suggestion(titleData, descData, typeData,  lastLatTap, lastLngTap));
+    SuggestionManager.postSuggestion(new Suggestion(titleData, descData, typeData,  lastLatTap, lastLngTap));
   }
 
   @override

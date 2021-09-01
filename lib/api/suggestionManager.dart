@@ -8,8 +8,13 @@ import 'package:latlong2/latlong.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:http/http.dart' as http;
 
-class SuggestionManager {
-  Future<List<Suggestion>> getAllSugestions() async{
+class SuggestionManager{
+
+  Future<List<Suggestion>> updateSuggestions() async{
+    return getAllSugestions();
+  }
+
+  static Future<List<Suggestion>> getAllSugestions() async{
     final response = await http.get(Uri.parse('/api/suggestion'));
 
     if(response.statusCode == 200) {
@@ -26,7 +31,7 @@ class SuggestionManager {
     }
   }
 
-  Future<Suggestion> getSuggestion(int id) async{
+  static Future<Suggestion> getSuggestion(int id) async{
     final response = await http.get(Uri.parse('/api/suggestion/' + id.toString()));
     if(response.statusCode == 200){
       return Suggestion.fromJson(jsonDecode(response.body));
@@ -35,11 +40,11 @@ class SuggestionManager {
     }
   }
 
-  void postSuggestion(Suggestion suggestion){
+  static void postSuggestion(Suggestion suggestion){
     http.post(Uri.parse('/api/suggestion/'), body: suggestion);
   }
 
-  Future<List<Marker>> formatSuggestions() async{
+  static Future<List<Marker>> formatSuggestions() async{
     List<Marker> markers = [];
     List<Suggestion> suggestions = await getAllSugestions();
 

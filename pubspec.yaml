@@ -31,6 +31,7 @@ dependencies:
   flutter_map: ^0.13.1
   flutter_map_marker_cluster: any
   flutter_svg: ^0.22.0
+  provider: ^5.0.0
 
 dev_dependencies:
   flutter_test:
