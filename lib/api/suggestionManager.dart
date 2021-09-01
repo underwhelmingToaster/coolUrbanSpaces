@@ -18,14 +18,8 @@ class SuggestionManager{
     final response = await http.get(Uri.parse('/api/suggestion/all'));
 
     if(response.statusCode == 200) {
-      List<Suggestion> suggestions = [];
-      Map<String, dynamic> json = jsonDecode(response.body);
-      List<dynamic> suggestionList = json['suggestions'];
-      suggestionList.forEach((element) {
-        suggestions.add(element);
-      });
-
-      return suggestions;
+      List<dynamic> suggestionList = jsonDecode(response.body);
+      return suggestionList.map((dict) => Suggestion.fromJson(dict)).toList();
     }else{
       throw Exception('Failed to load all suggestions. Status: ' + response.statusCode.toString());
     }
