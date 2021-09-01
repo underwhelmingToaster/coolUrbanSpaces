@@ -46,7 +46,7 @@ class SuggestionManager{
 
   static Future<List<Marker>> formatSuggestions() async{
     List<Marker> markers = [];
-    List<Suggestion> suggestions = await getAllSugestions();
+    List<Suggestion> suggestions = await getAllSuggestions();
 
     for (int i = 0; i < suggestions.length; i++){
       Widget icon = SvgPicture.asset("icons/shade.svg");
@@ -67,7 +67,7 @@ class SuggestionManager{
               point: LatLng(suggestions[i].lat, suggestions[i].lng),
               builder: (ctx) =>
                   Container(
-                      child: Icon(Icons.location_pin) // TODO get icons to work?
+                      child: Icon(Icons.sd) // TODO get icons to work?
                   ))
       );
     }

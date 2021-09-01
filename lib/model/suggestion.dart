@@ -1,4 +1,3 @@
-
 class Suggestion {
 
   late String title;

@@ -1,13 +1,10 @@
-import 'dart:async';
-
-import 'package:cool_urban_spaces/Controller/markerController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:provider/provider.dart';
 import 'api/suggestionManager.dart';
 import 'fragments/addSuggestion.dart' as addSuggestion;
 
@@ -19,7 +16,6 @@ double lastLatTap = 0.0;
 double lastLngTap = 0.0;
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -66,15 +62,15 @@ class _MapFragment extends State<StatefulMapFragment> {
         title: const Text('Cool Urban Spaces'),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () { Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => addSuggestion.StatefulAddSuggestionFragment() ),
-        ); },
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(
+              builder: (context) => addSuggestion.StatefulAddSuggestionFragment()));
+          },
         child: const Icon(Icons.add),
       ),
-      body: new FlutterMap(
-        options: new MapOptions(
+      body:
+      new FlutterMap(
+      options: new MapOptions(
         center: new LatLng(51.5, -0.09),
         zoom: 13.0,
         controller: mc,
