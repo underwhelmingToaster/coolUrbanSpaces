@@ -61,9 +61,12 @@ class _MapFragment extends State<StatefulMapFragment> {
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Image.asset("assets/images/Coolcity.png",
+
           ),
         ),
         title: const Text('Cool Urban Spaces'),
+          backgroundColor: Color(0xff92d396
+          ),
           actions: <Widget>[
             IconButton(
               icon: const Icon(Icons.menu),
