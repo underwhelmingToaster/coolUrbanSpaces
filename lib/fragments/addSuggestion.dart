@@ -1,3 +1,4 @@
+import 'package:cool_urban_spaces/Controller/markerController.dart';
 import 'package:cool_urban_spaces/main.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:cool_urban_spaces/view/urbanMapView.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cool_urban_spaces/api/suggestionManager.dart';
+import 'package:provider/provider.dart';
 
 class StatefulAddSuggestionFragment extends StatefulWidget {
   const StatefulAddSuggestionFragment({Key? key}) : super(key: key);
@@ -100,6 +102,9 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       submit();
+                      var controller = Provider.of<MarkerController>(context);
+                      SuggestionManager.formatSuggestions().then((value) =>
+                      controller.markerList = value);
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Processing Data')),
                       );
