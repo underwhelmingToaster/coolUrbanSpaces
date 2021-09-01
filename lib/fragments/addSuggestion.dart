@@ -11,6 +11,7 @@ class StatefulAddSuggestionFragment extends StatefulWidget {
 
 class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
   final _formKey = GlobalKey<FormState>();
+  int selectedType = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -54,14 +55,54 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
                   return null;
                 },
               ),
-              // TODO Radio Buttons for types
-
-              Padding(padding: EdgeInsets.all(10),
+              Padding(padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
+                child: Text("Type of Suggestion:")),
+              DropdownButton(
+                isExpanded: true,
+                value: selectedType = 0,
+                items: [
+                  DropdownMenuItem(
+                    child: Text("General"),
+                    value: 0,
+                  ),
+                  DropdownMenuItem(
+                    child: Text("Shading"),
+                    value: 1,
+                  ),
+                  DropdownMenuItem(
+                    child: Text("Seating"),
+                    value: 2,
+                  ),
+                  DropdownMenuItem(
+                    child: Text("Gardening"),
+                    value: 3,
+                  ),
+                  DropdownMenuItem(
+                    child: Text("Social"),
+                    value: 4,
+                  ),
+                  DropdownMenuItem(
+                    child: Text("Water"),
+                    value: 5,
+                  ),
+                  DropdownMenuItem(
+                    child: Text("Plants"),
+                    value: 6,
+                  ),
+                ],
+                onChanged: (value) {
+                  setState(() {
+                    selectedType = value as int;
+                  });
+                }
+              ),
+              Padding(padding: EdgeInsets.all(30),
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Processing Data')),
+
                       );
                     }
                   },

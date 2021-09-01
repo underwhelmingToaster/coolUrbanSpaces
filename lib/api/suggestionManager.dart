@@ -12,6 +12,13 @@ class SuggestionManager {
     return suggestions;
   }
 
+  List getExampleSuggestions () {
+    var suggestion1 = new Suggestion("titel 1", "text 1", 1, 51.1, -0.09);
+    var suggestion2 = new Suggestion("titel 2", "text 2", 2, 51.2, -0.07);
+    var suggestions = [suggestion1, suggestion2];
+    return suggestions;
+  }
+
   List<Marker> formatSuggestions () {
     List<Marker> markers = [];
     var suggestions = getSuggestions();
@@ -24,7 +31,7 @@ class SuggestionManager {
         case 4: icon = SvgPicture.asset("../icons/social.svg"); break;
         case 5: icon = SvgPicture.asset("../icons/water.svg"); break;
         case 6: icon = SvgPicture.asset("../icons/plants.svg"); break;
-        case 7: icon = SvgPicture.asset("../icons/general.svg"); break;
+        case 0: icon = SvgPicture.asset("../icons/general.svg"); break;
         default: print("Could not assign type of suggestion");
       }
       markers.add(
