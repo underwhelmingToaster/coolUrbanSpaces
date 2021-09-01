@@ -35,7 +35,7 @@ class SuggestionManager{
   }
 
   static Future<void> postSuggestion(Suggestion suggestion) async {
-    final response = await http.post(Uri.parse('/api/suggestion/add/'), body: jsonEncode(suggestion));
+    final response = await http.post(Uri.parse('/api/suggestion/add'), body: jsonEncode(suggestion.toJson()), headers: {"Content-Type": "application/json"});
     if(response.statusCode == 200){
       return;
     }else{

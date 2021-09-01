@@ -11,7 +11,7 @@ class Suggestion {
 
   Suggestion.fromJson(Map<String, dynamic> json)
     : title = json['title'],
-      text = json['text'],
+      text = json['description'],
       type = json['type'],
       lat = json['lat'],
       lng = json['lon'],
@@ -19,7 +19,7 @@ class Suggestion {
 
   Map<String, dynamic> toJson() => {
     'title' : title,
-    'text' : text,
+    'description' : text,
     'type' : type,
     'lat' : lat,
     'lon' : lng,
