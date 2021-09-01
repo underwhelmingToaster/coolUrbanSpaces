@@ -11,11 +11,11 @@ import 'package:http/http.dart' as http;
 class SuggestionManager{
 
   Future<List<Suggestion>> updateSuggestions() async{
-    return getAllSugestions();
+    return getAllSuggestions();
   }
 
-  static Future<List<Suggestion>> getAllSugestions() async{
-    final response = await http.get(Uri.parse('/api/suggestion'));
+  static Future<List<Suggestion>> getAllSuggestions() async{
+    final response = await http.get(Uri.parse('/api/suggestion/all'));
 
     if(response.statusCode == 200) {
       List<Suggestion> suggestions = [];
@@ -41,12 +41,12 @@ class SuggestionManager{
   }
 
   static void postSuggestion(Suggestion suggestion){
-    http.post(Uri.parse('/api/suggestion/'), body: suggestion);
+    http.post(Uri.parse('/api/suggestion/add/'), body: suggestion);
   }
 
   static Future<List<Marker>> formatSuggestions() async{
     List<Marker> markers = [];
-    List<Suggestion> suggestions = await getAllSugestions();
+    List<Suggestion> suggestions = await getAllSuggestions();
 
     for (int i = 0; i < suggestions.length; i++){
       Widget icon = SvgPicture.asset("icons/shade.svg");
@@ -68,7 +68,7 @@ class SuggestionManager{
               builder: (ctx) =>
                   Container(
                       child: icon
-                  ))
+                  )),
       );
     }
     return markers;
