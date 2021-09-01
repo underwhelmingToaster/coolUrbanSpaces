@@ -4,11 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cool_urban_spaces/api/suggestionManager.dart';
-import 'package:cool_urban_spaces/main.dart';
 
 class StatefulAddSuggestionFragment extends StatefulWidget {
   const StatefulAddSuggestionFragment({Key? key}) : super(key: key);
-
   @override
   _AddSuggestionFragment createState() => _AddSuggestionFragment();
 }

@@ -81,12 +81,11 @@ class _MapFragment extends State<StatefulMapFragment> {
           subdomains: ['a', 'b', 'c'],
         ),
         MarkerClusterLayerOptions(
-          /*markers: new SuggestionManager().formatSuggestions(),*/
           builder: (BuildContext context, List<Marker> markers) {
             return FloatingActionButton(
               child: Text(markers.length.toString()),
               onPressed: () {
-
+                // TODO implement
               }
             );
           },

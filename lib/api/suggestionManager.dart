@@ -9,7 +9,7 @@ import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:http/http.dart' as http;
 
 class SuggestionManager {
-  Future<List<Suggestion>> getAllSugestions() async{
+  Future<List<Suggestion>> getAllSuggestions() async{
     final response = await http.get(Uri.parse('/api/suggestion'));
 
     if(response.statusCode == 200) {
@@ -42,7 +42,7 @@ class SuggestionManager {
 
   Future<List<Marker>> formatSuggestions() async{
     List<Marker> markers = [];
-    List<Suggestion> suggestions = await getAllSugestions();
+    List<Suggestion> suggestions = await getAllSuggestions();
 
     for (int i = 0; i < suggestions.length; i++){
       Widget icon = SvgPicture.asset("icons/shade.svg");
@@ -63,7 +63,7 @@ class SuggestionManager {
               point: LatLng(suggestions[i].lat, suggestions[i].lng),
               builder: (ctx) =>
                   Container(
-                      child: Icon(Icons.location_pin) // TODO get icons to work?
+                      child: Icon(Icons.sd) // TODO get icons to work?
                   ))
       );
     }
