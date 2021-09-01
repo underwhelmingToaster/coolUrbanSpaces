@@ -1,4 +1,7 @@
 import 'package:cool_urban_spaces/Controller/markerController.dart';
+import 'package:cool_urban_spaces/api/suggestionManager.dart';
+import 'package:cool_urban_spaces/fragments/viewSuggestion.dart';
+import 'package:cool_urban_spaces/fragments/viewSuggestion.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -46,16 +49,15 @@ class UrbanMapView extends StatelessWidget{
         ),
         MarkerClusterLayerOptions(
           markers: controller.markerList,
-          onMarkerTap: (value) {
-
-            controller.selectedMarker = value;
+          onMarkerTap: (value) async {
+            int id = int.parse(value.key.toString());
+            Navigator.push(context, MaterialPageRoute(
+                builder: (context) => StatefulViewSuggestionFragment(id)));
           },
           builder: (BuildContext context, List<Marker> markers) {
             return FloatingActionButton(
                 child: Text(markers.length.toString()),
-                onPressed: () {
-                  // TODO au hilfe zämme mit em andere todo
-                }
+                onPressed: () { }
             );
           },
         ),

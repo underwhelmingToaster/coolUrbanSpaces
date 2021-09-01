@@ -67,7 +67,9 @@ class SuggestionManager{
               builder: (ctx) =>
                   Container(
                       child: icon
-                  )),
+                  ),
+              key: new Key(i.toString())
+          ),
       );
     }
     return markers;

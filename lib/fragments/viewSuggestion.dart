@@ -5,11 +5,17 @@ import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:latlong2/latlong.dart';
 
 class StatefulViewSuggestionFragment extends StatefulWidget {
+
+  StatefulViewSuggestionFragment(this.id);
+  int id;
   @override
-  _ViewSuggestionFragment createState() => _ViewSuggestionFragment();
+  _ViewSuggestionFragment createState() => _ViewSuggestionFragment(id);
 }
 
 class _ViewSuggestionFragment extends State<StatefulViewSuggestionFragment> {
+
+  int id;
+  _ViewSuggestionFragment(this.id);
 
   @override
   Widget build(BuildContext context) {
