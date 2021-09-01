@@ -43,7 +43,7 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
               TextFormField(
                 decoration: InputDecoration(
                     labelText: "Description",
-                    hintText: "Describe your suggestion in more detail"
+                    hintText: "Describe your suggestion.dart in more detail"
                 ),
                 inputFormatters: [LengthLimitingTextInputFormatter(500)],
                 minLines: 4,
