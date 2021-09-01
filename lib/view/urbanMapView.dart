@@ -32,8 +32,8 @@ class UrbanMapView extends StatelessWidget{
           lastLngTap = point.longitude;
         },
         onLongPress: (point) {
-          point.latitude = lastLngTap;
-          point.longitude = lastLngTap;
+          lastLngTap = point.latitude;
+          lastLngTap = point.longitude;
           Navigator.push(context, MaterialPageRoute(
               builder: (context) => addSuggestion.StatefulAddSuggestionFragment()));
         },
