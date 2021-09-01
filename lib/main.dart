@@ -67,7 +67,7 @@ class _MapFragment extends State<StatefulMapFragment> {
           actions: <Widget>[
             IconButton(
               icon: const Icon(Icons.menu),
-              tooltip: 'Show Snackbar',
+              tooltip: 'Show Menu',
               onPressed: () {
                 // TODO menu
               },
@@ -113,7 +113,7 @@ class _MapFragment extends State<StatefulMapFragment> {
             return FloatingActionButton(
               child: Text(markers.length.toString()),
               onPressed: () {
-                // TODO au hilfe zämme mit em andere todo
+
               }
             );
           },
