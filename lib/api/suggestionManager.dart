@@ -1,3 +1,4 @@
+import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -40,18 +41,5 @@ class SuggestionManager {
     }
     return markers;
   }
-
-}
-
-class Suggestion {
-
-  late String title;
-  late String text;
-  late int type;
-  late double lat;
-  late double lng;
-
-  Suggestion(this.title, this.text, this.type, this.lat, this.lng);
-
 
 }

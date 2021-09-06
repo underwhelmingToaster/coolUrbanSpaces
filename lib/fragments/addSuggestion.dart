@@ -16,7 +16,7 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add a Suggestion"),
+        title: Text("Add a suggestion.dart"),
         actions: <Widget> [
           IconButton(onPressed: () { null; }, icon: Icon(Icons.add)) // TODO implement onpressed
         ],
