@@ -1,6 +1,6 @@
 ## Cool City
 
-This project has been created for the [Opendata Hackaton 2021](https://hack.opendata.ch/event/36#top "Opendata Hackaton 2021") by Felix Reiniger, Lucas Buchli, Fabio Zahner, Remo Steiner, Jurek Müller under the lead of Stefan Keller.
+This project has been created for the [Opendata Hackaton 2021](https://hack.opendata.ch/event/36#top "Opendata Hackaton 2021") by Felix Reiniger, Lukas Buchli, Fabio Zahner, Remo Steiner, Jurek Müller under the lead of Stefan Keller.
 
 
 <details>
