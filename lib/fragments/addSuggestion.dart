@@ -1,10 +1,15 @@
+import 'package:cool_urban_spaces/Controller/markerController.dart';
+import 'package:cool_urban_spaces/main.dart';
+import 'package:cool_urban_spaces/model/suggestion.dart';
+import 'package:cool_urban_spaces/view/urbanMapView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:cool_urban_spaces/api/suggestionManager.dart';
+import 'package:provider/provider.dart';
 
 class StatefulAddSuggestionFragment extends StatefulWidget {
   const StatefulAddSuggestionFragment({Key? key}) : super(key: key);
-
   @override
   _AddSuggestionFragment createState() => _AddSuggestionFragment();
 }
@@ -12,14 +17,23 @@ class StatefulAddSuggestionFragment extends StatefulWidget {
 class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
   final _formKey = GlobalKey<FormState>();
 
+  String titleData = "";
+  String descData = "";
+  int typeData = 1;
+
+  void submit(){
+    SuggestionManager.postSuggestion(new Suggestion(titleData, descData, typeData,  UrbanMapView.lastLatTap, UrbanMapView.lastLngTap));
+    Navigator.pop(context, MaterialPageRoute(
+        builder: (context) => StatefulMapFragment()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add a suggestion.dart"),
-        actions: <Widget> [
-          IconButton(onPressed: () { null; }, icon: Icon(Icons.add)) // TODO implement onpressed
-        ],
+        title: Text("Add a Suggestion"),
+        backgroundColor: Color(0xff92d396
+        ),
       ),
       body: Form (
         key: _formKey,
@@ -38,11 +52,14 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
                   }
                   return null;
                 },
+                onChanged: (value) {
+                  this.titleData = value;
+                }
               ),
               TextFormField(
                 decoration: InputDecoration(
                     labelText: "Description",
-                    hintText: "Describe your suggestion in more detail"
+                    hintText: "Describe your suggestion.dart in more detail"
                 ),
                 inputFormatters: [LengthLimitingTextInputFormatter(500)],
                 minLines: 4,
@@ -53,16 +70,47 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
                   }
                   return null;
                 },
+                onChanged: (value) {
+                  this.descData = value;
+                }
               ),
-              // TODO Radio Buttons for types
-
-              Padding(padding: EdgeInsets.all(10),
+              Padding(padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
+                child: Text("Type of Suggestion:")),
+              DropdownButton(
+                isExpanded: true,
+                value: typeData,
+                items: [
+                  DropdownMenuItem(
+                    child: Text("General"), value: 0, ),
+                  DropdownMenuItem(
+                    child: Text("Shading"), value: 1, ),
+                  DropdownMenuItem(
+                    child: Text("Seating"), value: 2, ),
+                  DropdownMenuItem(
+                    child: Text("Gardening"), value: 3, ),
+                  DropdownMenuItem(
+                    child: Text("Social"), value: 4, ),
+                  DropdownMenuItem(
+                    child: Text("Water"), value: 5, ),
+                  DropdownMenuItem(
+                    child: Text("Plants"), value: 6, ),
+                ],
+                onChanged: (value) {
+                  setState(() { typeData = value as int; });
+                }
+              ),
+              Padding(padding: EdgeInsets.all(30),
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
+                      submit();
+                      var controller = Provider.of<MarkerController>(context);
+                      SuggestionManager.formatSuggestions().then((value) =>
+                      controller.markerList = value);
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Processing Data')),
                       );
+
                     }
                   },
                   child: const Text('Submit'),
