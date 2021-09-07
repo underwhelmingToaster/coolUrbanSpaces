@@ -1,6 +1,4 @@
 import 'package:cool_urban_spaces/Controller/markerController.dart';
-import 'package:cool_urban_spaces/api/suggestionManager.dart';
-import 'package:cool_urban_spaces/fragments/viewSuggestion.dart';
 import 'package:cool_urban_spaces/fragments/viewSuggestion.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
