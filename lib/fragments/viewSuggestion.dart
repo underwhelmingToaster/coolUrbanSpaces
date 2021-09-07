@@ -1,8 +1,11 @@
+import 'package:cool_urban_spaces/Controller/markerController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cool_urban_spaces/api/suggestionManager.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:provider/provider.dart';
 
 class StatefulViewSuggestionFragment extends StatefulWidget {
 
@@ -20,19 +23,11 @@ class _ViewSuggestionFragment extends State<StatefulViewSuggestionFragment> {
   @override
   Widget build(BuildContext context) {
     var selectedSuggestion;
-    SuggestionManager.getAllSuggestions().then((value) => {
-      value.forEach((element) {
-        var pos = new LatLng(element.lat, element.lng);
-        if(pos.latitude == element.lat && pos.longitude == element.lng){
-          int id = 0;
-          if(element.id!=null){
-            id = (element.id) as int;
-          }
-          selectedSuggestion = SuggestionManager.getSuggestion(id) as Suggestion;
-          return;
-        }
-      })
-    });
+    Marker? selected = Provider.of<MarkerController>(context).selectedMarker;
+    if(selected!=null){
+      selectedSuggestion = SuggestionManager.getSuggestion(selected.key as int);
+    }
+
     return Visibility(
         visible: selectedSuggestion!=null,
         child: Scaffold(

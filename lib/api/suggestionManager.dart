@@ -60,21 +60,20 @@ class SuggestionManager{
         default: print("Could not assign type of suggestion.dart");
       }
       markers.add(
-          Marker(
-              width: 80.0,
-              height: 80.0,
-              point: LatLng(suggestions[i].lat, suggestions[i].lng),
-              builder: (ctx) =>
-                  Container(
-                      child: icon
-                  ),
-              key: new Key(i.toString())
-          ),
+        Marker(
+            width: 80.0,
+            height: 80.0,
+            point: LatLng(suggestions[i].lat, suggestions[i].lng),
+            builder: (ctx) =>
+                Container(
+                    child: icon
+                ),
+            key: new Key(i.toString())
+        ),
       );
     }
     return markers;
-    }
-
+  }
 }
 
 
