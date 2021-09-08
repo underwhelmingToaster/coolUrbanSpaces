@@ -1,6 +1,6 @@
 import 'package:cool_urban_spaces/Controller/markerController.dart';
+import 'package:cool_urban_spaces/Model/suggestion.dart';
 import 'package:cool_urban_spaces/main.dart';
-import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:cool_urban_spaces/view/urbanMapView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +21,8 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
   String descData = "";
   int typeData = 1;
 
-  void submit(){
-    SuggestionManager.postSuggestion(new Suggestion(titleData, descData, typeData,  UrbanMapView.lastLatTap, UrbanMapView.lastLngTap));
+  void submit(Suggestion suggestion){
+    SuggestionManager.postSuggestion(suggestion);
     Navigator.pop(context, MaterialPageRoute(
         builder: (context) => StatefulMapFragment()));
   }
@@ -103,7 +103,8 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      submit();
+                      Suggestion suggestion = new Suggestion(titleData, descData, typeData,  UrbanMapView.lastLatTap, UrbanMapView.lastLngTap)
+                      submit(suggestion);
                       var controller = Provider.of<MarkerController>(context);
                       SuggestionManager.formatSuggestions().then((value) =>
                       controller.markerList = value);

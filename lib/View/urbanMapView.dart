@@ -43,14 +43,15 @@ class UrbanMapView extends StatelessWidget{
         new TileLayerOptions(
           urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
           subdomains: ['a', 'b', 'c'],
-
         ),
+
         MarkerClusterLayerOptions(
           markers: controller.markerList,
           onMarkerTap: (value) async {
             int id = int.parse(value.key.toString());
             Navigator.push(context, MaterialPageRoute(
-                builder: (context) => StatefulViewSuggestionFragment(id)));
+                builder: (context) => StatefulViewSuggestionFragment(id)
+            ));
           },
           builder: (BuildContext context, List<Marker> markers) {
             return FloatingActionButton(
@@ -59,6 +60,7 @@ class UrbanMapView extends StatelessWidget{
             );
           },
         ),
+
         LocationOptions(
           locationButton(),
           onLocationUpdate: (LatLngData? ld) {

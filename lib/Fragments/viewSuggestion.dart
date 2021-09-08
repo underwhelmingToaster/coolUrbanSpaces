@@ -27,18 +27,17 @@ class _ViewSuggestionFragment extends State<StatefulViewSuggestionFragment> {
     return Visibility(
         visible: selectedSuggestion!=null,
         child: Scaffold(
-        appBar: AppBar(
-          title: Text(selectedSuggestion.title),
-        ) ,
-        body: Padding(padding: EdgeInsets.all(10) ,
-            child: Column(
-              children: <Widget> [
-                Text("lol"),
-              ],
+            appBar: AppBar(
+              title: Text(selectedSuggestion.title),
+            ) ,
+            body: Padding(padding: EdgeInsets.all(10),
+                child: Column(
+                  children: <Widget> [
+                    Text("lol"),
+                  ],
+                )
             )
         )
-      )
     );
   }
-
 }

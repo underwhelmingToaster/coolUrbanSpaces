@@ -1,11 +1,11 @@
 import 'dart:convert';
 
+import 'package:cool_urban_spaces/Model/suggestion.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:http/http.dart' as http;
 
 class SuggestionManager{
@@ -15,7 +15,7 @@ class SuggestionManager{
   }
 
   static Future<List<Suggestion>> getAllSuggestions() async{
-    final response = await http.get(Uri.parse('/api/suggestion/all'));
+    final response = await http.get(Uri.parse('/Api/suggestion/all'));
 
     if(response.statusCode == 200) {
       List<dynamic> suggestionList = jsonDecode(response.body);
@@ -26,7 +26,7 @@ class SuggestionManager{
   }
 
   static Future<Suggestion> getSuggestion(int id) async{
-    final response = await http.get(Uri.parse('/api/suggestion/' + id.toString()));
+    final response = await http.get(Uri.parse('/Api/suggestion/' + id.toString()));
     if(response.statusCode == 200){
       return Suggestion.fromJson(jsonDecode(response.body));
     }else{
@@ -35,7 +35,7 @@ class SuggestionManager{
   }
 
   static Future<void> postSuggestion(Suggestion suggestion) async {
-    final response = await http.post(Uri.parse('/api/suggestion/add'), body: jsonEncode(suggestion.toJson()), headers: {"Content-Type": "application/json"});
+    final response = await http.post(Uri.parse('/Api/suggestion/add'), body: jsonEncode(suggestion.toJson()), headers: {"Content-Type": "application/json"});
     if(response.statusCode == 200){
       return;
     }else{
@@ -68,7 +68,7 @@ class SuggestionManager{
                 Container(
                     child: icon
                 ),
-            key: new Key(i.toString())
+            key: new Key(suggestions[i].id.toString())
         ),
       );
     }
