@@ -1,11 +1,7 @@
-import 'package:cool_urban_spaces/Controller/markerController.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cool_urban_spaces/api/suggestionManager.dart';
-import 'package:cool_urban_spaces/model/suggestion.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
-import 'package:provider/provider.dart';
 
 class StatefulViewSuggestionFragment extends StatefulWidget {
 
@@ -17,15 +13,15 @@ class StatefulViewSuggestionFragment extends StatefulWidget {
 
 class _ViewSuggestionFragment extends State<StatefulViewSuggestionFragment> {
 
-  int id;
-  _ViewSuggestionFragment(this.id);
+  int _id;
+
+  _ViewSuggestionFragment(this._id);
 
   @override
   Widget build(BuildContext context) {
     var selectedSuggestion;
-    Marker? selected = Provider.of<MarkerController>(context).selectedMarker;
-    if(selected!=null){
-      selectedSuggestion = SuggestionManager.getSuggestion(selected.key as int);
+    if(_id>=0){
+      selectedSuggestion = SuggestionManager.getSuggestion(_id);
     }
 
     return Visibility(
