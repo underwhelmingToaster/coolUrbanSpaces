@@ -1,11 +1,11 @@
+import 'package:cool_urban_spaces/Api/suggestionManager.dart';
 import 'package:cool_urban_spaces/Controller/markerController.dart';
 import 'package:cool_urban_spaces/Model/suggestion.dart';
 import 'package:cool_urban_spaces/main.dart';
-import 'package:cool_urban_spaces/view/urbanMapView.dart';
+import 'package:cool_urban_spaces/View/urbanMapView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:cool_urban_spaces/api/suggestionManager.dart';
 import 'package:provider/provider.dart';
 
 class StatefulAddSuggestionFragment extends StatefulWidget {
@@ -29,6 +29,7 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Provider.of<MarkerController>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Add a Suggestion"),
@@ -99,19 +100,18 @@ class _AddSuggestionFragment extends State<StatefulAddSuggestionFragment> {
                   setState(() { typeData = value as int; });
                 }
               ),
+
               Padding(padding: EdgeInsets.all(30),
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      Suggestion suggestion = new Suggestion(titleData, descData, typeData,  UrbanMapView.lastLatTap, UrbanMapView.lastLngTap)
+                      Suggestion suggestion = new Suggestion(titleData, descData, typeData,  UrbanMapView.lastLatTap, UrbanMapView.lastLngTap);
                       submit(suggestion);
-                      var controller = Provider.of<MarkerController>(context);
                       SuggestionManager.formatSuggestions().then((value) =>
                       controller.markerList = value);
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Processing Data')),
                       );
-
                     }
                   },
                   child: const Text('Submit'),

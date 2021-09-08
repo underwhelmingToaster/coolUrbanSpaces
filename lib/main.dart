@@ -4,9 +4,6 @@ import 'package:cool_urban_spaces/view/urbanMapView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 import 'Controller/markerController.dart';
 import 'api/suggestionManager.dart';
@@ -46,9 +43,9 @@ class _MapFragment extends State<StatefulMapFragment> {
   @override
   Widget build(BuildContext context) {
     MarkerController marker = Provider.of<MarkerController>(context);
-    const interval = const Duration(seconds: 30);
+    const interval = const Duration(seconds: 5);
 
-    reloadDataScheduler(interval, marker);
+    //reloadDataScheduler(interval, marker);
 
     return Scaffold(
       appBar: AppBar(
@@ -70,6 +67,7 @@ class _MapFragment extends State<StatefulMapFragment> {
           ]
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: "addButton",
         backgroundColor: Color(0xff92d396),
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(
@@ -81,17 +79,17 @@ class _MapFragment extends State<StatefulMapFragment> {
     );
   }
 
-  void reloadDataScheduler(var interval, MarkerController controller){
+  /*void reloadDataScheduler(var interval, MarkerController controller){
     if(!started) {
       started = true;
-      SuggestionManager.formatSuggestions().then((value) =>
+      SuggestionManager.formatSuggestions().((value) =>
       controller.markerList = value);
       Timer.periodic(interval, (Timer timer) {
         SuggestionManager.formatSuggestions().then((value) =>
         controller.markerList = value);
       });
     }
-  }
+  }*/
 }
 
 

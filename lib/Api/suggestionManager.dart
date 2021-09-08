@@ -10,22 +10,35 @@ import 'package:http/http.dart' as http;
 
 class SuggestionManager{
 
+  static List<Suggestion> suggestionsTEMP = [];
+
   Future<List<Suggestion>> updateSuggestions() async{
     return getAllSuggestions();
   }
 
   static Future<List<Suggestion>> getAllSuggestions() async{
+    return suggestionsTEMP;
+    //TODO: Change to productional
     final response = await http.get(Uri.parse('/Api/suggestion/all'));
 
     if(response.statusCode == 200) {
       List<dynamic> suggestionList = jsonDecode(response.body);
-      return suggestionList.map((dict) => Suggestion.fromJson(dict)).toList();
+      //return suggestionList.map((dict) => Suggestion.fromJson(dict)).toList();
+
     }else{
       throw Exception('Failed to load all suggestions. Status: ' + response.statusCode.toString());
     }
   }
 
   static Future<Suggestion> getSuggestion(int id) async{
+    var result;
+    suggestionsTEMP.forEach((element) {
+      if(element.id == id){
+        result = element;
+      }
+    });
+    return result;
+    //TODO: Change to productional
     final response = await http.get(Uri.parse('/Api/suggestion/' + id.toString()));
     if(response.statusCode == 200){
       return Suggestion.fromJson(jsonDecode(response.body));
@@ -35,6 +48,12 @@ class SuggestionManager{
   }
 
   static Future<void> postSuggestion(Suggestion suggestion) async {
+    if(suggestion.id==null){
+      suggestion.id = SuggestionManager.suggestionsTEMP.length;
+    }
+    SuggestionManager.suggestionsTEMP.add(suggestion);
+    return;
+    //TODO: Change to productional
     final response = await http.post(Uri.parse('/Api/suggestion/add'), body: jsonEncode(suggestion.toJson()), headers: {"Content-Type": "application/json"});
     if(response.statusCode == 200){
       return;
@@ -60,7 +79,7 @@ class SuggestionManager{
         default: print("Could not assign type of suggestion.dart");
       }
       markers.add(
-        Marker(
+        new Marker(
             width: 80.0,
             height: 80.0,
             point: LatLng(suggestions[i].lat, suggestions[i].lng),

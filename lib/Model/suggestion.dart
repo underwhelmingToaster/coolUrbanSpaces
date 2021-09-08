@@ -1,3 +1,4 @@
+
 class Suggestion {
 
   int? id;

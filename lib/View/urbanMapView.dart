@@ -47,8 +47,9 @@ class UrbanMapView extends StatelessWidget{
 
         MarkerClusterLayerOptions(
           markers: controller.markerList,
-          onMarkerTap: (value) async {
-            int id = int.parse(value.key.toString());
+          onMarkerTap: (value) {
+            int id = int.parse(value.key.toString().replaceAll("[<'", "").replaceAll("'>]", ""));
+            print(id);
             Navigator.push(context, MaterialPageRoute(
                 builder: (context) => StatefulViewSuggestionFragment(id)
             ));
