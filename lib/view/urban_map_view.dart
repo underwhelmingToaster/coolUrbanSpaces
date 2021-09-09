@@ -52,6 +52,7 @@ class UrbanMapView extends StatelessWidget{
           markers: mapDataController.availableMarkers,
           onMarkerTap: (value) {
             int id = mapDataController.cleanUpKey(value.key as Key);
+            mapDataController.setSelectedMarkerToId(id);
             Navigator.push(context, MaterialPageRoute(
                 builder: (context) => StatefulViewSuggestionFragment(id)
             ));

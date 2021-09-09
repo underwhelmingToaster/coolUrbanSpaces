@@ -1,5 +1,4 @@
 import 'package:cool_urban_spaces/data/abstract_data.dart';
-import 'package:cool_urban_spaces/data/api_request_data.dart';
 import 'package:cool_urban_spaces/data/local_variable_data.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:flutter/cupertino.dart';
@@ -48,9 +47,20 @@ class MapDataController extends ChangeNotifier {
 
   }
 
+  void setSelectedMarkerToId(int id){
+    _dataProvider.getSuggestion(id).then((value) => {
+      _lastSelect = value as Marker?,
+
+    });
+  }
+
   Marker suggestionToMarkers(Suggestion suggestion) {
     Widget icon = SvgPicture.asset("icons/shade.svg");
     switch (suggestion.type) {
+      case 0:
+        icon = Icon(Icons.pin_drop, color: Colors.amber,);
+
+        break;
       case 1:
         icon = Icon(Icons.wb_sunny_outlined, color: Colors.yellow,);
         break;
