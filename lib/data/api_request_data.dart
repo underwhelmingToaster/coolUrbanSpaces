@@ -14,7 +14,8 @@ class ApiRequestData implements DataProvider{
 
   ApiRequestData._internal();
 
-    Future<List<Suggestion>> getAllSuggestions() async {
+  @override
+  Future<List<Suggestion>> getAllSuggestions() async {
     final response = await http.get(Uri.parse('/data/suggestion/all'));
 
     if(response.statusCode == 200) {
@@ -26,6 +27,7 @@ class ApiRequestData implements DataProvider{
     }
   }
 
+  @override
   Future<Suggestion> getSuggestion(int id) async {
     final response = await http.get(Uri.parse('/data/suggestion/' + id.toString()));
     if(response.statusCode == 200){
@@ -35,6 +37,7 @@ class ApiRequestData implements DataProvider{
     }
   }
 
+  @override
   Future<void> postSuggestion(Suggestion suggestion) async {
     final response = await http.post(Uri.parse('/data/suggestion/add'), body: jsonEncode(suggestion.toJson()), headers: {"Content-Type": "application/json"});
     if(response.statusCode == 200){
