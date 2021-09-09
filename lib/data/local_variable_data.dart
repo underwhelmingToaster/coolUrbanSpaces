@@ -1,7 +1,15 @@
 import 'package:cool_urban_spaces/data/abstract_data.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
 
-class LocalData implements DataProvider{
+class LocalDataProvider implements DataProvider{
+
+  static final LocalDataProvider _requestData = LocalDataProvider._internal();
+
+  factory LocalDataProvider(){
+    return _requestData;
+  }
+
+  LocalDataProvider._internal();
 
   List<Suggestion> _localSuggestions = [];
 
