@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:cool_urban_spaces/Model/suggestion.dart';
+import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -10,16 +10,16 @@ import 'package:http/http.dart' as http;
 
 class SuggestionManager{
 
-  static List<Suggestion> suggestionsTEMP = [];
+  static List<Suggestion> _suggestionsTEMP = [];
 
   Future<List<Suggestion>> updateSuggestions() async{
     return getAllSuggestions();
   }
 
   static Future<List<Suggestion>> getAllSuggestions() async{
-    return suggestionsTEMP;
+    return _suggestionsTEMP;
     //TODO: Change to productional
-    final response = await http.get(Uri.parse('/Api/suggestion/all'));
+    final response = await http.get(Uri.parse('/api/suggestion/all'));
 
     if(response.statusCode == 200) {
       List<dynamic> suggestionList = jsonDecode(response.body);
@@ -31,15 +31,20 @@ class SuggestionManager{
   }
 
   static Future<Suggestion> getSuggestion(int id) async{
-    var result;
-    suggestionsTEMP.forEach((element) {
-      if(element.id == id){
-        result = element;
-      }
+    var result = new Suggestion("NaN", "Nan", 1, 0, 0);
+    result.id = -1;
+    await getAllSuggestions().then((value) => {
+      value.forEach((element) {
+        if(element.id == id){
+          result = element;
+      }})
     });
+
+    print(_suggestionsTEMP.length);
+
     return result;
     //TODO: Change to productional
-    final response = await http.get(Uri.parse('/Api/suggestion/' + id.toString()));
+    final response = await http.get(Uri.parse('/api/suggestion/' + id.toString()));
     if(response.statusCode == 200){
       return Suggestion.fromJson(jsonDecode(response.body));
     }else{
@@ -49,12 +54,12 @@ class SuggestionManager{
 
   static Future<void> postSuggestion(Suggestion suggestion) async {
     if(suggestion.id==null){
-      suggestion.id = SuggestionManager.suggestionsTEMP.length;
+      suggestion.id = SuggestionManager._suggestionsTEMP.length;
     }
-    SuggestionManager.suggestionsTEMP.add(suggestion);
+    SuggestionManager._suggestionsTEMP.add(suggestion);
     return;
     //TODO: Change to productional
-    final response = await http.post(Uri.parse('/Api/suggestion/add'), body: jsonEncode(suggestion.toJson()), headers: {"Content-Type": "application/json"});
+    final response = await http.post(Uri.parse('/api/suggestion/add'), body: jsonEncode(suggestion.toJson()), headers: {"Content-Type": "application/json"});
     if(response.statusCode == 200){
       return;
     }else{

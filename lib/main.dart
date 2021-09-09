@@ -1,12 +1,13 @@
 import 'dart:async';
 
+import 'package:cool_urban_spaces/controller/add_suggestion_controller.dart';
+import 'package:cool_urban_spaces/view/add_suggestion_view.dart';
 import 'package:cool_urban_spaces/view/urbanMapView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'Controller/markerController.dart';
-import 'api/suggestionManager.dart';
 import 'fragments/addSuggestion.dart' as addSuggestion;
 
 void main() {
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-          ChangeNotifierProvider(create: (_) => MarkerController()),
+        ChangeNotifierProvider(create: (_) => MarkerController()),
+        ChangeNotifierProvider(create: (_) => AddSuggestionController()),
       ],
         child: MaterialApp(
           title: 'Cool Urban',
@@ -42,10 +44,6 @@ class _MapFragment extends State<StatefulMapFragment> {
 
   @override
   Widget build(BuildContext context) {
-    MarkerController marker = Provider.of<MarkerController>(context);
-    const interval = const Duration(seconds: 5);
-
-    //reloadDataScheduler(interval, marker);
 
     return Scaffold(
       appBar: AppBar(
@@ -71,7 +69,7 @@ class _MapFragment extends State<StatefulMapFragment> {
         backgroundColor: Color(0xff92d396),
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(
-              builder: (context) => addSuggestion.StatefulAddSuggestionFragment()));
+              builder: (context) => AddSuggestionView()));
           },
         child: const Icon(Icons.add),
       ),

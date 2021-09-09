@@ -1,8 +1,8 @@
-import 'package:cool_urban_spaces/Api/suggestionManager.dart';
-import 'package:cool_urban_spaces/Controller/markerController.dart';
-import 'package:cool_urban_spaces/Model/suggestion.dart';
+import 'package:cool_urban_spaces/api/suggestionManager.dart';
+import 'package:cool_urban_spaces/controller/markerController.dart';
+import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:cool_urban_spaces/main.dart';
-import 'package:cool_urban_spaces/View/urbanMapView.dart';
+import 'package:cool_urban_spaces/view/urbanMapView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

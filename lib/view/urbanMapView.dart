@@ -1,5 +1,7 @@
 import 'package:cool_urban_spaces/Controller/markerController.dart';
+import 'package:cool_urban_spaces/controller/add_suggestion_controller.dart';
 import 'package:cool_urban_spaces/fragments/viewSuggestion.dart';
+import 'package:cool_urban_spaces/view/add_suggestion_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -19,6 +21,7 @@ class UrbanMapView extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     var controller = Provider.of<MarkerController>(context);
+    AddSuggestionController suggestionController = Provider.of<AddSuggestionController>(context);
     return new FlutterMap(
       options: new MapOptions(
         center: new LatLng(47.0, 8.0),
@@ -29,14 +32,17 @@ class UrbanMapView extends StatelessWidget{
           LocationPlugin(),
         ],
         onTap: (point) {
-          lastLatTap = point.latitude;
-          lastLngTap = point.longitude;
+          suggestionController.lat = point.latitude;
+          suggestionController.lon = point.longitude;
         },
         onLongPress: (point) {
-          lastLngTap = point.latitude;
-          lastLngTap = point.longitude;
-          Navigator.push(context, MaterialPageRoute(
-              builder: (context) => addSuggestion.StatefulAddSuggestionFragment()));
+          suggestionController.lat = point.latitude;
+          suggestionController.lon = point.longitude;
+          Navigator.push(context,
+              MaterialPageRoute(
+                  builder: (context) => AddSuggestionView()
+              )
+          );
         },
       ),
       layers: [

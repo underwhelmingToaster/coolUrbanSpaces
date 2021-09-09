@@ -1,6 +1,6 @@
 
-import 'package:cool_urban_spaces/Controller/markerController.dart';
-import 'package:cool_urban_spaces/Model/suggestion.dart';
+import 'package:cool_urban_spaces/controller/markerController.dart';
+import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cool_urban_spaces/api/suggestionManager.dart';
@@ -26,26 +26,30 @@ class _ViewSuggestionFragment extends State<StatefulViewSuggestionFragment> {
     if(_id>=0){
       SuggestionManager.getSuggestion(_id).then((value) =>
       {
-        controller.selectedMarker = value
+        //controller.selectedMarker = value
       });
     }
 
-    bool isNull = controller.SelectedSuggestion != null;
+    //bool isNull = controller.SelectedSuggestion != null;
+    if(_id<0){
+      Navigator.pop(context);
+    }
 
     return Visibility(
-        visible: isNull,
+        visible: true,
         child: Scaffold(
-            appBar: AppBar(
-              title: controller.SelectedSuggestion != null ? Text(controller.SelectedSuggestion!.title) : Text(""),
-            ),
-            body: Padding(padding: EdgeInsets.all(10),
-                child: Column(
-                  children: <Widget> [
-                    Text("lol"),
-                  ],
-                )
-            )
-        )
-    );
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            title: controller.SelectedSuggestion != null ? Text(controller.SelectedSuggestion!.title) : Text(""),
+          ),
+          body: Padding(padding: EdgeInsets.all(10),
+          child: Column(
+          children: <Widget> [
+          Text("lol"),
+            ],
+          )
+      )
+    ))
+    ;
   }
 }
