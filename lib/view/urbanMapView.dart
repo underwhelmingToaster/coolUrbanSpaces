@@ -1,5 +1,6 @@
 import 'package:cool_urban_spaces/Controller/markerController.dart';
 import 'package:cool_urban_spaces/controller/add_suggestion_controller.dart';
+import 'package:cool_urban_spaces/controller/map_data_controller.dart';
 import 'package:cool_urban_spaces/fragments/viewSuggestion.dart';
 import 'package:cool_urban_spaces/view/add_suggestion_view.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,6 +23,7 @@ class UrbanMapView extends StatelessWidget{
   Widget build(BuildContext context) {
     var controller = Provider.of<MarkerController>(context);
     AddSuggestionController suggestionController = Provider.of<AddSuggestionController>(context);
+    MapDataController mapDataController = Provider.of<MapDataController>(context);
     return new FlutterMap(
       options: new MapOptions(
         center: new LatLng(47.0, 8.0),
@@ -52,10 +54,9 @@ class UrbanMapView extends StatelessWidget{
         ),
 
         MarkerClusterLayerOptions(
-          markers: controller.markerList,
+          markers: mapDataController.getAvailableAsList(),
           onMarkerTap: (value) {
-            int id = int.parse(value.key.toString().replaceAll("[<'", "").replaceAll("'>]", ""));
-            print(id);
+            int id = mapDataController.cleanUpKey(value.key as Key);
             Navigator.push(context, MaterialPageRoute(
                 builder: (context) => StatefulViewSuggestionFragment(id)
             ));

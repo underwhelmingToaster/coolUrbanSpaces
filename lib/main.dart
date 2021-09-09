@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:cool_urban_spaces/Api/suggestionManager.dart';
 import 'package:cool_urban_spaces/controller/add_suggestion_controller.dart';
+import 'package:cool_urban_spaces/controller/map_data_controller.dart';
 import 'package:cool_urban_spaces/view/add_suggestion_view.dart';
 import 'package:cool_urban_spaces/view/urbanMapView.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +24,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => MarkerController()),
         ChangeNotifierProvider(create: (_) => AddSuggestionController()),
+        ChangeNotifierProvider(create: (_) => MapDataController()),
       ],
         child: MaterialApp(
           title: 'Cool Urban',
@@ -40,11 +43,11 @@ class StatefulMapFragment extends StatefulWidget {
 }
 
 class _MapFragment extends State<StatefulMapFragment> {
-  static bool started = false;
 
   @override
   Widget build(BuildContext context) {
-
+    MapDataController mapDataController = Provider.of<MapDataController>(context);
+    SuggestionManager.formatSuggestions().then((value) => mapDataController.setMarkerDataList(value));
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
