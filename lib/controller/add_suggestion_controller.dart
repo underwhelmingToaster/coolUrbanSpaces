@@ -29,7 +29,6 @@ class AddSuggestionController extends ChangeNotifier {
     lon = 0;
   }
 
-
   double get lon => _lon;
 
   set lon(double value) {
