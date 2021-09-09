@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cool_urban_spaces/data/suggestionManager.dart';
 
 class StatefulViewSuggestionFragment extends StatefulWidget {
 
@@ -20,13 +19,8 @@ class _ViewSuggestionFragment extends State<StatefulViewSuggestionFragment> {
   Widget build(BuildContext context) {
     //MarkerController controller = Provider.of<MarkerController>(context);
     if(_id>=0){
-      SuggestionManager.getSuggestion(_id).then((value) =>
-      {
-        //controller.selectedMarker = value
-      });
+      //TODO : get Suggestion with ID
     }
-
-    //bool isNull = controller.SelectedSuggestion != null;
     if(_id<0){
       Navigator.pop(context);
     }

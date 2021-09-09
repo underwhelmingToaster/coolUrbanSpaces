@@ -1,6 +1,3 @@
-
-import 'package:cool_urban_spaces/controller/map_data_controller.dart';
-import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:flutter/cupertino.dart';
 
 class AddSuggestionController extends ChangeNotifier {
