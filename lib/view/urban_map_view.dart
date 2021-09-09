@@ -2,6 +2,7 @@ import 'package:cool_urban_spaces/controller/add_suggestion_controller.dart';
 import 'package:cool_urban_spaces/controller/map_data_controller.dart';
 import 'package:cool_urban_spaces/fragments/viewSuggestion.dart';
 import 'package:cool_urban_spaces/view/add_suggestion_view.dart';
+import 'package:cool_urban_spaces/view/info_suggestion_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -54,7 +55,7 @@ class UrbanMapView extends StatelessWidget{
             int id = mapDataController.cleanUpKey(value.key as Key);
             mapDataController.setSelectedMarkerToId(id);
             Navigator.push(context, MaterialPageRoute(
-                builder: (context) => StatefulViewSuggestionFragment(id)
+                builder: (context) => InfoSuggestionView()
             ));
           },
           builder: (BuildContext context, List<Marker> markers) {

@@ -10,11 +10,11 @@ import 'package:latlong2/latlong.dart';
 class MapDataController extends ChangeNotifier {
   List<Marker> _availableMarkers = [];
 
-  Marker? _lastSelect;
+  Suggestion? _lastSelect;
 
-  Marker? get lastSelect => _lastSelect;
+  Suggestion? get lastSelect => _lastSelect;
 
-  set lastSelect(Marker? value) {
+  set lastSelect(Suggestion? value) {
     _lastSelect = value;
     notifyListeners();
   }
@@ -49,7 +49,7 @@ class MapDataController extends ChangeNotifier {
 
   void setSelectedMarkerToId(int id){
     _dataProvider.getSuggestion(id).then((value) => {
-      _lastSelect = value as Marker?,
+      _lastSelect = value,
 
     });
   }
