@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'dart:async';
 
+import 'package:cool_urban_spaces/data/abstract_data.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:http/http.dart' as http;
 
-class ApiRequestData{
+class ApiRequestData implements DataProvider{
   static final ApiRequestData _requestData = ApiRequestData._internal();
 
   factory ApiRequestData(){

@@ -1,3 +1,4 @@
+import 'package:cool_urban_spaces/data/api_request_data.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,20 @@ class MapDataController extends ChangeNotifier {
   int cleanUpKey(Key key) {
     return int.parse(
         key.toString().replaceAll("[<'", "").replaceAll("'>]", ""));
+  }
+
+  void updateMarkers(){
+    Stream<List<Marker>> updatedMarkers = Stream.fromFuture(ApiRequestData().getAllSuggestions())
+        .asyncMap<List<Marker>>((suggestionList) => Future.wait(
+          suggestionList.map<Future<Marker>>((e) async => suggestionToMarkers(e)
+          ),
+        ),
+      );
+    updatedMarkers.forEach((element) => {
+      availableMarkers = element,
+      notifyListeners()
+    });
+
   }
 
   Marker suggestionToMarkers(Suggestion suggestion) {
@@ -60,5 +75,6 @@ class MapDataController extends ChangeNotifier {
 
   void addSuggestion(Suggestion suggestion){
     _availableMarkers.add(suggestionToMarkers(suggestion));
+    updateMarkers();
   }
 }
