@@ -1,10 +1,6 @@
-
-import 'package:cool_urban_spaces/controller/markerController.dart';
-import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cool_urban_spaces/api/suggestionManager.dart';
-import 'package:provider/provider.dart';
+import 'package:cool_urban_spaces/data/suggestionManager.dart';
 
 class StatefulViewSuggestionFragment extends StatefulWidget {
 
@@ -22,7 +18,7 @@ class _ViewSuggestionFragment extends State<StatefulViewSuggestionFragment> {
 
   @override
   Widget build(BuildContext context) {
-    MarkerController controller = Provider.of<MarkerController>(context);
+    //MarkerController controller = Provider.of<MarkerController>(context);
     if(_id>=0){
       SuggestionManager.getSuggestion(_id).then((value) =>
       {
@@ -40,7 +36,7 @@ class _ViewSuggestionFragment extends State<StatefulViewSuggestionFragment> {
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            title: controller.SelectedSuggestion != null ? Text(controller.SelectedSuggestion!.title) : Text(""),
+              //title: controller.SelectedSuggestion != null ? Text(controller.SelectedSuggestion!.title) : Text(""),
           ),
           body: Padding(padding: EdgeInsets.all(10),
           child: Column(

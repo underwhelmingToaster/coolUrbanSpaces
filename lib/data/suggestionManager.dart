@@ -19,7 +19,7 @@ class SuggestionManager{
   static Future<List<Suggestion>> getAllSuggestions() async{
     return _suggestionsTEMP;
     //TODO: Change to productional
-    final response = await http.get(Uri.parse('/api/suggestion/all'));
+    final response = await http.get(Uri.parse('/data/suggestion/all'));
 
     if(response.statusCode == 200) {
       List<dynamic> suggestionList = jsonDecode(response.body);
@@ -44,7 +44,7 @@ class SuggestionManager{
 
     return result;
     //TODO: Change to productional
-    final response = await http.get(Uri.parse('/api/suggestion/' + id.toString()));
+    final response = await http.get(Uri.parse('/data/suggestion/' + id.toString()));
     if(response.statusCode == 200){
       return Suggestion.fromJson(jsonDecode(response.body));
     }else{
@@ -59,7 +59,7 @@ class SuggestionManager{
     SuggestionManager._suggestionsTEMP.add(suggestion);
     return;
     //TODO: Change to productional
-    final response = await http.post(Uri.parse('/api/suggestion/add'), body: jsonEncode(suggestion.toJson()), headers: {"Content-Type": "application/json"});
+    final response = await http.post(Uri.parse('/data/suggestion/add'), body: jsonEncode(suggestion.toJson()), headers: {"Content-Type": "application/json"});
     if(response.statusCode == 200){
       return;
     }else{
