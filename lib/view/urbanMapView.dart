@@ -31,7 +31,6 @@ class UrbanMapView extends StatelessWidget{
         controller: mc,
         plugins: [
           MarkerClusterPlugin(),
-          LocationPlugin(),
         ],
         onTap: (point) {
           suggestionController.lat = point.latitude;
@@ -67,55 +66,7 @@ class UrbanMapView extends StatelessWidget{
                 onPressed: () { }
             );
           },
-        ),
-
-        LocationOptions(
-          locationButton(),
-          onLocationUpdate: (LatLngData? ld) {
-            print(
-                'Location updated: ${ld?.location} (accuracy: ${ld?.accuracy})');
-          },
-          onLocationRequested: (LatLngData? ld) {
-            if (ld == null) {
-              return;
-            }
-            mc.move(ld.location, 16.0);
-          },
-        ),
-      ],
-    );
-  }
-
-  LocationButtonBuilder locationButton() {
-    return (BuildContext context, ValueNotifier<LocationServiceStatus> status,
-        Function onPressed) {
-      return Align(
-        alignment: Alignment.bottomRight,
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 16.0, right: 16.0),
-          child: FloatingActionButton(
-              child: ValueListenableBuilder<LocationServiceStatus>(
-                  valueListenable: status,
-                  builder: (BuildContext context, LocationServiceStatus value,
-                      Widget? child) {
-                    switch (value) {
-                      case LocationServiceStatus.disabled:
-                      case LocationServiceStatus.permissionDenied:
-                      case LocationServiceStatus.unsubscribed:
-                        return const Icon(
-                          Icons.location_disabled,
-                          color: Colors.white,
-                        );
-                      default:
-                        return const Icon(
-                          Icons.location_searching,
-                          color: Colors.white,
-                        );
-                    }
-                  }),
-              onPressed: () => onPressed()),
-        ),
+        ),]
       );
-    };
-  }
+    }
 }
