@@ -17,19 +17,37 @@ class InfoSuggestionView extends StatelessWidget{
       desc = suggestion.text;
     }
 
+    List<Widget> displayList = [];
+    // TODO: Get Comments and fill into list with colored seperators inbetween
 
     return SafeArea(
         child: Scaffold(
           appBar: AppBar(
             title: Text(title),
           ),
-          body: Padding(padding: EdgeInsets.all(10),
-          child: Column(
-            children: <Widget>[
+          body: Column(children: <Widget>[
+            Row(children: [
+              Text("ADRESS?"),
+              Spacer(flex: 1,),
               Text(desc),
-            ],
-          ),
-        ),)
+            ],),
+            Expanded(child:
+            ListView(
+              children: <Widget>[
+                Card(
+                  child: ListTile(
+                    title: Text("Current situation"),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text("Suggestions"),
+                  ),
+                )
+              ],
+            ),)
+          ],)
+        )
     );
   }
 }
