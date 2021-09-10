@@ -73,6 +73,7 @@ class _MapFragment extends State<StatefulMapFragment> {
               child: Text('CoolUrbanSpaces'),),
             ListTile(
               title: const Text('Map'),
+              onTap: () => Navigator.pop(context),
             ),
             ListTile(
               title: const Text('Browse'),
