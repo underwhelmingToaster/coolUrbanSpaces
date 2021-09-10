@@ -69,22 +69,18 @@ class _MapFragment extends State<StatefulMapFragment> {
         ),
       ),
       appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset("assets/images/Coolcity.png",),
+        leading: Builder(builder: (BuildContext context) {
+          return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: IconButton(
+                icon: Image.asset("assets/images/Coolcity.png"),
+                iconSize: 50,
+                onPressed: () => Scaffold.of(context).openDrawer(),
+              )
+          );},
         ),
         title: const Text('Cool Urban Spaces'),
-          backgroundColor: Color(0xff92d396
-          ),
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.menu),
-              tooltip: 'Show Menu',
-              onPressed: () {
-                // TODO menu
-              },
-            ),
-          ]
+        backgroundColor: Color(0xff92d396),
       ),
       floatingActionButton: FloatingActionButton(
         heroTag: "addButton",
@@ -98,18 +94,6 @@ class _MapFragment extends State<StatefulMapFragment> {
       body: new UrbanMapView()
     );
   }
-
-  /*void reloadDataScheduler(var interval, MarkerController controller){
-    if(!started) {
-      started = true;
-      SuggestionManager.formatSuggestions().((value) =>
-      controller.markerList = value);
-      Timer.periodic(interval, (Timer timer) {
-        SuggestionManager.formatSuggestions().then((value) =>
-        controller.markerList = value);
-      });
-    }
-  }*/
 }
 
 
