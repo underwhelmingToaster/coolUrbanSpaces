@@ -26,7 +26,9 @@ class MyApp extends StatelessWidget {
           title: 'Cool Urban',
           home: StatefulMapFragment(),
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            brightness: Brightness.light,
+            primaryColor: Color(0xff92d396),
+
           ),
         )
     );
@@ -47,8 +49,8 @@ class _MapFragment extends State<StatefulMapFragment> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(color: Colors.blue),
+            DrawerHeader(
+              decoration: BoxDecoration(color: Theme.of(context).primaryColor),
               child: Text('CoolUrbanSpaces'),),
             ListTile(
               title: const Text('Map'),
@@ -80,11 +82,11 @@ class _MapFragment extends State<StatefulMapFragment> {
           );},
         ),
         title: const Text('Cool Urban Spaces'),
-        backgroundColor: Color(0xff92d396),
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       floatingActionButton: FloatingActionButton(
         heroTag: "addButton",
-        backgroundColor: Color(0xff92d396),
+        backgroundColor: Theme.of(context).primaryColor,
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(
               builder: (context) => AddSuggestionView()));

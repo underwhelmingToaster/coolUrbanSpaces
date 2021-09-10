@@ -76,6 +76,9 @@ class AddSuggestionView extends StatelessWidget{
                 ),
                 Padding(padding: EdgeInsets.all(30),
                   child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Theme.of(context).primaryColor,
+                    ),
                     onPressed: () {
                         if(suggestionController.submit()) {
                           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Processing Data')));
