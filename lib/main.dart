@@ -43,6 +43,31 @@ class _MapFragment extends State<StatefulMapFragment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue),
+              child: Text('CoolUrbanSpaces'),),
+            ListTile(
+              title: const Text('Map'),
+            ),
+            ListTile(
+              title: const Text('Browse'),
+            ),
+            ListTile(
+              title: const Text('Supported'),
+            ),
+            ListTile(
+              title: const Text('Profile'),
+            ),
+            ListTile(
+              title: const Text('Settings'),
+            )
+          ],
+        ),
+      ),
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
