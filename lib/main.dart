@@ -28,13 +28,17 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             brightness: Brightness.light,
             primaryColor: Color(0xff92d396),
-            accentColor: Color(0xff92d396),
+            accentColor: Colors.green,
+
             inputDecorationTheme: InputDecorationTheme(
               enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Color(0xff92d396)),
+                borderSide: BorderSide(color: Colors.green),
               ),
               focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Color(0xff92d396)),
+                borderSide: BorderSide(color: Colors.green),
+              ),
+              border: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.green),
               ),
             ),
           ),
