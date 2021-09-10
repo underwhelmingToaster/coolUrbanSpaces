@@ -9,6 +9,9 @@ import 'package:latlong2/latlong.dart';
 
 class MapDataController extends ChangeNotifier {
   List<Marker> _availableMarkers = [];
+  List<Suggestion> _cachedSuggestions = [];
+
+  List<Suggestion> get cachedSuggestions => _cachedSuggestions;
 
   Suggestion? _lastSelect;
 
@@ -34,7 +37,8 @@ class MapDataController extends ChangeNotifier {
   }
 
   void updateMarkers(){
-    Stream<List<Marker>> updatedMarkers = Stream.fromFuture(_dataProvider.getAllSuggestions())
+    Future<List<Suggestion>> suggestions = _dataProvider.getAllSuggestions();
+    Stream<List<Marker>> updatedMarkers = Stream.fromFuture(suggestions)
         .asyncMap<List<Marker>>((suggestionList) => Future.wait(
           suggestionList.map<Future<Marker>>((e) async => suggestionToMarkers(e)
           ),
@@ -45,7 +49,10 @@ class MapDataController extends ChangeNotifier {
       notifyListeners()
     });
 
+    suggestions.then((value) => _cachedSuggestions = value);
+    notifyListeners();
   }
+
 
   void setSelectedMarkerToId(int id){
     _dataProvider.getSuggestion(id).then((value) => {
