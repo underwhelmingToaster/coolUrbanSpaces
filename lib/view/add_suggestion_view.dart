@@ -1,6 +1,6 @@
-
-
 import 'package:cool_urban_spaces/controller/add_suggestion_controller.dart';
+import 'package:cool_urban_spaces/controller/map_data_controller.dart';
+import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +11,7 @@ class AddSuggestionView extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     AddSuggestionController suggestionController = Provider.of<AddSuggestionController>(context);
+    MapDataController mapDataController = Provider.of<MapDataController>(context);
     return SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -76,10 +77,17 @@ class AddSuggestionView extends StatelessWidget{
                 Padding(padding: EdgeInsets.all(30),
                   child: ElevatedButton(
                     onPressed: () {
-                        if(suggestionController.submit())
-                        {
+                        if(suggestionController.submit()) {
                           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Processing Data')));
                           Navigator.pop(context);
+                          Suggestion suggestion = new Suggestion(
+                              suggestionController.title,
+                              suggestionController.desc,
+                              suggestionController.type,
+                              suggestionController.lat,
+                              suggestionController.lon);
+                          mapDataController.addSuggestion(suggestion);
+                          suggestionController.reset();
                         }else{
                           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Missing Data'), backgroundColor: Colors.red));
                         }

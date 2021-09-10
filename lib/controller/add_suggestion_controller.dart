@@ -1,6 +1,3 @@
-
-import 'package:cool_urban_spaces/api/suggestionManager.dart';
-import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:flutter/cupertino.dart';
 
 class AddSuggestionController extends ChangeNotifier {
@@ -13,9 +10,6 @@ class AddSuggestionController extends ChangeNotifier {
 
   bool submit() {
     if (title.isNotEmpty && desc.isNotEmpty) {
-      SuggestionManager.postSuggestion(
-          new Suggestion(title, desc, type, lat, lon));
-      reset();
       return true;
     }
     return false;
@@ -28,7 +22,6 @@ class AddSuggestionController extends ChangeNotifier {
     lat = 0;
     lon = 0;
   }
-
 
   double get lon => _lon;
 
