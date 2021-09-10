@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:cool_urban_spaces/controller/add_suggestion_controller.dart';
 import 'package:cool_urban_spaces/controller/map_data_controller.dart';
+import 'package:cool_urban_spaces/controller/settings_controller.dart';
 import 'package:cool_urban_spaces/view/add_suggestion_view.dart';
+import 'package:cool_urban_spaces/view/settings_view.dart';
 import 'package:cool_urban_spaces/view/urban_map_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,6 +23,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AddSuggestionController()),
         ChangeNotifierProvider(create: (_) => MapDataController()),
+        ChangeNotifierProvider(create: (_) => SettingsController()),
       ],
         child: MaterialApp(
           title: 'Cool Urban',
@@ -78,6 +81,8 @@ class _MapFragment extends State<StatefulMapFragment> {
             ),
             ListTile(
               title: const Text('Settings'),
+              onTap: () => Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => SettingsView())),
             )
           ],
         ),
