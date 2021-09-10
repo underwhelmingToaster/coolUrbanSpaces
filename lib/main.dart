@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:cool_urban_spaces/controller/add_suggestion_controller.dart';
 import 'package:cool_urban_spaces/controller/map_data_controller.dart';
+import 'package:cool_urban_spaces/controller/profile_controller.dart';
 import 'package:cool_urban_spaces/controller/settings_controller.dart';
 import 'package:cool_urban_spaces/view/add_suggestion_view.dart';
+import 'package:cool_urban_spaces/view/profile_view.dart';
 import 'package:cool_urban_spaces/view/settings_view.dart';
 import 'package:cool_urban_spaces/view/urban_map_view.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +26,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AddSuggestionController()),
         ChangeNotifierProvider(create: (_) => MapDataController()),
         ChangeNotifierProvider(create: (_) => SettingsController()),
+        ChangeNotifierProvider(create: (_) => ProfileController()),
       ],
         child: MaterialApp(
           title: 'Cool Urban',
@@ -78,6 +81,8 @@ class _MapFragment extends State<StatefulMapFragment> {
             ),
             ListTile(
               title: const Text('Profile'),
+              onTap: () => Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => ProfileView())),
             ),
             ListTile(
               title: const Text('Settings'),
