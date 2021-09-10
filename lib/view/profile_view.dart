@@ -12,39 +12,21 @@ class ProfileView extends StatelessWidget {
       appBar: AppBar(
         title: Text("Profile"),
       ),
-      body: Column(
-        children: <Widget>[
-          Expanded(child: ListView(
-            children: [
-              Card(
-                child: ListTile(
-                  title: Text("Username"),
-                  trailing: ConstrainedBox(
-                      constraints: BoxConstraints(maxHeight: 60, maxWidth: 150),
-                      child: TextFormField(
-                        initialValue: profileController.username,
-                        decoration: InputDecoration(
-                          labelText: "Username",
-                          labelStyle: new TextStyle(color: Theme.of(context).primaryColor),
-                        ),
-                        inputFormatters: [LengthLimitingTextInputFormatter(500)],
-                        minLines: 4,
-                        maxLines: 10,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Username invalid";
-                          }
-                          return null;
-                          },
-                        onChanged: (v) => profileController.username = v,
-                      ),
-                  ),
-                ),
-              )
-            ],
-          ))
+      body: ListView(
+        children: [
+          Card(
+            child: ListTile(
+              title: Text("Username"),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text("Password"),
+            ),
+          )
         ],
-      ),
-    ));
+      )
+    )
+    );
   }
 }
