@@ -22,8 +22,9 @@ class AddSuggestionView extends StatelessWidget{
               children: <Widget>[
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: "Title",
-                    hintText: "A short title"
+                      labelText: "Title",
+                      hintText: "A short title",
+                      labelStyle: new TextStyle(color: Theme.of(context).primaryColor)
                   ),
                   inputFormatters: [LengthLimitingTextInputFormatter(50)],
                   validator: (value) {
@@ -37,7 +38,8 @@ class AddSuggestionView extends StatelessWidget{
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Description",
-                      hintText: "Describe your suggestion.dart in more detail"
+                      hintText: "Describe your suggestion.dart in more detail",
+                      labelStyle: new TextStyle(color: Theme.of(context).primaryColor),
                   ),
                   inputFormatters: [LengthLimitingTextInputFormatter(500)],
                   minLines: 4,
@@ -76,6 +78,9 @@ class AddSuggestionView extends StatelessWidget{
                 ),
                 Padding(padding: EdgeInsets.all(30),
                   child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Theme.of(context).primaryColor,
+                    ),
                     onPressed: () {
                         if(suggestionController.submit()) {
                           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Processing Data')));
