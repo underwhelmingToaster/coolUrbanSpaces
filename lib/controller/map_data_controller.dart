@@ -63,35 +63,8 @@ class MapDataController extends ChangeNotifier {
 
   Marker suggestionToMarkers(Suggestion suggestion) {
     Widget icon = SvgPicture.asset("icons/shade.svg");
-    switch (suggestion.type) {
-      case 0:
-        icon = Icon(Icons.pin_drop, color: Colors.amber,);
+    icon = getMarkerIcon(suggestion);
 
-        break;
-      case 1:
-        icon = Icon(Icons.wb_sunny_outlined, color: Colors.yellow,);
-        break;
-      case 2:
-        icon = Icon(Icons.event_seat_outlined, color: Colors.grey,);
-        break;
-      case 3:
-        icon = Icon(Icons.local_florist_outlined, color: Colors.green,);
-        break;
-      case 4:
-        icon = Icon(Icons.person_outline, color: Colors.orange,);
-        break;
-      case 5:
-        icon = Icon(Icons.waves_outlined, color: Colors.blue,);
-        break;
-      case 6:
-        icon = Icon(Icons.account_tree_outlined, color: Colors.green,);
-        break;
-      case 7:
-        icon = Icon(Icons.lightbulb_outline, color: Colors.yellow,);
-        break;
-      default:
-        print("Could not assign type of suggestion.dart");
-    }
     return new Marker(
         width: 80.0,
         height: 80.0,
@@ -101,6 +74,30 @@ class MapDataController extends ChangeNotifier {
                 child: icon
             ),
         key: new Key(suggestion.id.toString()));
+  }
+
+  Icon getMarkerIcon(Suggestion suggestion){
+    switch (suggestion.type) {
+      case 0:
+        return Icon(Icons.pin_drop, color: Colors.amber);
+      case 1:
+        return Icon(Icons.wb_sunny_outlined, color: Colors.yellow);
+      case 2:
+        return Icon(Icons.event_seat_outlined, color: Colors.grey);
+      case 3:
+        return Icon(Icons.local_florist_outlined, color: Colors.green);
+      case 4:
+        return Icon(Icons.person_outline, color: Colors.orange);
+      case 5:
+        return Icon(Icons.waves_outlined, color: Colors.blue);
+      case 6:
+        return Icon(Icons.account_tree_outlined, color: Colors.green);
+      case 7:
+        return Icon(Icons.lightbulb_outline, color: Colors.yellow);
+      default:
+        print("Could not assign type of suggestion.dart");
+        return Icon(Icons.warning, color: Colors.red);
+    }
   }
 
   void addSuggestion(Suggestion suggestion){

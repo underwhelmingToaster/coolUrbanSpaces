@@ -2,7 +2,6 @@ import 'package:cool_urban_spaces/controller/map_data_controller.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:provider/provider.dart';
 
 class InfoSuggestionView extends StatelessWidget{
@@ -31,21 +30,22 @@ class InfoSuggestionView extends StatelessWidget{
               Spacer(flex: 1,),
               Text(desc),
             ],),
-            Expanded(child:
-            ListView(
-              children: <Widget>[
-                Card(
-                  child: ListTile(
-                    title: Text("Current situation"),
+            Expanded(
+              child: ListView(
+                children: <Widget>[
+                  Card(
+                    child: ListTile(
+                      title: Text("Current situation"),
+                    ),
                   ),
-                ),
-                Card(
-                  child: ListTile(
-                    title: Text("Suggestions"),
-                  ),
-                )
-              ],
-            ),)
+                  Card(
+                    child: ListTile(
+                      title: Text("Suggestions"),
+                    ),
+                  )
+                ],
+              ),
+            )
           ],)
         )
     );

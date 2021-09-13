@@ -64,62 +64,62 @@ class _MapFragment extends State<StatefulMapFragment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(color: Theme.of(context).primaryColor),
-              child: Text('CoolUrbanSpaces'),),
-            ListTile(
-              title: const Text('Map'),
-              onTap: () => Navigator.pop(context),
-            ),
-            ListTile(
-              title: const Text('Browse'),
-              onTap: () => Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => BrowsingView())),
-            ),
-            ListTile(
-              title: const Text('Supported'),
-            ),
-            ListTile(
-              title: const Text('Profile'),
-              onTap: () => Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => ProfileView())),
-            ),
-            ListTile(
-              title: const Text('Settings'),
-              onTap: () => Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => SettingsView())),
-            )
-          ],
-        ),
-      ),
-      appBar: AppBar(
-        leading: Builder(builder: (BuildContext context) {
-          return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconButton(
-                icon: Image.asset("assets/images/Coolcity.png"),
-                iconSize: 50,
-                onPressed: () => Scaffold.of(context).openDrawer(),
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+                child: Text('CoolUrbanSpaces'),),
+              ListTile(
+                title: const Text('Map'),
+                onTap: () => Navigator.pop(context),
+              ),
+              ListTile(
+                title: const Text('Browse'),
+                onTap: () => Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => BrowsingView())),
+              ),
+              ListTile(
+                title: const Text('Supported'),
+              ),
+              ListTile(
+                title: const Text('Profile'),
+                onTap: () => Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => ProfileView())),
+              ),
+              ListTile(
+                title: const Text('Settings'),
+                onTap: () => Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => SettingsView())),
               )
-          );},
+            ],
+          ),
         ),
-        title: const Text('Cool Urban Spaces'),
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
-      floatingActionButton: FloatingActionButton(
-        heroTag: "addButton",
-        backgroundColor: Theme.of(context).primaryColor,
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(
-              builder: (context) => AddSuggestionView()));
-          },
-        child: const Icon(Icons.add),
-      ),
-      body: new UrbanMapView()
+        appBar: AppBar(
+          leading: Builder(builder: (BuildContext context) {
+            return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                  icon: Image.asset("assets/images/Coolcity.png"),
+                  iconSize: 50,
+                  onPressed: () => Scaffold.of(context).openDrawer(),
+                )
+            );},
+          ),
+          title: const Text('Cool Urban Spaces'),
+          backgroundColor: Theme.of(context).primaryColor,
+        ),
+        floatingActionButton: FloatingActionButton(
+          heroTag: "addButton",
+          backgroundColor: Theme.of(context).primaryColor,
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(
+                builder: (context) => AddSuggestionView()));
+            },
+          child: const Icon(Icons.add),
+        ),
+        body: new UrbanMapView()
     );
   }
 }

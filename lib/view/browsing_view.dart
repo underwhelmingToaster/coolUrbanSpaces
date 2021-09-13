@@ -41,7 +41,7 @@ class BrowsingView extends StatelessWidget{
       widgets.add(new Card(
           child: ListTile(
             title: Text(suggestion.title),
-            trailing: Icon(Icons.ac_unit),
+            trailing: dataController.getMarkerIcon(suggestion),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
