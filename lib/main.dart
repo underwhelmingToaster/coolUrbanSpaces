@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cool_urban_spaces/controller/add_suggestion_controller.dart';
+import 'package:cool_urban_spaces/controller/chat_controller.dart';
 import 'package:cool_urban_spaces/controller/map_data_controller.dart';
 import 'package:cool_urban_spaces/controller/profile_controller.dart';
 import 'package:cool_urban_spaces/controller/settings_controller.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MapDataController()),
         ChangeNotifierProvider(create: (_) => SettingsController()),
         ChangeNotifierProvider(create: (_) => ProfileController()),
+        ChangeNotifierProvider(create: (_) => ChatController()),
       ],
         child: MaterialApp(
           title: 'Cool Urban',
