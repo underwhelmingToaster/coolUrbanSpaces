@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-class User {
+class UserModel {
   int? id;
   late String name;
   late String pwdHash;
 
-  User(this.name, this.pwdHash, [this.id]);
+  UserModel(this.name, this.pwdHash, [this.id]);
 
-  User.fromJson(Map<String, dynamic> json)
+  UserModel.fromJson(Map<String, dynamic> json)
       :
         name = json["name"],
         pwdHash = json["pwdHash"],

@@ -1,3 +1,4 @@
+import 'package:cool_urban_spaces/data/abstract_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart';
 
@@ -10,5 +11,8 @@ class ChatController extends ChangeNotifier{
     // TODO: Load messages first?
     _activeMessages.add(message);
     notifyListeners();
+  }
+
+  void updateMessages(){
   }
 }

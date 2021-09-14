@@ -9,15 +9,15 @@ import 'package:latlong2/latlong.dart';
 
 class MapDataController extends ChangeNotifier {
   List<Marker> _availableMarkers = [];
-  List<Suggestion> _cachedSuggestions = [];
+  List<SugestionModel> _cachedSuggestions = [];
 
-  List<Suggestion> get cachedSuggestions => _cachedSuggestions;
+  List<SugestionModel> get cachedSuggestions => _cachedSuggestions;
 
-  Suggestion? _lastSelect;
+  SugestionModel? _lastSelect;
 
-  Suggestion? get lastSelect => _lastSelect;
+  SugestionModel? get lastSelect => _lastSelect;
 
-  set lastSelect(Suggestion? value) {
+  set lastSelect(SugestionModel? value) {
     _lastSelect = value;
     notifyListeners();
   }
@@ -37,7 +37,7 @@ class MapDataController extends ChangeNotifier {
   }
 
   void updateMarkers(){
-    Future<List<Suggestion>> suggestions = _dataProvider.getAllSuggestions();
+    Future<List<SugestionModel>> suggestions = _dataProvider.getAllSuggestions();
     Stream<List<Marker>> updatedMarkers = Stream.fromFuture(suggestions)
         .asyncMap<List<Marker>>((suggestionList) => Future.wait(
           suggestionList.map<Future<Marker>>((e) async => suggestionToMarkers(e)
@@ -61,7 +61,7 @@ class MapDataController extends ChangeNotifier {
     });
   }
 
-  Marker suggestionToMarkers(Suggestion suggestion) {
+  Marker suggestionToMarkers(SugestionModel suggestion) {
     Widget icon = SvgPicture.asset("icons/shade.svg");
     icon = getMarkerIcon(suggestion);
 
@@ -76,7 +76,7 @@ class MapDataController extends ChangeNotifier {
         key: new Key(suggestion.id.toString()));
   }
 
-  Icon getMarkerIcon(Suggestion suggestion){
+  Icon getMarkerIcon(SugestionModel suggestion){
     switch (suggestion.type) {
       case 0:
         return Icon(Icons.pin_drop, color: Colors.amber);
@@ -100,7 +100,7 @@ class MapDataController extends ChangeNotifier {
     }
   }
 
-  void addSuggestion(Suggestion suggestion){
+  void addSuggestion(SugestionModel suggestion){
     _availableMarkers.add(suggestionToMarkers(suggestion));
     _dataProvider.postSuggestion(suggestion);
     updateMarkers();

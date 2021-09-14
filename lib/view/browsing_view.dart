@@ -17,7 +17,7 @@ class BrowsingView extends StatelessWidget{
     SettingsController settingsController = Provider.of<SettingsController>(context);
     List<Widget> widgets = [];
 
-    List<Suggestion> suggestions = dataController.cachedSuggestions;
+    List<SugestionModel> suggestions = dataController.cachedSuggestions;
 
     switch(settingsController.browsingSort){
       case "Name":

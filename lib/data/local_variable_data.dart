@@ -1,4 +1,5 @@
 import 'package:cool_urban_spaces/data/abstract_data.dart';
+import 'package:cool_urban_spaces/model/message.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
 
 class LocalDataProvider implements DataProvider{
@@ -11,15 +12,16 @@ class LocalDataProvider implements DataProvider{
 
   LocalDataProvider._internal();
 
-  List<Suggestion> _localSuggestions = [];
+  List<SugestionModel> _localSuggestions = [];
+  List<MessageModel> _messages = [];
 
   @override
-  Future<List<Suggestion>> getAllSuggestions() async{
+  Future<List<SugestionModel>> getAllSuggestions() async{
     return _localSuggestions;
   }
 
   @override
-  Future<void> postSuggestion(Suggestion suggestion) async{
+  Future<void> postSuggestion(SugestionModel suggestion) async{
     if(suggestion.id == null){
       suggestion.id = _localSuggestions.length;
     }
@@ -27,8 +29,8 @@ class LocalDataProvider implements DataProvider{
   }
 
   @override
-  Future<Suggestion> getSuggestion(int id) async{
-    Suggestion suggestion = _localSuggestions.first;
+  Future<SugestionModel> getSuggestion(int id) async{
+    SugestionModel suggestion = _localSuggestions.first;
     _localSuggestions.forEach((element) {
       if(element.id == id){
         suggestion = element;
@@ -36,4 +38,16 @@ class LocalDataProvider implements DataProvider{
     });
     return suggestion;
   }
+
+  @override
+  Future<List<MessageModel>> getMessage(int chatId) async {
+    return _messages;
+  }
+
+  @override
+  Future<void> postMessage(MessageModel message) async {
+      _messages.add(message);
+  }
+
+
 }

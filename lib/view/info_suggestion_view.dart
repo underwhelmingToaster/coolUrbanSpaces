@@ -46,7 +46,7 @@ class InfoSuggestionView extends StatelessWidget{
     String desc = "";
     Icon icon = Icon(Icons.warning, color: Colors.orange,);
     MapDataController mapDataController = Provider.of<MapDataController>(context);
-    Suggestion? suggestion= mapDataController.lastSelect;
+    SugestionModel? suggestion= mapDataController.lastSelect;
     if(suggestion!=null){
       title = suggestion.title;
       desc = suggestion.text;
@@ -66,7 +66,10 @@ class InfoSuggestionView extends StatelessWidget{
             child: ListView(
               children: [
                 Card(
-                    child: Padding(padding: EdgeInsets.all(20),child:Text(desc))
+                    child: Padding(
+                        padding: EdgeInsets.all(20),
+                        child:Text(desc)
+                    )
                 )
               ],
             ),
