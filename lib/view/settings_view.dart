@@ -20,10 +20,39 @@ class SettingsView extends StatelessWidget{
               title: Text("EXAMPLE"),
               trailing: Switch(
                 value: settingsController.exampleSwitch,
-                onChanged: (bool) {settingsController.exampleSwitch = bool;},
+                onChanged: (newValue) {settingsController.exampleSwitch = newValue;},
               ),
             ),
-          )
+          ),
+          Card(
+            child: Row(
+              children: [
+                Text("Auto-refresh Chat"),
+                Spacer(),
+                Container(
+                  child: Switch(
+                      value: settingsController.automaticRefresh,
+                      onChanged: (newValue) {
+                        settingsController.automaticRefresh = newValue;
+                      }),
+                ),
+                Expanded(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Refresh rate"),
+                          TextField(
+                            keyboardType: TextInputType.number,
+                            onChanged: (value) {
+                              settingsController.chatRefreshRate = int.parse(value);
+                            },
+                          ),
+                        ]
+                    )
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     ));
