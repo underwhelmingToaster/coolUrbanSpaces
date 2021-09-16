@@ -63,12 +63,9 @@ class StatefulMapFragment extends StatefulWidget {
 }
 
 class _MapFragment extends State<StatefulMapFragment> {
-  bool _isRunning = false;
-  bool _stopTask = false;
 
   @override
   Widget build(BuildContext context) {
-    setUpChatRefresh(context);
     return Scaffold(
         drawer: Drawer(
           child: ListView(
@@ -127,28 +124,6 @@ class _MapFragment extends State<StatefulMapFragment> {
         ),
         body: new UrbanMapView()
     );
-  }
-
-  void setUpChatRefresh(BuildContext context){
-    SettingsController settingsController = Provider.of<SettingsController>(context);
-    ChatController chatController = Provider.of<ChatController>(context);
-    Duration offset = Duration(seconds: settingsController.chatRefreshRate);
-    _stopTask = settingsController.stopAsyncTask;
-
-    while(_isRunning && _stopTask) {
-      print("Waiting till task stops");
-    }
-    if(settingsController.automaticRefresh) {
-      _isRunning = true;
-      Timer.periodic(offset, (timer) {
-        print("Running on: " + offset.inSeconds.toString());
-        if (_stopTask) {
-          timer.cancel();
-          _isRunning = false;
-        }
-        chatController.updateMessages();
-      });
-    }
   }
 }
 

@@ -1,11 +1,11 @@
-import 'package:cool_urban_spaces/model/user.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 class MessageModel{
-  String? uuid;
+  String uuid;
   late String authorName;
   late String text;
 
-  MessageModel(this.authorName, this.text, [this.uuid]);
+  MessageModel(this.authorName, this.text, this.uuid);
 
 
   MessageModel.fromJson(Map<String, dynamic> json):
@@ -18,4 +18,8 @@ class MessageModel{
     'text' : text,
     'authorName' : authorName,
   };
+
+  types.TextMessage toMessage() {
+    return types.TextMessage(id: this.uuid, author: types.User(id: authorName), text: this.text);
+  }
 }

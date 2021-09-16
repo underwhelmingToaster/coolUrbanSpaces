@@ -24,35 +24,6 @@ class SettingsView extends StatelessWidget{
               ),
             ),
           ),
-          Card(
-            child: Row(
-              children: [
-                Text("Auto-refresh Chat"),
-                Spacer(),
-                Container(
-                  child: Switch(
-                      value: settingsController.automaticRefresh,
-                      onChanged: (newValue) {
-                        settingsController.automaticRefresh = newValue;
-                      }),
-                ),
-                Expanded(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Refresh rate"),
-                          TextField(
-                            keyboardType: TextInputType.number,
-                            onChanged: (value) {
-                              settingsController.chatRefreshRate = int.parse(value);
-                            },
-                          ),
-                        ]
-                    )
-                ),
-              ],
-            ),
-          ),
         ],
       ),
     ));
