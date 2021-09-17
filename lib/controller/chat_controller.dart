@@ -29,6 +29,8 @@ class ChatController extends ChangeNotifier{
 
     if(_formerId != id) {
       _formerId = id;
+      _activeMessages = [];
+      // TODO: get all Messages to this point
       channel.sink.close(status.goingAway);
       if(id >= 0){
         Uri uri = Uri.parse(webSocketURL + "/" + id.toString());
