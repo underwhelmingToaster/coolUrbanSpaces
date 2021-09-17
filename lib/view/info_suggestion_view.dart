@@ -1,3 +1,4 @@
+import 'package:cool_urban_spaces/controller/add_suggestion_controller.dart';
 import 'package:cool_urban_spaces/controller/chat_controller.dart';
 import 'package:cool_urban_spaces/controller/map_data_controller.dart';
 import 'package:cool_urban_spaces/controller/profile_controller.dart';
@@ -82,6 +83,14 @@ class InfoSuggestionView extends StatelessWidget{
   Widget chatTab(BuildContext context){
     ChatController chatController = Provider.of<ChatController>(context);
     ProfileController profileController = Provider.of<ProfileController>(context);
+    MapDataController suggestionController = Provider.of<MapDataController>(context);
+
+    if(suggestionController.lastSelect != null) {
+      int id = suggestionController.lastSelect!.id as int;
+      chatController.changeWebSocketChannel(id);
+    }
+
+
     types.User _user = types.User(id: profileController.username);
 
     List<types.Message> _messages = chatController.activeMessages;
