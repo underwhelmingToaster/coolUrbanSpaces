@@ -1,3 +1,5 @@
+import 'package:cool_urban_spaces/data/abstract_data.dart';
+import 'package:cool_urban_spaces/data/local_variable_data.dart';
 import 'package:cool_urban_spaces/model/message.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart';
@@ -30,24 +32,35 @@ class ChatController extends ChangeNotifier{
     if(_formerId != id) {
       _formerId = id;
       _activeMessages = [];
-      // TODO: get all Messages to this point
+      updateMessages(id, );
+
       channel.sink.close(status.goingAway);
+
       if(id >= 0){
         Uri uri = Uri.parse(webSocketURL + "/" + id.toString());
         channel = WebSocketChannel.connect(uri);
+
+        channel.stream.listen((message) {
+          if(message is MessageModel){
+            _activeMessages.add(message.toMessage());
+          }else{
+            // TODO: throw exception (invalid result from websocket)
+          }
+        });
+        notifyListeners();
         print("Listening to :" + uri.toString());
       }
     }
   }
 
-  void updateMessages(){
-    channel.stream.listen((message) {
-      if(message is MessageModel){
-        _activeMessages.add(message.toMessage());
-      }else{
-        // TODO: throw exception (invalid result from websocket)
-      }
+  void updateMessages(int id, [Function? whenDone]){
+    Future<List<MessageModel>> messages = DataProvider.dataProvider.getAllMessages(id);
+    messages.then((value) => {
+      value.forEach((element) {
+        if(!_activeMessages.contains(element)){
+         _activeMessages.add(element.toMessage());
+        }
+      }), notifyListeners(), whenDone
     });
-    notifyListeners();
   }
 }

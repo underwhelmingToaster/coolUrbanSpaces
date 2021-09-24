@@ -40,7 +40,7 @@ class LocalDataProvider implements DataProvider{
   }
 
   @override
-  Future<List<MessageModel>> getMessage(int chatId) async {
+  Future<List<MessageModel>> getAllMessages(int chatId) async {
     return _messages;
   }
 

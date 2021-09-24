@@ -24,6 +24,5 @@ class SugestionModel {
     'type' : type,
     'lat' : lat,
     'lon' : lng,
-    'id' : id,
   };
 }
