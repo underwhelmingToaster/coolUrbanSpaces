@@ -7,9 +7,9 @@ import 'package:cool_urban_spaces/view/urban_map_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 class InfoSuggestionView extends StatelessWidget{
@@ -27,7 +27,7 @@ class InfoSuggestionView extends StatelessWidget{
               title: Text("Suggestion"),
               bottom: TabBar(
                 tabs: [
-                  Tab(icon: Icon(Icons.search)),
+                  Tab(icon: Icon(Icons.info)),
                   Tab(icon: Icon(Icons.chat_bubble))
                 ],
               ),
@@ -47,6 +47,7 @@ class InfoSuggestionView extends StatelessWidget{
   Widget overviewTab(BuildContext context){
     String title = "";
     String desc = "";
+    LatLng location = LatLng(0,0);
     Icon icon = Icon(Icons.warning, color: Colors.orange,);
     MapDataController mapDataController = Provider.of<MapDataController>(context);
     SugestionModel? suggestion= mapDataController.lastSelect;
@@ -54,13 +55,17 @@ class InfoSuggestionView extends StatelessWidget{
       title = suggestion.title;
       desc = suggestion.text;
       icon = mapDataController.getMarkerIcon(suggestion);
+      location = LatLng(suggestion.lat, suggestion.lng);
     }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
             child: Container(
               child: UrbanMapView(
+                isInteractable: false,
+                startLocation: location,
               ),
               height: 100,
             )

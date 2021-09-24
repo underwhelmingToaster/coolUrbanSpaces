@@ -27,8 +27,6 @@ class UrbanMapView extends StatelessWidget{
 
   var mc = new MapController();
 
-  static double lastLatTap = 0.0;
-  static double lastLngTap = 0.0;
 
   @override
   Widget build(BuildContext context) {
