@@ -53,30 +53,28 @@ class InfoSuggestionView extends StatelessWidget{
       desc = suggestion.text;
       icon = mapDataController.getMarkerIcon(suggestion);
     }
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            icon,
+            Text(title, style: TextStyle(fontSize: 16),),
+          ],
+        ),
+        Expanded(
+          child: ListView(
             children: [
-              icon,
-              Text(title, style: TextStyle(fontSize: 16),),
+              Card(
+                  child: Padding(
+                      padding: EdgeInsets.all(20),
+                      child:Text(desc)
+                  )
+              )
             ],
           ),
-          Expanded(
-            child: ListView(
-              children: [
-                Card(
-                    child: Padding(
-                        padding: EdgeInsets.all(20),
-                        child:Text(desc)
-                    )
-                )
-              ],
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 
