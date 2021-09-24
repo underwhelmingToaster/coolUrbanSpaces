@@ -1,10 +1,12 @@
 import 'package:cool_urban_spaces/controller/add_suggestion_controller.dart';
 import 'package:cool_urban_spaces/controller/map_data_controller.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
+import 'package:cool_urban_spaces/view/urban_map_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:latlong2/latlong.dart';
 
 class AddSuggestionView extends StatelessWidget{
 
@@ -12,6 +14,9 @@ class AddSuggestionView extends StatelessWidget{
   Widget build(BuildContext context) {
     AddSuggestionController suggestionController = Provider.of<AddSuggestionController>(context);
     MapDataController mapDataController = Provider.of<MapDataController>(context);
+
+    LatLng startPosition = LatLng(suggestionController.lat, suggestionController.lon);
+
     return SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -20,6 +25,15 @@ class AddSuggestionView extends StatelessWidget{
           body: Padding(padding: EdgeInsets.all(10),
             child: Column(
               children: <Widget>[
+                Container(
+                  child: Expanded(child:
+                    new UrbanMapView(
+                      startLocation: startPosition,
+                      startZoom: 15,
+                      isInteractable: false,
+                    ),
+                  )
+                ),
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Title",

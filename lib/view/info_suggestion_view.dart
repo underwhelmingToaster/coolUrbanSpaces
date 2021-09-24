@@ -3,9 +3,11 @@ import 'package:cool_urban_spaces/controller/chat_controller.dart';
 import 'package:cool_urban_spaces/controller/map_data_controller.dart';
 import 'package:cool_urban_spaces/controller/profile_controller.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
+import 'package:cool_urban_spaces/view/urban_map_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
@@ -20,18 +22,18 @@ class InfoSuggestionView extends StatelessWidget{
 
     return DefaultTabController(
         length: 2,
-        child: SafeArea(
-            child: Scaffold(
-                appBar: AppBar(
-                  title: Text("Suggestion"),
-                  bottom: TabBar(
-                    tabs: [
-                      Tab(icon: Icon(Icons.search)),
-                      Tab(icon: Icon(Icons.chat_bubble))
-                    ],
-                  ),
-                ),
-                body: TabBarView(
+        child: Scaffold(
+            appBar: AppBar(
+              title: Text("Suggestion"),
+              bottom: TabBar(
+                tabs: [
+                  Tab(icon: Icon(Icons.search)),
+                  Tab(icon: Icon(Icons.chat_bubble))
+                ],
+              ),
+            ),
+            body: SafeArea(
+                child: TabBarView(
                   children: [
                     overviewTab(context),
                     chatTab(context),
@@ -56,6 +58,13 @@ class InfoSuggestionView extends StatelessWidget{
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Expanded(
+            child: Container(
+              child: UrbanMapView(
+              ),
+              height: 100,
+            )
+        ),
         Row(
           children: [
             icon,
