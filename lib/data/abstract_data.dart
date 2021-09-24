@@ -1,4 +1,3 @@
-import 'package:cool_urban_spaces/data/api_request_data.dart';
 import 'package:cool_urban_spaces/data/local_variable_data.dart';
 import 'package:cool_urban_spaces/model/message.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';

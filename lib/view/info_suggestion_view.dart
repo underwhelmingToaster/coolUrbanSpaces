@@ -1,4 +1,3 @@
-import 'package:cool_urban_spaces/controller/add_suggestion_controller.dart';
 import 'package:cool_urban_spaces/controller/chat_controller.dart';
 import 'package:cool_urban_spaces/controller/map_data_controller.dart';
 import 'package:cool_urban_spaces/controller/profile_controller.dart';
@@ -15,10 +14,6 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 class InfoSuggestionView extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-
-
-    List<Widget> displayList = [];
-    // TODO: Get Comments and fill into list with colored seperators inbetween
 
     return DefaultTabController(
         length: 2,

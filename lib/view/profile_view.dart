@@ -1,8 +1,6 @@
 import 'package:cool_urban_spaces/controller/profile_controller.dart';
-import 'package:crypt/crypt.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class ProfileView extends StatelessWidget {

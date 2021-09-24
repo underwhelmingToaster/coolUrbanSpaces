@@ -1,4 +1,3 @@
-
 class SugestionModel {
 
   int? id;
