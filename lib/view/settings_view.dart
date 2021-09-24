@@ -20,10 +20,10 @@ class SettingsView extends StatelessWidget{
               title: Text("EXAMPLE"),
               trailing: Switch(
                 value: settingsController.exampleSwitch,
-                onChanged: (bool) {settingsController.exampleSwitch = bool;},
+                onChanged: (newValue) {settingsController.exampleSwitch = newValue;},
               ),
             ),
-          )
+          ),
         ],
       ),
     ));

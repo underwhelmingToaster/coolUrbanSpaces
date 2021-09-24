@@ -85,7 +85,7 @@ class AddSuggestionView extends StatelessWidget{
                         if(suggestionController.submit()) {
                           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Processing Data')));
                           Navigator.pop(context);
-                          Suggestion suggestion = new Suggestion(
+                          SugestionModel suggestion = new SugestionModel(
                               suggestionController.title,
                               suggestionController.desc,
                               suggestionController.type,

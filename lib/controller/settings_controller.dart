@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 class SettingsController extends ChangeNotifier{
 
   String _browsingSort = "Name";
-
   bool _exampleSwitch = true;
+
 
   bool get exampleSwitch => _exampleSwitch;
 
@@ -19,4 +19,6 @@ class SettingsController extends ChangeNotifier{
     _browsingSort = value;
     notifyListeners();
   }
+
+
 }
