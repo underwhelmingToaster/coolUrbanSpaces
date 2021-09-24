@@ -1,5 +1,4 @@
 import 'package:cool_urban_spaces/data/abstract_data.dart';
-import 'package:cool_urban_spaces/data/local_variable_data.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +21,6 @@ class MapDataController extends ChangeNotifier {
     notifyListeners();
   }
 
-  DataProvider _dataProvider = LocalDataProvider();
-
   set availableMarkers(List<Marker> value) {
     _availableMarkers = value;
     notifyListeners();
@@ -37,7 +34,7 @@ class MapDataController extends ChangeNotifier {
   }
 
   void updateMarkers(){
-    Future<List<SugestionModel>> suggestions = _dataProvider.getAllSuggestions();
+    Future<List<SugestionModel>> suggestions = DataProvider.dataProvider.getAllSuggestions();
     Stream<List<Marker>> updatedMarkers = Stream.fromFuture(suggestions)
         .asyncMap<List<Marker>>((suggestionList) => Future.wait(
           suggestionList.map<Future<Marker>>((e) async => suggestionToMarkers(e)
@@ -55,7 +52,7 @@ class MapDataController extends ChangeNotifier {
 
 
   void setSelectedMarkerToId(int id){
-    _dataProvider.getSuggestion(id).then((value) => {
+    DataProvider.dataProvider.getSuggestion(id).then((value) => {
       _lastSelect = value,
 
     });
@@ -102,7 +99,7 @@ class MapDataController extends ChangeNotifier {
 
   void addSuggestion(SugestionModel suggestion){
     _availableMarkers.add(suggestionToMarkers(suggestion));
-    _dataProvider.postSuggestion(suggestion);
+    DataProvider.dataProvider.postSuggestion(suggestion);
     updateMarkers();
   }
 }

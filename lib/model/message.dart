@@ -31,6 +31,5 @@ class MessageModel{
     this.authorName = message.author.id;
     this.text = message.text;
     this.createdAt = message.createdAt!;
-
   }
 }

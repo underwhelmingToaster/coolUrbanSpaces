@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 
 class ApiRequestData implements DataProvider{
   static final ApiRequestData _requestData = ApiRequestData._internal();
+  static final String BASE_URL = "localhost:80";
 
   factory ApiRequestData(){
     return _requestData;
@@ -17,7 +18,7 @@ class ApiRequestData implements DataProvider{
 
   @override
   Future<List<SugestionModel>> getAllSuggestions() async {
-    final response = await http.get(Uri.parse('/data/suggestion/all'));
+    final response = await http.get(Uri.http(BASE_URL,'/api/suggestion/all'));
 
     if(response.statusCode == 200) {
       List<dynamic> suggestionList = jsonDecode(response.body);
@@ -30,7 +31,7 @@ class ApiRequestData implements DataProvider{
 
   @override
   Future<SugestionModel> getSuggestion(int id) async {
-    final response = await http.get(Uri.parse('/data/suggestion/' + id.toString()));
+    final response = await http.get(Uri.http(BASE_URL, '/api/suggestion/' + id.toString()));
     if(response.statusCode == 200){
       return SugestionModel.fromJson(jsonDecode(response.body));
     }else{
@@ -40,7 +41,7 @@ class ApiRequestData implements DataProvider{
 
   @override
   Future<void> postSuggestion(SugestionModel suggestion) async {
-    final response = await http.post(Uri.parse('/data/suggestion/add'), body: jsonEncode(suggestion.toJson()), headers: {"Content-Type": "application/json"});
+    final response = await http.post(Uri.http(BASE_URL, '/api/suggestion/add'), body: jsonEncode(suggestion.toJson()), headers: {"Content-Type": "application/json"});
     if(response.statusCode == 200){
       return;
     }else{
@@ -49,8 +50,8 @@ class ApiRequestData implements DataProvider{
   }
 
   @override
-  Future<List<MessageModel>> getMessage(int chatId) async {
-    final response = await http.get(Uri.parse('/data/message/all'));
+  Future<List<MessageModel>> getAllMessages(int chatId) async {
+    final response = await http.get(Uri.http(BASE_URL, '/api/message/all'));
 
     if(response.statusCode == 200) {
       List<dynamic> messageList = jsonDecode(response.body);
@@ -63,13 +64,11 @@ class ApiRequestData implements DataProvider{
 
   @override
   Future<void> postMessage(MessageModel message) async {
-    final response = await http.post(Uri.parse('/data/message/add'), body: jsonEncode(message.toJson()), headers: {"Content-Type": "application/json"});
+    final response = await http.post(Uri.http(BASE_URL, '/api/message/add'), body: jsonEncode(message.toJson()), headers: {"Content-Type": "application/json"});
     if(response.statusCode == 200){
       return;
     }else{
       throw Exception('Failed to post new Suggestion. Status: ' + response.statusCode.toString());
     }
   }
-
-
 }
