@@ -6,7 +6,7 @@ import 'package:web_socket_channel/status.dart' as status;
 
 class ChatController extends ChangeNotifier{
   List<Message> _activeMessages = [];
-  final String webSocketURL = "wss://notawebsocket.ch";
+  final String webSocketURL = "wss://localhost:80";
   late WebSocketChannel channel;
 
   int _formerId = -1;
