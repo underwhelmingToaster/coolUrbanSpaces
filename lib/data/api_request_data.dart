@@ -7,7 +7,9 @@ import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:http/http.dart' as http;
 
 class ApiRequestData implements DataProvider{
+
   static final ApiRequestData _requestData = ApiRequestData._internal();
+
   static final String BASE_URL = "localhost:80";
 
   factory ApiRequestData(){

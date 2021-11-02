@@ -43,7 +43,6 @@ class ChatController extends ChangeNotifier{
           if(message is MessageModel){
             _activeMessages.add(message.toMessage());
           }else{
-            // TODO: throw exception (invalid result from websocket)
             throw ArgumentError("Result from websocket was invalid");
           }
         });

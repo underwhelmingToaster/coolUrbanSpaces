@@ -10,9 +10,9 @@ class MapDataController extends ChangeNotifier {
   List<Marker> _availableMarkers = [];
   List<SuggestionModel> _cachedSuggestions = [];
 
-  List<SuggestionModel> get cachedSuggestions => _cachedSuggestions;
-
   SuggestionModel? _lastSelect;
+
+  List<SuggestionModel> get cachedSuggestions => _cachedSuggestions;
 
   SuggestionModel? get lastSelect => _lastSelect;
 
@@ -54,7 +54,6 @@ class MapDataController extends ChangeNotifier {
   void setSelectedMarkerToId(int id){
     DataProvider.dataProvider.getSuggestion(id).then((value) => {
       _lastSelect = value,
-
     });
   }
 
