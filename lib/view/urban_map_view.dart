@@ -13,12 +13,16 @@ class UrbanMapView extends StatelessWidget{
   late bool isInteractable;
   late LatLng startingLocation;
   late double startZoom;
+  late List<Marker> displayedMarkers;
 
-  UrbanMapView({
-    this.isInteractable = true,
-    this.startZoom = 13.0,
-    LatLng? startLocation,
-  }){
+  UrbanMapView(
+      this.displayedMarkers,
+      {
+        this.isInteractable = true,
+        this.startZoom = 13.0,
+        LatLng? startLocation,
+      }
+  ){
     if(startLocation==null){
       startLocation = new LatLng(47.0, 8.0);
     }
@@ -65,7 +69,7 @@ class UrbanMapView extends StatelessWidget{
           ),
 
           MarkerClusterLayerOptions(
-            markers: mapDataController.availableMarkers,
+            markers: this.displayedMarkers,
             onMarkerTap: (value) {
               if(isInteractable) {
                 int id = mapDataController.cleanUpKey(value.key as Key);

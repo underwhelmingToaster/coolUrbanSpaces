@@ -59,6 +59,7 @@ class InfoSuggestionView extends StatelessWidget{
         Expanded(
             child: Container(
               child: UrbanMapView(
+                mapDataController.availableMarkers,
                 isInteractable: false,
                 startLocation: location,
               ),

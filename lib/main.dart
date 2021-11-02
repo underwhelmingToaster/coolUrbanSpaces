@@ -66,6 +66,8 @@ class _MapFragment extends State<StatefulMapFragment> {
 
   @override
   Widget build(BuildContext context) {
+    MapDataController mapDataController = Provider.of<MapDataController>(context);
+
     return Scaffold(
         drawer: Drawer(
           child: ListView(
@@ -122,7 +124,7 @@ class _MapFragment extends State<StatefulMapFragment> {
             },
           child: const Icon(Icons.add),
         ),
-        body: new UrbanMapView()
+        body: new UrbanMapView(mapDataController.availableMarkers)
     );
   }
 }

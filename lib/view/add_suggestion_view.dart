@@ -5,6 +5,7 @@ import 'package:cool_urban_spaces/view/urban_map_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:provider/provider.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -17,6 +18,17 @@ class AddSuggestionView extends StatelessWidget{
 
     LatLng startPosition = LatLng(suggestionController.lat, suggestionController.lon);
 
+    List<Marker> markList = [];
+    markList.add(
+        new Marker(
+          point: startPosition,
+          builder: (ctx) =>
+            Container(
+              child: Icon(Icons.add_location, color: Colors.red,),
+            ),
+        ),
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Add a suggestion"),
@@ -27,6 +39,7 @@ class AddSuggestionView extends StatelessWidget{
             Expanded(
                 child: Container(
                   child: UrbanMapView(
+                    markList,
                     isInteractable: false,
                     startZoom: 15,
                     startLocation: startPosition,
@@ -34,7 +47,7 @@ class AddSuggestionView extends StatelessWidget{
                   height: 100,
                 )
             ),
-            TextFormField(
+            Padding(padding: EdgeInsets.all(10),child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Title",
                   hintText: "A short title",
@@ -46,10 +59,12 @@ class AddSuggestionView extends StatelessWidget{
                   return "Please add a title";
                 }
                 return null;
-                },
+              },
               onChanged: (v) => suggestionController.title = v,
-            ),
-            TextFormField(
+            ),),
+
+            Padding(padding: EdgeInsets.all(10),
+            child: TextFormField(
               decoration: InputDecoration(
                 labelText: "Description",
                 hintText: "Describe your suggestion.dart in more detail",
@@ -63,32 +78,36 @@ class AddSuggestionView extends StatelessWidget{
                   return "Please describe your project";
                 }
                 return null;
-                },
+              },
               onChanged: (v) => suggestionController.desc = v,
-            ),
+            ),),
+
             Padding(padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
                 child: Text("Type of Suggestion:")
             ),
-            DropdownButton(
-              value: suggestionController.type,
-              isExpanded: true,
-              items: [
-                DropdownMenuItem(
-                    child: Text("General"), value: 0),
-                DropdownMenuItem(
-                    child: Text("Shading"), value: 1),
-                DropdownMenuItem(
-                    child: Text("Seating"), value: 2),
-                DropdownMenuItem(
-                    child: Text("Gardening"), value: 3),
-                DropdownMenuItem(
-                    child: Text("Social"), value: 4),
-                DropdownMenuItem(
-                    child: Text("Water"), value: 5),
-                DropdownMenuItem(
-                    child: Text("Plants"), value: 6),
-              ],
-              onChanged: (v) => suggestionController.type = (v as int),
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: DropdownButton(
+                value: suggestionController.type,
+                isExpanded: true,
+                items: [
+                  DropdownMenuItem(
+                      child: Text("General"), value: 0),
+                  DropdownMenuItem(
+                      child: Text("Shading"), value: 1),
+                  DropdownMenuItem(
+                      child: Text("Seating"), value: 2),
+                  DropdownMenuItem(
+                      child: Text("Gardening"), value: 3),
+                  DropdownMenuItem(
+                      child: Text("Social"), value: 4),
+                  DropdownMenuItem(
+                      child: Text("Water"), value: 5),
+                  DropdownMenuItem(
+                      child: Text("Plants"), value: 6),
+                ],
+                onChanged: (v) => suggestionController.type = (v as int),
+              ),
             ),
             Padding(padding: EdgeInsets.all(30),
               child: ElevatedButton(
