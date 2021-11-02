@@ -15,9 +15,11 @@ class BrowsingView extends StatelessWidget{
   Widget build(BuildContext context) {
     MapDataController dataController = Provider.of<MapDataController>(context);
     SettingsController settingsController = Provider.of<SettingsController>(context);
-    List<Widget> widgets = [];
 
     List<SuggestionModel> suggestions = dataController.cachedSuggestions;
+
+    //TODO: Widgets shouldn't be build in View
+    List<Widget> widgets = [];
 
     switch(settingsController.browsingSort){
       case "Name":
@@ -40,6 +42,9 @@ class BrowsingView extends StatelessWidget{
     suggestions.forEach((suggestion) {
       widgets.add(new Card(
           child: ListTile(
+            onTap: () {
+              //TODO: open info_suggestion_view for *suggestion*
+            },
             title: Text(suggestion.title),
             trailing: dataController.getMarkerIcon(suggestion),
             subtitle: Column(
