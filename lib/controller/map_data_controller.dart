@@ -8,15 +8,15 @@ import 'package:latlong2/latlong.dart';
 
 class MapDataController extends ChangeNotifier {
   List<Marker> _availableMarkers = [];
-  List<SugestionModel> _cachedSuggestions = [];
+  List<SuggestionModel> _cachedSuggestions = [];
 
-  List<SugestionModel> get cachedSuggestions => _cachedSuggestions;
+  List<SuggestionModel> get cachedSuggestions => _cachedSuggestions;
 
-  SugestionModel? _lastSelect;
+  SuggestionModel? _lastSelect;
 
-  SugestionModel? get lastSelect => _lastSelect;
+  SuggestionModel? get lastSelect => _lastSelect;
 
-  set lastSelect(SugestionModel? value) {
+  set lastSelect(SuggestionModel? value) {
     _lastSelect = value;
     notifyListeners();
   }
@@ -34,7 +34,7 @@ class MapDataController extends ChangeNotifier {
   }
 
   void updateMarkers(){
-    Future<List<SugestionModel>> suggestions = DataProvider.dataProvider.getAllSuggestions();
+    Future<List<SuggestionModel>> suggestions = DataProvider.dataProvider.getAllSuggestions();
     Stream<List<Marker>> updatedMarkers = Stream.fromFuture(suggestions)
         .asyncMap<List<Marker>>((suggestionList) => Future.wait(
           suggestionList.map<Future<Marker>>((e) async => suggestionToMarkers(e)
@@ -58,7 +58,7 @@ class MapDataController extends ChangeNotifier {
     });
   }
 
-  Marker suggestionToMarkers(SugestionModel suggestion) {
+  Marker suggestionToMarkers(SuggestionModel suggestion) {
     Widget icon = SvgPicture.asset("icons/shade.svg");
     icon = getMarkerIcon(suggestion);
 
@@ -73,7 +73,7 @@ class MapDataController extends ChangeNotifier {
         key: new Key(suggestion.id.toString()));
   }
 
-  Icon getMarkerIcon(SugestionModel suggestion){
+  Icon getMarkerIcon(SuggestionModel suggestion){
     switch (suggestion.type) {
       case 0:
         return Icon(Icons.pin_drop, color: Colors.amber);
@@ -97,7 +97,7 @@ class MapDataController extends ChangeNotifier {
     }
   }
 
-  void addSuggestion(SugestionModel suggestion){
+  void addSuggestion(SuggestionModel suggestion){
     _availableMarkers.add(suggestionToMarkers(suggestion));
     DataProvider.dataProvider.postSuggestion(suggestion);
     updateMarkers();

@@ -124,7 +124,7 @@ class _MapFragment extends State<StatefulMapFragment> {
             },
           child: const Icon(Icons.add),
         ),
-        body: new UrbanMapView(mapDataController.availableMarkers)
+        body: new UrbanMapView(displayedMarkers: mapDataController.availableMarkers)
     );
   }
 }

@@ -14,10 +14,11 @@ class UrbanMapView extends StatelessWidget{
   late LatLng startingLocation;
   late double startZoom;
   late List<Marker> displayedMarkers;
+  MapController mc = new MapController();
 
   UrbanMapView(
-      this.displayedMarkers,
       {
+        required this.displayedMarkers,
         this.isInteractable = true,
         this.startZoom = 13.0,
         LatLng? startLocation,
@@ -28,9 +29,6 @@ class UrbanMapView extends StatelessWidget{
     }
     startingLocation = startLocation;
   }
-
-  var mc = new MapController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +58,7 @@ class UrbanMapView extends StatelessWidget{
                 )
             );
           }
-          },
+        },
         ),
         layers: [
           new TileLayerOptions(
@@ -78,7 +76,7 @@ class UrbanMapView extends StatelessWidget{
                     builder: (context) => InfoSuggestionView()
                 ));
               }
-              },
+            },
             builder: (BuildContext context, List<Marker> markers) {
               return FloatingActionButton(
                   child: Text(markers.length.toString()),
@@ -86,7 +84,7 @@ class UrbanMapView extends StatelessWidget{
                   );
               },
           ),
-        ]
+        ],
     );
   }
 }

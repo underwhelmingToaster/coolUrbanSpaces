@@ -39,7 +39,7 @@ class AddSuggestionView extends StatelessWidget{
             Expanded(
                 child: Container(
                   child: UrbanMapView(
-                    markList,
+                    displayedMarkers: markList,
                     isInteractable: false,
                     startZoom: 15,
                     startLocation: startPosition,
@@ -64,23 +64,24 @@ class AddSuggestionView extends StatelessWidget{
             ),),
 
             Padding(padding: EdgeInsets.all(10),
-            child: TextFormField(
-              decoration: InputDecoration(
-                labelText: "Description",
-                hintText: "Describe your suggestion.dart in more detail",
-                labelStyle: new TextStyle(color: Theme.of(context).primaryColor),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  labelText: "Description",
+                  hintText: "Describe your suggestion.dart in more detail",
+                  labelStyle: new TextStyle(color: Theme.of(context).primaryColor),
+                ),
+                inputFormatters: [LengthLimitingTextInputFormatter(500)],
+                minLines: 4,
+                maxLines: 10,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Please describe your project";
+                  }
+                  return null;
+                },
+                onChanged: (v) => suggestionController.desc = v,
               ),
-              inputFormatters: [LengthLimitingTextInputFormatter(500)],
-              minLines: 4,
-              maxLines: 10,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return "Please describe your project";
-                }
-                return null;
-              },
-              onChanged: (v) => suggestionController.desc = v,
-            ),),
+            ),
 
             Padding(padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
                 child: Text("Type of Suggestion:")
@@ -118,7 +119,7 @@ class AddSuggestionView extends StatelessWidget{
                   if(suggestionController.submit()) {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Processing Data')));
                     Navigator.pop(context);
-                    SugestionModel suggestion = new SugestionModel(
+                    SuggestionModel suggestion = new SuggestionModel(
                         suggestionController.title,
                         suggestionController.desc,
                         suggestionController.type,

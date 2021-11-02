@@ -7,11 +7,11 @@ abstract class DataProvider{
 
   static DataProvider dataProvider = LocalDataProvider();
 
-  Future<List<SugestionModel>> getAllSuggestions();
+  Future<List<SuggestionModel>> getAllSuggestions();
 
-  Future<SugestionModel> getSuggestion(int id);
+  Future<SuggestionModel> getSuggestion(int id);
 
-  Future<void> postSuggestion(SugestionModel suggestion);
+  Future<void> postSuggestion(SuggestionModel suggestion);
 
   Future<List<MessageModel>> getAllMessages(int chatId);
 

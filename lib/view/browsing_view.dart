@@ -16,7 +16,7 @@ class BrowsingView extends StatelessWidget{
     SettingsController settingsController = Provider.of<SettingsController>(context);
     List<Widget> widgets = [];
 
-    List<SugestionModel> suggestions = dataController.cachedSuggestions;
+    List<SuggestionModel> suggestions = dataController.cachedSuggestions;
 
     switch(settingsController.browsingSort){
       case "Name":
@@ -46,16 +46,18 @@ class BrowsingView extends StatelessWidget{
               children: [
                 Text(suggestion.text),
               ],
-            )
-          )
+            ),
+          ),
       ));
     });
-
 
     return SafeArea(
         child: Scaffold(
           appBar: AppBar(
             title: Text("Browse"),
+            actions: [
+              IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+            ],
           ),
           body: Column(
             children: [
@@ -80,9 +82,11 @@ class BrowsingView extends StatelessWidget{
                   ],
                 ),
               ),
-              Expanded(child: ListView(
-                children: widgets,
-              )),
+              Expanded(
+                  child: ListView(
+                    children: widgets,
+                  )
+              ),
             ],
           ),
         )

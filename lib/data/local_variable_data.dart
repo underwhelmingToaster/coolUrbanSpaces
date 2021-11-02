@@ -12,16 +12,16 @@ class LocalDataProvider implements DataProvider{
 
   LocalDataProvider._internal();
 
-  List<SugestionModel> _localSuggestions = [];
+  List<SuggestionModel> _localSuggestions = [];
   List<MessageModel> _messages = [];
 
   @override
-  Future<List<SugestionModel>> getAllSuggestions() async{
+  Future<List<SuggestionModel>> getAllSuggestions() async{
     return _localSuggestions;
   }
 
   @override
-  Future<void> postSuggestion(SugestionModel suggestion) async{
+  Future<void> postSuggestion(SuggestionModel suggestion) async{
     if(suggestion.id == null){
       suggestion.id = _localSuggestions.length;
     }
@@ -29,8 +29,8 @@ class LocalDataProvider implements DataProvider{
   }
 
   @override
-  Future<SugestionModel> getSuggestion(int id) async{
-    SugestionModel suggestion = _localSuggestions.first;
+  Future<SuggestionModel> getSuggestion(int id) async{
+    SuggestionModel suggestion = _localSuggestions.first;
     _localSuggestions.forEach((element) {
       if(element.id == id){
         suggestion = element;

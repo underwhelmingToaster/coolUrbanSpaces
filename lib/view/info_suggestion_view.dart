@@ -40,12 +40,15 @@ class InfoSuggestionView extends StatelessWidget{
   }
 
   Widget overviewTab(BuildContext context){
+    MapDataController mapDataController = Provider.of<MapDataController>(context);
+
     String title = "";
     String desc = "";
     LatLng location = LatLng(0,0);
     Icon icon = Icon(Icons.warning, color: Colors.orange,);
-    MapDataController mapDataController = Provider.of<MapDataController>(context);
-    SugestionModel? suggestion= mapDataController.lastSelect;
+
+    SuggestionModel? suggestion= mapDataController.lastSelect;
+
     if(suggestion!=null){
       title = suggestion.title;
       desc = suggestion.text;
@@ -59,7 +62,7 @@ class InfoSuggestionView extends StatelessWidget{
         Expanded(
             child: Container(
               child: UrbanMapView(
-                mapDataController.availableMarkers,
+                displayedMarkers: mapDataController.availableMarkers,
                 isInteractable: false,
                 startLocation: location,
               ),
@@ -98,12 +101,12 @@ class InfoSuggestionView extends StatelessWidget{
       chatController.changeWebSocketChannel(id);
     }
 
-
     types.User _user = types.User(id: profileController.username);
-
     List<types.Message> _messages = chatController.activeMessages;
+
     _messages.sort((a, b) => a.createdAt!.compareTo(b.createdAt!));
     _messages = _messages.reversed.toList();
+
     return Chat(
         messages: _messages,
         onSendPressed: (message) => chatController.sendMessage(new types.TextMessage(

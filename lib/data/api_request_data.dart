@@ -17,12 +17,12 @@ class ApiRequestData implements DataProvider{
   ApiRequestData._internal();
 
   @override
-  Future<List<SugestionModel>> getAllSuggestions() async {
+  Future<List<SuggestionModel>> getAllSuggestions() async {
     final response = await http.get(Uri.http(BASE_URL,'/api/suggestion/all'));
 
     if(response.statusCode == 200) {
       List<dynamic> suggestionList = jsonDecode(response.body);
-      return suggestionList.map((dict) => SugestionModel.fromJson(dict)).toList();
+      return suggestionList.map((dict) => SuggestionModel.fromJson(dict)).toList();
 
     }else{
       throw Exception('Failed to load all suggestions. Status: ' + response.statusCode.toString());
@@ -30,17 +30,17 @@ class ApiRequestData implements DataProvider{
   }
 
   @override
-  Future<SugestionModel> getSuggestion(int id) async {
+  Future<SuggestionModel> getSuggestion(int id) async {
     final response = await http.get(Uri.http(BASE_URL, '/api/suggestion/' + id.toString()));
     if(response.statusCode == 200){
-      return SugestionModel.fromJson(jsonDecode(response.body));
+      return SuggestionModel.fromJson(jsonDecode(response.body));
     }else{
       throw Exception('Failed to load single suggestion. Status: ' + response.statusCode.toString());
     }
   }
 
   @override
-  Future<void> postSuggestion(SugestionModel suggestion) async {
+  Future<void> postSuggestion(SuggestionModel suggestion) async {
     final response = await http.post(Uri.http(BASE_URL, '/api/suggestion/add'), body: jsonEncode(suggestion.toJson()), headers: {"Content-Type": "application/json"});
     if(response.statusCode == 200){
       return;
