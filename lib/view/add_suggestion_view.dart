@@ -2,6 +2,7 @@ import 'package:cool_urban_spaces/controller/add_suggestion_controller.dart';
 import 'package:cool_urban_spaces/controller/map_data_controller.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:cool_urban_spaces/view/urban_map_view.dart';
+import 'package:cool_urban_spaces/view/utils_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -47,23 +48,24 @@ class AddSuggestionView extends StatelessWidget{
                   height: 100,
                 )
             ),
-            Padding(padding: EdgeInsets.all(10),child: TextFormField(
-              decoration: InputDecoration(
-                  labelText: "Title",
-                  hintText: "A short title",
-                  labelStyle: new TextStyle(color: Theme.of(context).primaryColor)
+            NormalizedPadding(
+              child: TextFormField(
+                decoration: InputDecoration(
+                    labelText: "Title",
+                    hintText: "A short title",
+                    labelStyle: new TextStyle(color: Theme.of(context).primaryColor)
+                ),
+                inputFormatters: [LengthLimitingTextInputFormatter(50)],
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Please add a title";
+                  }
+                  return null;
+                  },
+                onChanged: (v) => suggestionController.title = v,
               ),
-              inputFormatters: [LengthLimitingTextInputFormatter(50)],
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return "Please add a title";
-                }
-                return null;
-              },
-              onChanged: (v) => suggestionController.title = v,
-            ),),
-
-            Padding(padding: EdgeInsets.all(10),
+            ),
+            NormalizedPadding(
               child: TextFormField(
                 decoration: InputDecoration(
                   labelText: "Description",
@@ -86,8 +88,7 @@ class AddSuggestionView extends StatelessWidget{
             Padding(padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
                 child: Text("Type of Suggestion:")
             ),
-            Padding(
-              padding: EdgeInsets.all(10),
+            NormalizedPadding(
               child: DropdownButton(
                 value: suggestionController.type,
                 isExpanded: true,
@@ -110,7 +111,7 @@ class AddSuggestionView extends StatelessWidget{
                 onChanged: (v) => suggestionController.type = (v as int),
               ),
             ),
-            Padding(padding: EdgeInsets.all(30),
+            NormalizedPadding(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Theme.of(context).primaryColor,

@@ -211,8 +211,9 @@ class ProfileView extends StatelessWidget {
     );
   }
 
-  Widget changeProfile(BuildContext context){
-    ProfileController profileController = Provider.of<ProfileController>(context);
+  Widget changeProfile(BuildContext context) {
+    ProfileController profileController = Provider.of<ProfileController>(
+        context);
 
     return SafeArea(
         child: ListView(
@@ -231,7 +232,7 @@ class ProfileView extends StatelessWidget {
                               maxLength: 20,
                               onChanged: (value) {
                                 profileController.username = value;
-                                },
+                              },
                             )
                           ],
                         )
@@ -299,14 +300,21 @@ class ProfileView extends StatelessWidget {
                     padding: EdgeInsets.all(30),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Theme.of(context).primaryColor,
+                        primary: Theme
+                            .of(context)
+                            .primaryColor,
                       ),
                       key: Key("Submit Profile-Form"),
                       onPressed: () {
-                        if(profileController.changeProfile()){
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Profile details changed')));
-                        }else{
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Password incorrect or fields empty'), backgroundColor: Colors.red));
+                        if (profileController.changeProfile()) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text(
+                                  'Profile details changed')));
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text(
+                                  'Password incorrect or fields empty'),
+                                  backgroundColor: Colors.red));
                         }
                       },
                       child: Text("Update profile"),

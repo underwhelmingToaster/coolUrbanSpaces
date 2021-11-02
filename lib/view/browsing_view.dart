@@ -1,6 +1,7 @@
 import 'package:cool_urban_spaces/controller/map_data_controller.dart';
 import 'package:cool_urban_spaces/controller/settings_controller.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
+import 'package:cool_urban_spaces/view/utils_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -61,8 +62,7 @@ class BrowsingView extends StatelessWidget{
           ),
           body: Column(
             children: [
-              Padding(
-                padding: EdgeInsets.all(20),
+              NormalizedPadding(
                 child: Row(
                   children: [
                     Text("All Entries:"),
