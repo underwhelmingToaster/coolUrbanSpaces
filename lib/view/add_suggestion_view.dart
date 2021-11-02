@@ -17,107 +17,106 @@ class AddSuggestionView extends StatelessWidget{
 
     LatLng startPosition = LatLng(suggestionController.lat, suggestionController.lon);
 
-    return SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text("Add a suggestion"),
-          ),
-          body: Padding(padding: EdgeInsets.all(10),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  child: Expanded(child:
-                    new UrbanMapView(
-                      startLocation: startPosition,
-                      startZoom: 15,
-                      isInteractable: false,
-                    ),
-                  )
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                      labelText: "Title",
-                      hintText: "A short title",
-                      labelStyle: new TextStyle(color: Theme.of(context).primaryColor)
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Add a suggestion"),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            Expanded(
+                child: Container(
+                  child: UrbanMapView(
+                    isInteractable: false,
+                    startZoom: 15,
+                    startLocation: startPosition,
                   ),
-                  inputFormatters: [LengthLimitingTextInputFormatter(50)],
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Please add a title";
-                    }
-                    return null;
-                    },
-                  onChanged: (v) => suggestionController.title = v,
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                      labelText: "Description",
-                      hintText: "Describe your suggestion.dart in more detail",
-                      labelStyle: new TextStyle(color: Theme.of(context).primaryColor),
-                  ),
-                  inputFormatters: [LengthLimitingTextInputFormatter(500)],
-                  minLines: 4,
-                  maxLines: 10,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Please describe your project";
-                    }
-                    return null;
-                  },
-                  onChanged: (v) => suggestionController.desc = v,
-                ),
-                Padding(padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
-                  child: Text("Type of Suggestion:")
-                ),
-                DropdownButton(
-                  value: suggestionController.type,
-                  isExpanded: true,
-                  items: [
-                  DropdownMenuItem(
-                    child: Text("General"), value: 0),
-                  DropdownMenuItem(
-                    child: Text("Shading"), value: 1),
-                  DropdownMenuItem(
-                    child: Text("Seating"), value: 2),
-                  DropdownMenuItem(
-                    child: Text("Gardening"), value: 3),
-                  DropdownMenuItem(
-                    child: Text("Social"), value: 4),
-                  DropdownMenuItem(
-                    child: Text("Water"), value: 5),
-                  DropdownMenuItem(
-                    child: Text("Plants"), value: 6),
-                  ],
-                  onChanged: (v) => suggestionController.type = (v as int),
-                ),
-                Padding(padding: EdgeInsets.all(30),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Theme.of(context).primaryColor,
-                    ),
-                    onPressed: () {
-                        if(suggestionController.submit()) {
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Processing Data')));
-                          Navigator.pop(context);
-                          SugestionModel suggestion = new SugestionModel(
-                              suggestionController.title,
-                              suggestionController.desc,
-                              suggestionController.type,
-                              suggestionController.lat,
-                              suggestionController.lon);
-                          mapDataController.addSuggestion(suggestion);
-                          suggestionController.reset();
-                        }else{
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Missing Data'), backgroundColor: Colors.red));
-                        }
-                      },
-                    child: const Text('Submit'),
-                  ),
+                  height: 100,
                 )
-              ],
             ),
-          ),
-        )
+            TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Title",
+                  hintText: "A short title",
+                  labelStyle: new TextStyle(color: Theme.of(context).primaryColor)
+              ),
+              inputFormatters: [LengthLimitingTextInputFormatter(50)],
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Please add a title";
+                }
+                return null;
+                },
+              onChanged: (v) => suggestionController.title = v,
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: "Description",
+                hintText: "Describe your suggestion.dart in more detail",
+                labelStyle: new TextStyle(color: Theme.of(context).primaryColor),
+              ),
+              inputFormatters: [LengthLimitingTextInputFormatter(500)],
+              minLines: 4,
+              maxLines: 10,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Please describe your project";
+                }
+                return null;
+                },
+              onChanged: (v) => suggestionController.desc = v,
+            ),
+            Padding(padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
+                child: Text("Type of Suggestion:")
+            ),
+            DropdownButton(
+              value: suggestionController.type,
+              isExpanded: true,
+              items: [
+                DropdownMenuItem(
+                    child: Text("General"), value: 0),
+                DropdownMenuItem(
+                    child: Text("Shading"), value: 1),
+                DropdownMenuItem(
+                    child: Text("Seating"), value: 2),
+                DropdownMenuItem(
+                    child: Text("Gardening"), value: 3),
+                DropdownMenuItem(
+                    child: Text("Social"), value: 4),
+                DropdownMenuItem(
+                    child: Text("Water"), value: 5),
+                DropdownMenuItem(
+                    child: Text("Plants"), value: 6),
+              ],
+              onChanged: (v) => suggestionController.type = (v as int),
+            ),
+            Padding(padding: EdgeInsets.all(30),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Theme.of(context).primaryColor,
+                ),
+                onPressed: () {
+                  if(suggestionController.submit()) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Processing Data')));
+                    Navigator.pop(context);
+                    SugestionModel suggestion = new SugestionModel(
+                        suggestionController.title,
+                        suggestionController.desc,
+                        suggestionController.type,
+                        suggestionController.lat,
+                        suggestionController.lon);
+                    mapDataController.addSuggestion(suggestion);
+                    suggestionController.reset();
+                  }else{
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Missing Data'), backgroundColor: Colors.red));
+                  }
+                  },
+                child: const Text('Submit'),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

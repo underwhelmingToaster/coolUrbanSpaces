@@ -46,8 +46,6 @@ class LocalDataProvider implements DataProvider{
 
   @override
   Future<void> postMessage(MessageModel message) async {
-      _messages.add(message);
+    _messages.add(message);
   }
-
-
 }
