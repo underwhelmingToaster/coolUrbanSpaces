@@ -17,6 +17,7 @@ class ProfileView extends StatelessWidget {
             ],
           ),
           appBar: AppBar(
+            backgroundColor: Theme.of(context).primaryColor,
             title: Text("Profile"),
             bottom: TabBar(
               tabs: [

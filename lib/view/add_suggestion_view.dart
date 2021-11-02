@@ -32,6 +32,7 @@ class AddSuggestionView extends StatelessWidget{
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text("Add a suggestion"),
       ),
       body: SafeArea(
@@ -131,7 +132,7 @@ class AddSuggestionView extends StatelessWidget{
                   }else{
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Missing Data'), backgroundColor: Colors.red));
                   }
-                  },
+                },
                 child: const Text('Submit'),
               ),
             )

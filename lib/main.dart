@@ -39,7 +39,6 @@ class MyApp extends StatelessWidget {
             brightness: Brightness.light,
             primaryColor: Color(0xff92d396),
             accentColor: Colors.green,
-
             inputDecorationTheme: InputDecorationTheme(
               enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.green),

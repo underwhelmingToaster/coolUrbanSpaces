@@ -55,6 +55,7 @@ class BrowsingView extends StatelessWidget{
     return SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            backgroundColor: Theme.of(context).primaryColor,
             title: Text("Browse"),
             actions: [
               IconButton(onPressed: () {}, icon: const Icon(Icons.search)),

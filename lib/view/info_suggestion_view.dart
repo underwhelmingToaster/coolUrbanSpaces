@@ -20,6 +20,7 @@ class InfoSuggestionView extends StatelessWidget{
         length: 2,
         child: Scaffold(
             appBar: AppBar(
+              backgroundColor: Theme.of(context).primaryColor,
               title: Text("Suggestion"),
               bottom: TabBar(
                 tabs: [
