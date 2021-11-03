@@ -39,7 +39,6 @@ class MyApp extends StatelessWidget {
             brightness: Brightness.light,
             primaryColor: Color(0xff92d396),
             accentColor: Colors.green,
-
             inputDecorationTheme: InputDecorationTheme(
               enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.green),
@@ -66,6 +65,8 @@ class _MapFragment extends State<StatefulMapFragment> {
 
   @override
   Widget build(BuildContext context) {
+    MapDataController mapDataController = Provider.of<MapDataController>(context);
+
     return Scaffold(
         drawer: Drawer(
           child: ListView(
@@ -122,7 +123,7 @@ class _MapFragment extends State<StatefulMapFragment> {
             },
           child: const Icon(Icons.add),
         ),
-        body: new UrbanMapView()
+        body: new UrbanMapView(displayedMarkers: mapDataController.availableMarkers)
     );
   }
 }

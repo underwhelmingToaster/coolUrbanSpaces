@@ -7,7 +7,6 @@ class AddSuggestionController extends ChangeNotifier {
   double _lat = 0;
   double _lon = 0;
 
-
   bool submit() {
     if (title.isNotEmpty && desc.isNotEmpty) {
       return true;
@@ -30,14 +29,12 @@ class AddSuggestionController extends ChangeNotifier {
     notifyListeners();
   }
 
-
   String get title => _title;
 
   set title(String value) {
     _title = value;
     notifyListeners();
   }
-
 
   double get lat => _lat;
 

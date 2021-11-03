@@ -1,4 +1,5 @@
 import 'package:cool_urban_spaces/data/abstract_data.dart';
+import 'package:cool_urban_spaces/controller/enum/sorting_type.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,15 +9,15 @@ import 'package:latlong2/latlong.dart';
 
 class MapDataController extends ChangeNotifier {
   List<Marker> _availableMarkers = [];
-  List<SugestionModel> _cachedSuggestions = [];
+  List<SuggestionModel> _cachedSuggestions = [];
 
-  List<SugestionModel> get cachedSuggestions => _cachedSuggestions;
+  SuggestionModel? _lastSelect;
 
-  SugestionModel? _lastSelect;
+  List<SuggestionModel> get cachedSuggestions => _cachedSuggestions;
 
-  SugestionModel? get lastSelect => _lastSelect;
+  SuggestionModel? get lastSelect => _lastSelect;
 
-  set lastSelect(SugestionModel? value) {
+  set lastSelect(SuggestionModel? value) {
     _lastSelect = value;
     notifyListeners();
   }
@@ -28,13 +29,36 @@ class MapDataController extends ChangeNotifier {
 
   List<Marker> get availableMarkers => _availableMarkers;
 
+  List<SuggestionModel> getSortedSuggestions(SortingTypes sortType){
+    List<SuggestionModel> suggestions = _cachedSuggestions;
+
+    switch(sortType) {
+      case SortingTypes.NAME:
+        suggestions.sort((a, b) => a.text.compareTo(b.text));
+        break;
+
+      case SortingTypes.ID:
+        suggestions.sort((a, b) => a.id!.compareTo(b.id!));
+        break;
+
+      case SortingTypes.TYPE:
+        suggestions.sort((a, b) => a.type.compareTo(b.type));
+        break;
+
+      default:
+        throw new UnsupportedError("Don't recognize SortingType");
+    }
+
+    return suggestions;
+  }
+
   int cleanUpKey(Key key) {
     return int.parse(
         key.toString().replaceAll("[<'", "").replaceAll("'>]", ""));
   }
 
   void updateMarkers(){
-    Future<List<SugestionModel>> suggestions = DataProvider.dataProvider.getAllSuggestions();
+    Future<List<SuggestionModel>> suggestions = DataProvider.dataProvider.getAllSuggestions();
     Stream<List<Marker>> updatedMarkers = Stream.fromFuture(suggestions)
         .asyncMap<List<Marker>>((suggestionList) => Future.wait(
           suggestionList.map<Future<Marker>>((e) async => suggestionToMarkers(e)
@@ -54,11 +78,10 @@ class MapDataController extends ChangeNotifier {
   void setSelectedMarkerToId(int id){
     DataProvider.dataProvider.getSuggestion(id).then((value) => {
       _lastSelect = value,
-
     });
   }
 
-  Marker suggestionToMarkers(SugestionModel suggestion) {
+  Marker suggestionToMarkers(SuggestionModel suggestion) {
     Widget icon = SvgPicture.asset("icons/shade.svg");
     icon = getMarkerIcon(suggestion);
 
@@ -73,7 +96,7 @@ class MapDataController extends ChangeNotifier {
         key: new Key(suggestion.id.toString()));
   }
 
-  Icon getMarkerIcon(SugestionModel suggestion){
+  Icon getMarkerIcon(SuggestionModel suggestion){
     switch (suggestion.type) {
       case 0:
         return Icon(Icons.pin_drop, color: Colors.amber);
@@ -97,7 +120,7 @@ class MapDataController extends ChangeNotifier {
     }
   }
 
-  void addSuggestion(SugestionModel suggestion){
+  void addSuggestion(SuggestionModel suggestion){
     _availableMarkers.add(suggestionToMarkers(suggestion));
     DataProvider.dataProvider.postSuggestion(suggestion);
     updateMarkers();

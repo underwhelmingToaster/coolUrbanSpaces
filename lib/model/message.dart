@@ -11,7 +11,7 @@ class MessageModel{
 
   MessageModel.fromJson(Map<String, dynamic> json):
         uuid = json['uuid'],
-        authorName = json['authorName'], //TODO: change to get User
+        authorName = json['authorName'],
         text = json['text'],
         createdAt = json['createdAt'];
 

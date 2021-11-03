@@ -1,5 +1,4 @@
-
-class SugestionModel {
+class SuggestionModel {
 
   int? id;
   late String title;
@@ -8,9 +7,9 @@ class SugestionModel {
   late double lat;
   late double lng;
 
-  SugestionModel(this.title, this.text, this.type, this.lat, this.lng, [this.id]);
+  SuggestionModel(this.title, this.text, this.type, this.lat, this.lng, [this.id]);
 
-  SugestionModel.fromJson(Map<String, dynamic> json):
+  SuggestionModel.fromJson(Map<String, dynamic> json):
       title = json['title'],
       text = json['description'],
       type = json['type'],

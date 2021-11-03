@@ -11,6 +11,7 @@ class SettingsView extends StatelessWidget{
 
     return SafeArea(child: Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text("Settings"),
       ),
       body: ListView(

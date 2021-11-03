@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class UserModel {
   int? id;
   late String name;
@@ -7,8 +5,7 @@ class UserModel {
 
   UserModel(this.name, this.pwdHash, [this.id]);
 
-  UserModel.fromJson(Map<String, dynamic> json)
-      :
+  UserModel.fromJson(Map<String, dynamic> json):
         name = json["name"],
         pwdHash = json["pwdHash"],
         id = json["id"];

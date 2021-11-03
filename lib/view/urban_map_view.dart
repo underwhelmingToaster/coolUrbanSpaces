@@ -10,63 +10,82 @@ import 'package:provider/provider.dart';
 import 'package:latlong2/latlong.dart';
 
 class UrbanMapView extends StatelessWidget{
+  late bool isInteractable;
+  late LatLng startingLocation;
+  late double startZoom;
+  late List<Marker> displayedMarkers;
 
-  var mc = new MapController();
+  MapController mc = new MapController();
 
-  static double lastLatTap = 0.0;
-  static double lastLngTap = 0.0;
+  UrbanMapView(
+      {
+        required this.displayedMarkers,
+        this.isInteractable = true,
+        this.startZoom = 13.0,
+        LatLng? startLocation,
+      }
+  ){
+    if(startLocation==null){
+      startLocation = new LatLng(47.0, 8.0);
+    }
+    startingLocation = startLocation;
+  }
 
   @override
   Widget build(BuildContext context) {
     AddSuggestionController suggestionController = Provider.of<AddSuggestionController>(context);
     MapDataController mapDataController = Provider.of<MapDataController>(context);
     return FlutterMap(
-          options: new MapOptions(
-            center: new LatLng(47.0, 8.0),
-            zoom: 13.0,
-            controller: mc,
-            plugins: [
-              MarkerClusterPlugin(),
-            ],
-            onTap: (point) {
+        options:
+        new MapOptions(
+          center: startingLocation,
+          zoom: startZoom,
+          controller: mc,
+          plugins: [
+            MarkerClusterPlugin(),
+          ],
+          onTap: (point) {
+            if(isInteractable) {
               suggestionController.lat = point.latitude;
               suggestionController.lon = point.longitude;
-              },
-            onLongPress: (point) {
+            }
+          },
+          onLongPress: (point) {
+            if(isInteractable) {
               suggestionController.lat = point.latitude;
               suggestionController.lon = point.longitude;
               Navigator.push(context,
                   MaterialPageRoute(
                       builder: (context) => AddSuggestionView()
-                  )
+                )
               );
-              },
-
-
-          ),
-          layers: [
-            new TileLayerOptions(
-              urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-              subdomains: ['a', 'b', 'c'],
-            ),
-
-            MarkerClusterLayerOptions(
-              markers: mapDataController.availableMarkers,
-              onMarkerTap: (value) {
-                int id = mapDataController.cleanUpKey(value.key as Key);
-                mapDataController.setSelectedMarkerToId(id);
-                Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => InfoSuggestionView()
-                ));
-                },
-              builder: (BuildContext context, List<Marker> markers) {
-                return FloatingActionButton(
-                    child: Text(markers.length.toString()),
-                    onPressed: () { }
-                    );
-                },
-            ),
-          ]
+            }
+          },
+        ),
+      layers: [
+        new TileLayerOptions(
+          urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          subdomains: ['a', 'b', 'c'],
+        ),
+        MarkerClusterLayerOptions(
+          markers: this.displayedMarkers,
+          onMarkerTap: (value) {
+            if(isInteractable) {
+              int id = mapDataController.cleanUpKey(value.key as Key);
+              mapDataController.setSelectedMarkerToId(id);
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => InfoSuggestionView()
+              ));
+            }
+          },
+          builder: (BuildContext context, List<Marker> markers) {
+            return FloatingActionButton(
+                child: Text(markers.length.toString()),
+                onPressed: () { }
+                );
+            },
+        ),
+      ],
     );
   }
 }

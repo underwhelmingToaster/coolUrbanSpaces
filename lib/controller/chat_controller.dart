@@ -1,5 +1,4 @@
 import 'package:cool_urban_spaces/data/abstract_data.dart';
-import 'package:cool_urban_spaces/data/local_variable_data.dart';
 import 'package:cool_urban_spaces/model/message.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart';
@@ -8,7 +7,7 @@ import 'package:web_socket_channel/status.dart' as status;
 
 class ChatController extends ChangeNotifier{
   List<Message> _activeMessages = [];
-  final String webSocketURL = "wss://notawebsocket.ch";
+  final String webSocketURL = "wss://localhost:80";
   late WebSocketChannel channel;
 
   int _formerId = -1;
@@ -44,7 +43,7 @@ class ChatController extends ChangeNotifier{
           if(message is MessageModel){
             _activeMessages.add(message.toMessage());
           }else{
-            // TODO: throw exception (invalid result from websocket)
+            throw ArgumentError("Result from websocket was invalid");
           }
         });
         notifyListeners();
