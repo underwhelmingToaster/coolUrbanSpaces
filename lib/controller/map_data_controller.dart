@@ -1,4 +1,5 @@
 import 'package:cool_urban_spaces/data/abstract_data.dart';
+import 'package:cool_urban_spaces/controller/enum/sorting_type.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,29 @@ class MapDataController extends ChangeNotifier {
   }
 
   List<Marker> get availableMarkers => _availableMarkers;
+
+  List<SuggestionModel> getSortedSuggestions(SortingTypes sortType){
+    List<SuggestionModel> suggestions = _cachedSuggestions;
+
+    switch(sortType) {
+      case SortingTypes.NAME:
+        suggestions.sort((a, b) => a.text.compareTo(b.text));
+        break;
+
+      case SortingTypes.ID:
+        suggestions.sort((a, b) => a.id!.compareTo(b.id!));
+        break;
+
+      case SortingTypes.TYPE:
+        suggestions.sort((a, b) => a.type.compareTo(b.type));
+        break;
+
+      default:
+        throw new UnsupportedError("Don't recognize SortingType");
+    }
+
+    return suggestions;
+  }
 
   int cleanUpKey(Key key) {
     return int.parse(

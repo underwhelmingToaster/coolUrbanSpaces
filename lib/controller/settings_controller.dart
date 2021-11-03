@@ -1,8 +1,9 @@
+import 'package:cool_urban_spaces/controller/enum/sorting_type.dart';
 import 'package:flutter/cupertino.dart';
 
 class SettingsController extends ChangeNotifier{
 
-  String _browsingSort = "Name";
+  SortingTypes _browsingSort = SortingTypes.NAME;
   bool _exampleSwitch = true;
 
 
@@ -13,9 +14,9 @@ class SettingsController extends ChangeNotifier{
     notifyListeners();
   }
 
-  String get browsingSort => _browsingSort;
+  SortingTypes get browsingSort => _browsingSort;
 
-  set browsingSort(String value) {
+  set browsingSort(SortingTypes value) {
     _browsingSort = value;
     notifyListeners();
   }
