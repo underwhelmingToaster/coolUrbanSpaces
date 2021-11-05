@@ -12,8 +12,9 @@ import '../info_suggestion_view.dart';
 class SuggestionList extends StatelessWidget{
 
   late List<SuggestionModel> suggestions;
+  Function? onTab;
 
-  SuggestionList(this.suggestions);
+  SuggestionList({required this.suggestions, this.onTab});
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +26,9 @@ class SuggestionList extends StatelessWidget{
       widgets.add(new Card(
         child: ListTile(
           onTap: () {
-            dataController.setSelectedMarkerToId(suggestion.id!);
-            Navigator.push(context, MaterialPageRoute(
-                builder: (context) => InfoSuggestionView()
-            ));
+            if(onTab!=null){
+              onTab!(suggestion);
+            }
           },
           title: Text(suggestion.title),
           trailing: suggestion.getMarkerIcon(),

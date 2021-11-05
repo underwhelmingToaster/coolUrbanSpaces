@@ -30,7 +30,14 @@ class BrowsingView extends StatelessWidget{
               IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
             ],
           ),
-          body: SuggestionList(suggestions),
+          body: SuggestionList(
+            suggestions: suggestions,
+            onTab: (suggestion) => {
+              dataController.setSelectedMarkerToId(suggestion.id!),
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => InfoSuggestionView()
+              )),
+            },),
         )
     );
   }

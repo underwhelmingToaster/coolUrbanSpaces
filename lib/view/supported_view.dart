@@ -7,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'info_suggestion_view.dart';
+
 class SupportView extends StatelessWidget {
 
   @override
@@ -47,7 +49,14 @@ class SupportView extends StatelessWidget {
               IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
             ],
           ),
-          body: SuggestionList(suggestions),
+          body: SuggestionList(
+              suggestions: suggestions,
+            onTab: (suggestion) => {
+              dataController.setSelectedMarkerToId(suggestion.id!),
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => InfoSuggestionView()
+              )),
+            },),
         )
     );
   }
