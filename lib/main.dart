@@ -10,6 +10,7 @@ import 'package:cool_urban_spaces/view/browsing_view.dart';
 import 'package:cool_urban_spaces/view/info_suggestion_view.dart';
 import 'package:cool_urban_spaces/view/profile_view.dart';
 import 'package:cool_urban_spaces/view/settings_view.dart';
+import 'package:cool_urban_spaces/view/supported_view.dart';
 import 'package:cool_urban_spaces/view/widgets/urban_map_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -87,6 +88,8 @@ class _MapFragment extends State<StatefulMapFragment> {
               ),
               ListTile(
                 title: const Text('Supported'),
+                onTap: () => Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => SupportView())),
               ),
               ListTile(
                 title: const Text('Profile'),
