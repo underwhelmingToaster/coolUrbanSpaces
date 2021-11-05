@@ -51,12 +51,6 @@ class ApiRequestData implements DataProvider{
     }
   }
 
-  Future<List<SuggestionModel>> getSupportedSuggestions(int id) async {
-    final response = await http.get(Uri.http(BASE_URL, '/api/suggestion/supported/' + id.toString()));
-    List<dynamic> suggestionList = jsonDecode(response.body);
-    return suggestionList.map((dict) => SuggestionModel.fromJson(dict)).toList();
-  }
-
   @override
   Future<List<MessageModel>> getAllMessages(int chatId) async {
     final response = await http.get(Uri.http(BASE_URL, '/api/message/all'));

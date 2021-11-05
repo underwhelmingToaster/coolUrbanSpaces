@@ -11,8 +11,6 @@ abstract class DataProvider{
 
   Future<SuggestionModel> getSuggestion(int id);
 
-  Future<List<SuggestionModel>> getSupportedSuggestions(int id);
-
   Future<void> postSuggestion(SuggestionModel suggestion);
 
   Future<List<MessageModel>> getAllMessages(int chatId);
