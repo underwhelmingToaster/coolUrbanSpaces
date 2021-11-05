@@ -10,10 +10,13 @@ import 'package:latlong2/latlong.dart';
 class MapDataController extends ChangeNotifier {
   List<Marker> _availableMarkers = [];
   List<SuggestionModel> _cachedSuggestions = [];
+  List<SuggestionModel> _supportedSuggestions = [];
 
   SuggestionModel? _lastSelect;
 
   List<SuggestionModel> get cachedSuggestions => _cachedSuggestions;
+
+  List<SuggestionModel> get supportedSuggestions => _supportedSuggestions;
 
   SuggestionModel? get lastSelect => _lastSelect;
 

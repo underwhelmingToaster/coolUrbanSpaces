@@ -17,7 +17,7 @@ class SupportView extends StatelessWidget {
     SettingsController settingsController = Provider.of<SettingsController>(
         context);
 
-    List<SuggestionModel> suggestions = dataController.cachedSuggestions;
+    List<SuggestionModel> suggestions = dataController.supportedSuggestions;
     List<Widget> widgets = [];
 
     suggestions = dataController.getSortedSuggestions(settingsController.browsingSort); //FIXME: only get supported suggestions (adjust data)
