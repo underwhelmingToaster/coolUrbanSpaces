@@ -21,6 +21,11 @@ class LocalDataProvider implements DataProvider{
   }
 
   @override
+  Future<List<SuggestionModel>> getSupportedSuggestions(int id) async {
+    return _localSuggestions;
+  }
+
+  @override
   Future<void> postSuggestion(SuggestionModel suggestion) async{
     if(suggestion.id == null){
       suggestion.id = _localSuggestions.length;

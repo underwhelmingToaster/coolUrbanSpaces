@@ -70,7 +70,7 @@ class MapDataController extends ChangeNotifier {
       notifyListeners()
     });
 
-    suggestions.then((value) => _cachedSuggestions = value);
+    suggestions.then((value) => _cachedSuggestions = value); //TODO: make a list of supported suggestions based on this one. - instead of making another API-Request
     notifyListeners();
   }
 
