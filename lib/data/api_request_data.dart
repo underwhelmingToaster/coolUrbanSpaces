@@ -73,4 +73,11 @@ class ApiRequestData implements DataProvider{
       throw Exception('Failed to post new Suggestion. Status: ' + response.statusCode.toString());
     }
   }
+
+  @override
+  Future<List<int>> getSupported(int userId) {
+    throw UnimplementedError();
+  }
+
+
 }

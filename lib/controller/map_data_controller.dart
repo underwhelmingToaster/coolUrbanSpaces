@@ -73,8 +73,9 @@ class MapDataController extends ChangeNotifier {
       notifyListeners()
     });
 
-    suggestions.then((value) => _cachedSuggestions = value); //TODO: make a list of supported suggestions based on this one. - instead of making another API-Request
+    suggestions.then((value) => _cachedSuggestions = value);
     notifyListeners();
+    _updateSupported(0); //TODO: <-- get userID somehow? User need a big refactor.
   }
 
 
@@ -103,5 +104,16 @@ class MapDataController extends ChangeNotifier {
     _availableMarkers.add(suggestionToMarkers(suggestion));
     DataProvider.dataProvider.postSuggestion(suggestion);
     updateMarkers();
+  }
+
+  void _updateSupported(int userID){
+    _supportedSuggestions.clear();
+    DataProvider.dataProvider.getSupported(userID).then((value) => {
+      for(SuggestionModel suggestion in _cachedSuggestions){
+        if(value.contains(suggestion.id)){
+          _supportedSuggestions.add(suggestion)
+        }
+      }
+    });
   }
 }
