@@ -6,7 +6,6 @@ class SettingsController extends ChangeNotifier{
   SortingTypes _browsingSort = SortingTypes.NAME;
   bool _exampleSwitch = true;
 
-
   bool get exampleSwitch => _exampleSwitch;
 
   set exampleSwitch(bool value) {
@@ -20,6 +19,4 @@ class SettingsController extends ChangeNotifier{
     _browsingSort = value;
     notifyListeners();
   }
-
-
 }
