@@ -15,11 +15,9 @@ class BrowsingView extends StatelessWidget{
     SettingsController settingsController = Provider.of<SettingsController>(context);
 
     List<SuggestionModel> suggestions = dataController.cachedSuggestions;
-
     List<Widget> widgets = [];
 
     suggestions = dataController.getSortedSuggestions(settingsController.browsingSort);
-
 
     suggestions.forEach((suggestion) {
       widgets.add(new Card(
