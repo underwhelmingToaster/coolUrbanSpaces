@@ -27,7 +27,6 @@ class ChatController extends ChangeNotifier{
   }
 
   void changeWebSocketChannel(int id){
-
     if(_formerId != id) {
       _formerId = id;
       _activeMessages = [];

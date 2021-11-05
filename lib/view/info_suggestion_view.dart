@@ -2,8 +2,8 @@ import 'package:cool_urban_spaces/controller/chat_controller.dart';
 import 'package:cool_urban_spaces/controller/map_data_controller.dart';
 import 'package:cool_urban_spaces/controller/profile_controller.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
-import 'package:cool_urban_spaces/view/urban_map_view.dart';
-import 'package:cool_urban_spaces/view/utils_view.dart';
+import 'package:cool_urban_spaces/view/widgets/urban_map_widget.dart';
+import 'package:cool_urban_spaces/view/widgets/utils_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
@@ -54,7 +54,7 @@ class InfoSuggestionView extends StatelessWidget{
     if(suggestion!=null){
       title = suggestion.title;
       desc = suggestion.text;
-      icon = mapDataController.getMarkerIcon(suggestion);
+      icon = suggestion.getMarkerIcon();
       location = LatLng(suggestion.lat, suggestion.lng);
     }
 

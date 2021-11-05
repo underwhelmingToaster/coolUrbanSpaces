@@ -1,3 +1,4 @@
+
 import 'package:cool_urban_spaces/controller/map_data_controller.dart';
 import 'package:cool_urban_spaces/controller/settings_controller.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
@@ -8,28 +9,48 @@ import 'package:provider/provider.dart';
 
 import 'info_suggestion_view.dart';
 
-class BrowsingView extends StatelessWidget{
+class SupportView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     MapDataController dataController = Provider.of<MapDataController>(context);
-    SettingsController settingsController = Provider.of<SettingsController>(context);
+    SettingsController settingsController = Provider.of<SettingsController>(
+        context);
 
-    List<SuggestionModel> suggestions = dataController.cachedSuggestions;
+    List<SuggestionModel> suggestions = dataController.supportedSuggestions;
+    List<Widget> widgets = [];
 
-    suggestions = dataController.getSortedSuggestions(settingsController.browsingSort);
+    suggestions = dataController.getSortedSuggestions(settingsController.browsingSort); //FIXME: only get supported suggestions (adjust data)
+
+    suggestions.forEach((suggestion) {
+      widgets.add(new Card(
+        child: ListTile(
+          onTap: () {},
+          title: Text(suggestion.title),
+          trailing: suggestion.getMarkerIcon(),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(suggestion.text),
+            ],
+          ),
+        ),
+      ));
+    });
 
     return SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: Theme
+                .of(context)
+                .primaryColor,
             title: Text("Browse"),
             actions: [
               IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
             ],
           ),
           body: SuggestionList(
-            suggestions: suggestions,
+              suggestions: suggestions,
             onTab: (suggestion) => {
               dataController.setSelectedMarkerToId(suggestion.id!),
               Navigator.push(context, MaterialPageRoute(

@@ -10,10 +10,13 @@ import 'package:latlong2/latlong.dart';
 class MapDataController extends ChangeNotifier {
   List<Marker> _availableMarkers = [];
   List<SuggestionModel> _cachedSuggestions = [];
+  List<SuggestionModel> _supportedSuggestions = [];
 
   SuggestionModel? _lastSelect;
 
   List<SuggestionModel> get cachedSuggestions => _cachedSuggestions;
+
+  List<SuggestionModel> get supportedSuggestions => _supportedSuggestions;
 
   SuggestionModel? get lastSelect => _lastSelect;
 
@@ -72,6 +75,7 @@ class MapDataController extends ChangeNotifier {
 
     suggestions.then((value) => _cachedSuggestions = value);
     notifyListeners();
+    _updateSupported(0); //TODO: <-- get userID somehow? User need a big refactor.
   }
 
 
@@ -83,7 +87,7 @@ class MapDataController extends ChangeNotifier {
 
   Marker suggestionToMarkers(SuggestionModel suggestion) {
     Widget icon = SvgPicture.asset("icons/shade.svg");
-    icon = getMarkerIcon(suggestion);
+    icon = suggestion.getMarkerIcon();
 
     return new Marker(
         width: 80.0,
@@ -96,33 +100,20 @@ class MapDataController extends ChangeNotifier {
         key: new Key(suggestion.id.toString()));
   }
 
-  Icon getMarkerIcon(SuggestionModel suggestion){
-    switch (suggestion.type) {
-      case 0:
-        return Icon(Icons.pin_drop, color: Colors.amber);
-      case 1:
-        return Icon(Icons.wb_sunny_outlined, color: Colors.yellow);
-      case 2:
-        return Icon(Icons.event_seat_outlined, color: Colors.grey);
-      case 3:
-        return Icon(Icons.local_florist_outlined, color: Colors.green);
-      case 4:
-        return Icon(Icons.person_outline, color: Colors.orange);
-      case 5:
-        return Icon(Icons.waves_outlined, color: Colors.blue);
-      case 6:
-        return Icon(Icons.account_tree_outlined, color: Colors.green);
-      case 7:
-        return Icon(Icons.lightbulb_outline, color: Colors.yellow);
-      default:
-        print("Could not assign type of suggestion.dart");
-        return Icon(Icons.warning, color: Colors.red);
-    }
-  }
-
   void addSuggestion(SuggestionModel suggestion){
     _availableMarkers.add(suggestionToMarkers(suggestion));
     DataProvider.dataProvider.postSuggestion(suggestion);
     updateMarkers();
+  }
+
+  void _updateSupported(int userID){
+    _supportedSuggestions.clear();
+    DataProvider.dataProvider.getSupported(userID).then((value) => {
+      for(SuggestionModel suggestion in _cachedSuggestions){
+        if(value.contains(suggestion.id)){
+          _supportedSuggestions.add(suggestion)
+        }
+      }
+    });
   }
 }

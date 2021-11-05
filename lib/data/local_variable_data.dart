@@ -48,4 +48,9 @@ class LocalDataProvider implements DataProvider{
   Future<void> postMessage(MessageModel message) async {
     _messages.add(message);
   }
-}
+
+  @override
+  Future<List<int>> getSupported(int userId) {
+    throw UnimplementedError();
+  }
+} 

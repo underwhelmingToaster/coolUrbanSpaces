@@ -16,4 +16,6 @@ abstract class DataProvider{
   Future<List<MessageModel>> getAllMessages(int chatId);
 
   Future<void> postMessage(MessageModel message);
+
+  Future<List<int>> getSupported(int userId);
 }
