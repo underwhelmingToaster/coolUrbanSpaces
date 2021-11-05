@@ -8,29 +8,6 @@ class ProfileController extends ChangeNotifier {
 
   List<String> _passwords = ["", "", ""]; //
 
-  String get username => _username;
-
-  set username(String value) {
-    _username = value;
-    notifyListeners();
-  }
-
-  set password(String value) {
-    _passwords[0] = value;
-    notifyListeners();
-  }
-
-  set newpassword(String value) {
-    _passwords[1] = value;
-    notifyListeners();
-  }
-
-  set repeatNewPassword(String value) {
-    _passwords[2] = value;
-    notifyListeners();
-  }
-
-
   bool register(){
     String passwordHash = Crypt.sha256(_passwords[1], rounds: 1000, salt: salt).hash.toString();
     String passwordHash2 = Crypt.sha256(_passwords[2], rounds: 1000, salt: salt).hash.toString();
@@ -67,6 +44,28 @@ class ProfileController extends ChangeNotifier {
 
   void clearFields(){
     _passwords = ["", "", ""];
+    notifyListeners();
+  }
+
+  String get username => _username;
+
+  set username(String value) {
+    _username = value;
+    notifyListeners();
+  }
+
+  set password(String value) {
+    _passwords[0] = value;
+    notifyListeners();
+  }
+
+  set newpassword(String value) {
+    _passwords[1] = value;
+    notifyListeners();
+  }
+
+  set repeatNewPassword(String value) {
+    _passwords[2] = value;
     notifyListeners();
   }
 }

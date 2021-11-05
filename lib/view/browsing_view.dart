@@ -22,7 +22,6 @@ class BrowsingView extends StatelessWidget{
 
     suggestions = dataController.getSortedSuggestions(settingsController.browsingSort);
 
-
     suggestions.forEach((suggestion) {
       widgets.add(new Card(
           child: ListTile(

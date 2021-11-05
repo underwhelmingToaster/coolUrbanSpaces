@@ -7,6 +7,7 @@ import 'package:cool_urban_spaces/controller/profile_controller.dart';
 import 'package:cool_urban_spaces/controller/settings_controller.dart';
 import 'package:cool_urban_spaces/view/add_suggestion_view.dart';
 import 'package:cool_urban_spaces/view/browsing_view.dart';
+import 'package:cool_urban_spaces/view/info_suggestion_view.dart';
 import 'package:cool_urban_spaces/view/profile_view.dart';
 import 'package:cool_urban_spaces/view/settings_view.dart';
 import 'package:cool_urban_spaces/view/widgets/urban_map_widget.dart';
@@ -17,7 +18,6 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
@@ -66,6 +66,7 @@ class _MapFragment extends State<StatefulMapFragment> {
   @override
   Widget build(BuildContext context) {
     MapDataController mapDataController = Provider.of<MapDataController>(context);
+    AddSuggestionController suggestionController = Provider.of<AddSuggestionController>(context);
 
     return Scaffold(
         drawer: Drawer(
@@ -123,7 +124,28 @@ class _MapFragment extends State<StatefulMapFragment> {
             },
           child: const Icon(Icons.add),
         ),
-        body: new UrbanMapView(displayedMarkers: mapDataController.availableMarkers)
+        body: new UrbanMapView(
+            displayedMarkers: mapDataController.availableMarkers,
+          onLongPress: (lon, lat, _context) {
+            suggestionController.setLocation(lat, lon);
+
+            Navigator.push(_context,
+                MaterialPageRoute(
+                    builder: (context) => AddSuggestionView()
+                ));
+          },
+          onTab: (lon, lat, _context) {
+            suggestionController.lat = lat;
+            suggestionController.lon = lon;
+          },
+          onMarkerTab: (value, _context) {
+            int id = mapDataController.cleanUpKey(value.key as Key);
+            mapDataController.setSelectedMarkerToId(id);
+            Navigator.push(_context, MaterialPageRoute(
+                builder: (_context) => InfoSuggestionView()
+            ));
+          },
+        )
     );
   }
 }
