@@ -9,7 +9,7 @@ import 'package:cool_urban_spaces/view/add_suggestion_view.dart';
 import 'package:cool_urban_spaces/view/browsing_view.dart';
 import 'package:cool_urban_spaces/view/profile_view.dart';
 import 'package:cool_urban_spaces/view/settings_view.dart';
-import 'package:cool_urban_spaces/view/urban_map_view.dart';
+import 'package:cool_urban_spaces/view/widgets/urban_map_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';

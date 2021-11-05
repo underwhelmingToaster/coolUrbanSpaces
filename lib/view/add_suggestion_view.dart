@@ -1,8 +1,8 @@
 import 'package:cool_urban_spaces/controller/add_suggestion_controller.dart';
 import 'package:cool_urban_spaces/controller/map_data_controller.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
-import 'package:cool_urban_spaces/view/urban_map_view.dart';
-import 'package:cool_urban_spaces/view/utils_view.dart';
+import 'package:cool_urban_spaces/view/widgets/urban_map_view.dart';
+import 'package:cool_urban_spaces/view/widgets/utils_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
