@@ -1,4 +1,3 @@
-
 import 'package:cool_urban_spaces/controller/settings_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
