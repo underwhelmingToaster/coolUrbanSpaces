@@ -56,4 +56,10 @@ class AddSuggestionController extends ChangeNotifier {
     _type = value;
     notifyListeners();
   }
+
+  void setLocation(double lat, double lon){
+    this.lat = lat;
+    this.lon = lon;
+    notifyListeners();
+  }
 }
