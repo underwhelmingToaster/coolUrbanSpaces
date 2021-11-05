@@ -31,7 +31,7 @@ class SuggestionList extends StatelessWidget{
             ));
           },
           title: Text(suggestion.title),
-          trailing: dataController.getMarkerIcon(suggestion),
+          trailing: suggestion.getMarkerIcon(),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

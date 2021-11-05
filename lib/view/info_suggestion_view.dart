@@ -54,7 +54,7 @@ class InfoSuggestionView extends StatelessWidget{
     if(suggestion!=null){
       title = suggestion.title;
       desc = suggestion.text;
-      icon = mapDataController.getMarkerIcon(suggestion);
+      icon = suggestion.getMarkerIcon();
       location = LatLng(suggestion.lat, suggestion.lng);
     }
 

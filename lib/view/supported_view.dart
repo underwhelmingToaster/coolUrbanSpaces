@@ -25,7 +25,7 @@ class SupportView extends StatelessWidget {
         child: ListTile(
           onTap: () {},
           title: Text(suggestion.title),
-          trailing: dataController.getMarkerIcon(suggestion),
+          trailing: suggestion.getMarkerIcon(),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
