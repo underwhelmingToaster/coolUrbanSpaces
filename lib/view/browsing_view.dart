@@ -18,26 +18,8 @@ class BrowsingView extends StatelessWidget{
     SettingsController settingsController = Provider.of<SettingsController>(context);
 
     List<SuggestionModel> suggestions = dataController.cachedSuggestions;
-    List<Widget> widgets = [];
 
     suggestions = dataController.getSortedSuggestions(settingsController.browsingSort);
-
-    suggestions.forEach((suggestion) {
-      widgets.add(new Card(
-          child: ListTile(
-            onTap: () {
-            },
-            title: Text(suggestion.title),
-            trailing: suggestion.getMarkerIcon(),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(suggestion.text),
-              ],
-            ),
-          ),
-      ));
-    });
 
     return SafeArea(
         child: Scaffold(
