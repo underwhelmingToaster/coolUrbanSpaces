@@ -8,6 +8,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'info_suggestion_view.dart';
+
 class BrowsingView extends StatelessWidget{
 
   @override
@@ -16,7 +18,6 @@ class BrowsingView extends StatelessWidget{
     SettingsController settingsController = Provider.of<SettingsController>(context);
 
     List<SuggestionModel> suggestions = dataController.cachedSuggestions;
-
     List<Widget> widgets = [];
 
     suggestions = dataController.getSortedSuggestions(settingsController.browsingSort);
@@ -26,7 +27,6 @@ class BrowsingView extends StatelessWidget{
       widgets.add(new Card(
           child: ListTile(
             onTap: () {
-              //TODO: open info_suggestion_view for *suggestion*
             },
             title: Text(suggestion.title),
             trailing: dataController.getMarkerIcon(suggestion),

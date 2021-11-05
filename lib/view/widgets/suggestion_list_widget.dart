@@ -7,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../info_suggestion_view.dart';
+
 class SuggestionList extends StatelessWidget{
 
   late List<SuggestionModel> suggestions;
@@ -23,7 +25,10 @@ class SuggestionList extends StatelessWidget{
       widgets.add(new Card(
         child: ListTile(
           onTap: () {
-            //TODO: open info_suggestion_view for *suggestion*
+            dataController.setSelectedMarkerToId(suggestion.id!);
+            Navigator.push(context, MaterialPageRoute(
+                builder: (context) => InfoSuggestionView()
+            ));
           },
           title: Text(suggestion.title),
           trailing: dataController.getMarkerIcon(suggestion),
