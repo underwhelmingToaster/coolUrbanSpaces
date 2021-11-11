@@ -116,4 +116,10 @@ class MapDataController extends ChangeNotifier {
       }
     });
   }
+
+  void support(int userId, SuggestionModel suggestionModel){
+    DataProvider.dataProvider.postSupport(userId, suggestionModel.id as int);
+    _supportedSuggestions.add(suggestionModel);
+    _updateSupported(0); //TODO: GET USERID
+  }
 }

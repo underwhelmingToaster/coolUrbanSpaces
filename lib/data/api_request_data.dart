@@ -75,7 +75,13 @@ class ApiRequestData implements DataProvider{
   }
 
   @override
-  Future<List<int>> getSupported(int userId) {
+  Future<List<int>> getSupported(int userId) async{
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> postSupport(int userId, int suggestionId) async{
+    // TODO: implement postSupport
     throw UnimplementedError();
   }
 
