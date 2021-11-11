@@ -75,7 +75,7 @@ class MapDataController extends ChangeNotifier {
 
     suggestions.then((value) => _cachedSuggestions = value);
     notifyListeners();
-    _updateSupported(0); //TODO: <-- get userID somehow? User need a big refactor.
+    _updateSupported(0); //TODO: <-- get userID somehow? User needs a big refactor.
   }
 
 
