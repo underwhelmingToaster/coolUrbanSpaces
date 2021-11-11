@@ -14,6 +14,7 @@ class LocalDataProvider implements DataProvider{
 
   List<SuggestionModel> _localSuggestions = [];
   List<MessageModel> _messages = [];
+  List<int> _supported = [];
 
   @override
   Future<List<SuggestionModel>> getAllSuggestions() async{
@@ -50,7 +51,12 @@ class LocalDataProvider implements DataProvider{
   }
 
   @override
-  Future<List<int>> getSupported(int userId) {
-    throw UnimplementedError();
+  Future<List<int>> getSupported(int userId) async{
+    return _supported;
+  }
+
+  @override
+  Future<void> postSupport(int userId, int suggestionId) async{
+    _supported.add(suggestionId);
   }
 } 

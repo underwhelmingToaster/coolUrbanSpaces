@@ -18,4 +18,6 @@ abstract class DataProvider{
   Future<void> postMessage(MessageModel message);
 
   Future<List<int>> getSupported(int userId);
+
+  Future<void> postSupport(int userId, int suggestionId);
 }
