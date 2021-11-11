@@ -87,10 +87,13 @@ class InfoSuggestionView extends StatelessWidget{
                       padding: EdgeInsets.all(20),
                       child:Text(desc)
                   )
-              )
+              ),
+              Center(
+                child: ElevatedButton(onPressed: () {mapDataController.support(0, suggestion as SuggestionModel);}, child: Text("Support")),
+              ),
             ],
           ),
-        )
+        ),
       ],
     );
   }
