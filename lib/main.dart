@@ -128,7 +128,7 @@ class _MapFragment extends State<StatefulMapFragment> {
           child: const Icon(Icons.add),
         ),
         body: new UrbanMapView(
-            displayedMarkers: mapDataController.availableMarkers,
+          displayedMarkers: mapDataController.availableMarkers,
           onLongPress: (lon, lat, _context) {
             suggestionController.setLocation(lat, lon);
 
@@ -148,7 +148,7 @@ class _MapFragment extends State<StatefulMapFragment> {
                 builder: (_context) => InfoSuggestionView()
             ));
           },
-        )
+        ),
     );
   }
 }
