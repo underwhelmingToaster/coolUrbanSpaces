@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ChatController()),
       ],
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Cool Urban',
           home: StatefulMapFragment(),
           theme: ThemeData(
