@@ -14,6 +14,7 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 class InfoSuggestionView extends StatelessWidget{
   late MapDataController mapDataController;
+  late SuggestionModel? suggestion;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +22,9 @@ class InfoSuggestionView extends StatelessWidget{
     this.mapDataController = Provider.of<MapDataController>(context);
 
     bool showTab = false;
-    SuggestionModel? suggestion= mapDataController.lastSelect; //FIXME: Duplicate
+    suggestion= mapDataController.lastSelect; //FIXME: Duplicate
     if(suggestion!=null){
-      showTab = mapDataController.doesSupport(0, suggestion);
+      showTab = mapDataController.doesSupport(0, suggestion!);
     }
 
     return DefaultTabController(
@@ -51,19 +52,16 @@ class InfoSuggestionView extends StatelessWidget{
 
   Widget overviewTab(BuildContext context){
 
-
     String title = "";
     String desc = "";
     LatLng location = LatLng(0,0);
     Icon icon = Icon(Icons.warning, color: Colors.orange,);
 
-    SuggestionModel? suggestion= mapDataController.lastSelect;
-
     if(suggestion!=null){
-      title = suggestion.title;
-      desc = suggestion.text;
-      icon = suggestion.getMarkerIcon();
-      location = LatLng(suggestion.lat, suggestion.lng);
+      title = suggestion!.title;
+      desc = suggestion!.text;
+      icon = suggestion!.getMarkerIcon();
+      location = LatLng(suggestion!.lat, suggestion!.lng);
     }
 
     return Column(
