@@ -45,7 +45,7 @@ class AddSuggestionView extends StatelessWidget{
                   child: UrbanMapView(
                     displayedMarkers: markList,
                     isInteractable: false,
-                    startZoom: 15,
+                    startZoom: 18,
                     startLocation: startPosition,
                   ),
                   height: 100,
