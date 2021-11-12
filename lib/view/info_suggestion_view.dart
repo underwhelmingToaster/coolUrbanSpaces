@@ -67,13 +67,14 @@ class InfoSuggestionView extends StatelessWidget {
       children: [
         Expanded(
             child: Container(
-          child: UrbanMapView(
-            displayedMarkers: mapDataController.availableMarkers,
-            isInteractable: false,
-            startLocation: location,
-          ),
-          height: 100,
-        )),
+              child: UrbanMapView(
+                displayedMarkers: mapDataController.availableMarkers,
+                isInteractable: false,
+                startLocation: location,
+              ),
+              height: 100,
+            )
+        ),
         NormalizedPadding(
           child: Row(
             children: [
