@@ -25,7 +25,7 @@ class BrowsingView extends StatelessWidget{
             backgroundColor: Theme.of(context).primaryColor,
             title: Text("Browse"),
             actions: [
-              IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+              IconButton(onPressed: () { print("NOT IMPLEMENTED"); }, icon: const Icon(Icons.search)),
             ],
           ),
           body: SuggestionList(

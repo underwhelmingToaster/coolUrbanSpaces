@@ -75,7 +75,7 @@ class MapDataController extends ChangeNotifier {
 
     suggestions.then((value) => _cachedSuggestions = value);
     notifyListeners();
-    _updateSupported(0); //TODO: <-- get userID somehow? User need a big refactor.
+    _updateSupported(0); //TODO: <-- get userID somehow? User needs a big refactor.
   }
 
 
@@ -121,5 +121,10 @@ class MapDataController extends ChangeNotifier {
     DataProvider.dataProvider.postSupport(userId, suggestionModel.id as int);
     _supportedSuggestions.add(suggestionModel);
     _updateSupported(0); //TODO: GET USERID
+    notifyListeners();
+  }
+
+  bool doesSupport(int userId, SuggestionModel suggestionModel){
+    return _supportedSuggestions.contains(suggestionModel);
   }
 }

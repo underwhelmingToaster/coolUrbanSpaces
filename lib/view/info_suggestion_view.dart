@@ -13,28 +13,37 @@ import 'package:latlong2/latlong.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 class InfoSuggestionView extends StatelessWidget{
+  late MapDataController mapDataController;
+  late SuggestionModel? suggestion;
+
   @override
   Widget build(BuildContext context) {
 
+    this.mapDataController = Provider.of<MapDataController>(context);
+
+    bool showTab = false;
+    suggestion= mapDataController.lastSelect; //FIXME: Duplicate
+    if(suggestion!=null){
+      showTab = mapDataController.doesSupport(0, suggestion!);
+    }
+
     return DefaultTabController(
-        length: 2,
+        length: (showTab == true ? 2 : 1),
         child: Scaffold(
             appBar: AppBar(
               backgroundColor: Theme.of(context).primaryColor,
               title: Text("Suggestion"),
               bottom: TabBar(
                 tabs: [
-                  Tab(icon: Icon(Icons.info)),
-                  Tab(icon: Icon(Icons.chat_bubble))
-                ],
+                  Tab(icon: Icon(Icons.info))]
+                  + (showTab == true ? [Tab(icon: Icon(Icons.chat_bubble))] : []),
               ),
             ),
             body: SafeArea(
                 child: TabBarView(
                   children: [
-                    overviewTab(context),
-                    chatTab(context),
-                  ],
+                    overviewTab(context)]
+                    + (showTab == true ? [chatTab(context)] : []),
                 )
             )
         )
@@ -42,20 +51,17 @@ class InfoSuggestionView extends StatelessWidget{
   }
 
   Widget overviewTab(BuildContext context){
-    MapDataController mapDataController = Provider.of<MapDataController>(context);
 
     String title = "";
     String desc = "";
     LatLng location = LatLng(0,0);
     Icon icon = Icon(Icons.warning, color: Colors.orange,);
 
-    SuggestionModel? suggestion= mapDataController.lastSelect;
-
     if(suggestion!=null){
-      title = suggestion.title;
-      desc = suggestion.text;
-      icon = suggestion.getMarkerIcon();
-      location = LatLng(suggestion.lat, suggestion.lng);
+      title = suggestion!.title;
+      desc = suggestion!.text;
+      icon = suggestion!.getMarkerIcon();
+      location = LatLng(suggestion!.lat, suggestion!.lng);
     }
 
     return Column(
@@ -87,10 +93,13 @@ class InfoSuggestionView extends StatelessWidget{
                       padding: EdgeInsets.all(20),
                       child:Text(desc)
                   )
-              )
+              ),
+              Center(
+                child: ElevatedButton(onPressed: () {mapDataController.support(0, suggestion as SuggestionModel);}, child: Text("Support")),
+              ),
             ],
           ),
-        )
+        ),
       ],
     );
   }
