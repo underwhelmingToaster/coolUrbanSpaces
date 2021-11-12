@@ -8,16 +8,17 @@ import 'package:provider/provider.dart';
 
 import 'info_suggestion_view.dart';
 
-class BrowsingView extends StatelessWidget{
-
+class BrowsingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MapDataController dataController = Provider.of<MapDataController>(context);
-    SettingsController settingsController = Provider.of<SettingsController>(context);
+    SettingsController settingsController =
+        Provider.of<SettingsController>(context);
 
     List<SuggestionModel> suggestions = dataController.cachedSuggestions;
 
-    suggestions = dataController.getSortedSuggestions(settingsController.browsingSort);
+    suggestions =
+        dataController.getSortedSuggestions(settingsController.browsingSort);
 
     return SafeArea(
         child: Scaffold(
@@ -25,17 +26,21 @@ class BrowsingView extends StatelessWidget{
             backgroundColor: Theme.of(context).primaryColor,
             title: Text("Browse"),
             actions: [
-              IconButton(onPressed: () { print("NOT IMPLEMENTED"); }, icon: const Icon(Icons.search)),
+              IconButton(
+                  onPressed: () {
+                    print("NOT IMPLEMENTED");
+                  },
+                  icon: const Icon(Icons.search)),
             ],
           ),
           body: SuggestionList(
             suggestions: suggestions,
             onTab: (suggestion) => {
               dataController.setSelectedMarkerToId(suggestion.id!),
-              Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => InfoSuggestionView()
-              )),
-            },),
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => InfoSuggestionView())),
+            },
+          ),
         )
     );
   }

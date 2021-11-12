@@ -5,14 +5,14 @@ import 'package:flutter_chat_types/flutter_chat_types.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/status.dart' as status;
 
-class ChatController extends ChangeNotifier{
+class ChatController extends ChangeNotifier {
   List<Message> _activeMessages = [];
   final String webSocketURL = "wss://localhost:80";
   late WebSocketChannel channel;
 
   int _formerId = -1;
 
-  ChatController(){
+  ChatController() {
     channel = WebSocketChannel.connect(
       Uri.parse(webSocketURL),
     );
@@ -26,22 +26,24 @@ class ChatController extends ChangeNotifier{
     notifyListeners();
   }
 
-  void changeWebSocketChannel(int id){
-    if(_formerId != id) {
+  void changeWebSocketChannel(int id) {
+    if (_formerId != id) {
       _formerId = id;
       _activeMessages = [];
-      updateMessages(id, );
+      updateMessages(
+        id,
+      );
 
       channel.sink.close(status.goingAway);
 
-      if(id >= 0){
+      if (id >= 0) {
         Uri uri = Uri.parse(webSocketURL + "/" + id.toString());
         channel = WebSocketChannel.connect(uri);
 
         channel.stream.listen((message) {
-          if(message is MessageModel){
+          if (message is MessageModel) {
             _activeMessages.add(message.toMessage());
-          }else{
+          } else {
             throw ArgumentError("Result from websocket was invalid");
           }
         });
@@ -51,14 +53,17 @@ class ChatController extends ChangeNotifier{
     }
   }
 
-  void updateMessages(int id, [Function? whenDone]){
-    Future<List<MessageModel>> messages = DataProvider.dataProvider.getAllMessages(id);
+  void updateMessages(int id, [Function? whenDone]) {
+    Future<List<MessageModel>> messages =
+        DataProvider.dataProvider.getAllMessages(id);
     messages.then((value) => {
-      value.forEach((element) {
-        if(!_activeMessages.contains(element)){
-         _activeMessages.add(element.toMessage());
-        }
-      }), notifyListeners(), whenDone
-    });
+          value.forEach((element) {
+            if (!_activeMessages.contains(element)) {
+              _activeMessages.add(element.toMessage());
+            }
+          }),
+          notifyListeners(),
+          whenDone
+        });
   }
 }

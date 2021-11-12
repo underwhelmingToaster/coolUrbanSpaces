@@ -12,18 +12,17 @@ import 'package:uuid/uuid.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
-class InfoSuggestionView extends StatelessWidget{
+class InfoSuggestionView extends StatelessWidget {
   late MapDataController mapDataController;
   late SuggestionModel? suggestion;
 
   @override
   Widget build(BuildContext context) {
-
     this.mapDataController = Provider.of<MapDataController>(context);
 
     bool showTab = false;
-    suggestion= mapDataController.lastSelect; //FIXME: Duplicate
-    if(suggestion!=null){
+    suggestion = mapDataController.lastSelect; //FIXME: Duplicate
+    if (suggestion != null) {
       showTab = mapDataController.doesSupport(0, suggestion!);
     }
 
@@ -34,30 +33,29 @@ class InfoSuggestionView extends StatelessWidget{
               backgroundColor: Theme.of(context).primaryColor,
               title: Text("Suggestion"),
               bottom: TabBar(
-                tabs: [
-                  Tab(icon: Icon(Icons.info))]
-                  + (showTab == true ? [Tab(icon: Icon(Icons.chat_bubble))] : []),
+                tabs: [Tab(icon: Icon(Icons.info))] +
+                    (showTab == true
+                        ? [Tab(icon: Icon(Icons.chat_bubble))]
+                        : []),
               ),
             ),
             body: SafeArea(
                 child: TabBarView(
-                  children: [
-                    overviewTab(context)]
-                    + (showTab == true ? [chatTab(context)] : []),
-                )
-            )
-        )
-    );
+              children: [overviewTab(context)] +
+                  (showTab == true ? [chatTab(context)] : []),
+            ))));
   }
 
-  Widget overviewTab(BuildContext context){
-
+  Widget overviewTab(BuildContext context) {
     String title = "";
     String desc = "";
-    LatLng location = LatLng(0,0);
-    Icon icon = Icon(Icons.warning, color: Colors.orange,);
+    LatLng location = LatLng(0, 0);
+    Icon icon = Icon(
+      Icons.warning,
+      color: Colors.orange,
+    );
 
-    if(suggestion!=null){
+    if (suggestion != null) {
       title = suggestion!.title;
       desc = suggestion!.text;
       icon = suggestion!.getMarkerIcon();
@@ -69,33 +67,40 @@ class InfoSuggestionView extends StatelessWidget{
       children: [
         Expanded(
             child: Container(
-              child: UrbanMapView(
-                displayedMarkers: mapDataController.availableMarkers,
-                isInteractable: false,
-                startLocation: location,
-              ),
-              height: 100,
-            )
-        ),
+          child: UrbanMapView(
+            displayedMarkers: mapDataController.availableMarkers,
+            isInteractable: false,
+            startLocation: location,
+          ),
+          height: 100,
+        )),
         NormalizedPadding(
-            child: Row(
-              children: [
-                icon,
-                Text(title, style: TextStyle(fontSize: 16),),
-              ],
-            ),
+          child: Row(
+            children: [
+              icon,
+              Text(
+                title,
+                style: TextStyle(fontSize: 16),
+              ),
+            ],
+          ),
         ),
         Expanded(
           child: ListView(
             children: [
               Card(
-                  child: Padding(
-                      padding: EdgeInsets.all(20),
-                      child:Text(desc)
-                  )
-              ),
+                  child:
+                      Padding(padding: EdgeInsets.all(20), child: Text(desc))),
               Center(
-                child: ElevatedButton(onPressed: () {mapDataController.support(0, suggestion as SuggestionModel);}, child: Text("Support")),
+                child: Visibility(
+                  visible: !mapDataController.doesSupport(0, suggestion!),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        mapDataController.support(
+                            0, suggestion as SuggestionModel);
+                      },
+                      child: Text("Support")),
+                ),
               ),
             ],
           ),
@@ -104,12 +109,14 @@ class InfoSuggestionView extends StatelessWidget{
     );
   }
 
-  Widget chatTab(BuildContext context){
+  Widget chatTab(BuildContext context) {
     ChatController chatController = Provider.of<ChatController>(context);
-    ProfileController profileController = Provider.of<ProfileController>(context);
-    MapDataController suggestionController = Provider.of<MapDataController>(context);
+    ProfileController profileController =
+        Provider.of<ProfileController>(context);
+    MapDataController suggestionController =
+        Provider.of<MapDataController>(context);
 
-    if(suggestionController.lastSelect != null) {
+    if (suggestionController.lastSelect != null) {
       int id = suggestionController.lastSelect!.id as int;
       chatController.changeWebSocketChannel(id);
     }
@@ -122,11 +129,12 @@ class InfoSuggestionView extends StatelessWidget{
 
     return Chat(
         messages: _messages,
-        onSendPressed: (message) => chatController.sendMessage(new types.TextMessage(
-            author: _user,
-            id: Uuid().v4(),
-            createdAt: DateTime.now().millisecondsSinceEpoch,
-            text: message.text)),
+        onSendPressed: (message) => chatController.sendMessage(
+            new types.TextMessage(
+                author: _user,
+                id: Uuid().v4(),
+                createdAt: DateTime.now().millisecondsSinceEpoch,
+                text: message.text)),
         user: _user);
   }
 }

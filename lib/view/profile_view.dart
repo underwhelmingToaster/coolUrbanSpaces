@@ -21,103 +21,22 @@ class ProfileView extends StatelessWidget {
             title: Text("Profile"),
             bottom: TabBar(
               tabs: [
-                Tab(text: "Login",),
-                Tab(text: "Register",),
+                Tab(
+                  text: "Login",
+                ),
+                Tab(
+                  text: "Register",
+                ),
                 Tab(text: "Edit Profile"),
               ],
             ),
           ),
-        )
-    );
+        ));
   }
 
-
-  Widget loginView(BuildContext context){
-    ProfileController profileController = Provider.of<ProfileController>(context);
-    return SafeArea(child: ListView(
-        children: [
-          Card(
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Username"),
-                          TextFormField(
-                            maxLength: 20,
-                            onChanged: (value) {
-                              profileController.username = value;
-                            },
-                          )
-                        ],
-                      )
-                  )
-                ],
-              ),
-            ),
-          ),
-          Card(
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Password"),
-                        Padding(
-                          padding: EdgeInsets.all(8),
-                          child: TextFormField(
-                            obscureText: true,
-                            enableSuggestions: false,
-                            autocorrect: false,
-                            onChanged: (value) {
-                              profileController.password = value;
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          ListTile(
-            title: Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(30),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Theme.of(context).primaryColor,
-                    ),
-                    key: Key("Submit Profile-Form"),
-                    onPressed: () {
-                      if(profileController.login()){
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Profile details changed')));
-                      }else{
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Password incorrect or fields empty'), backgroundColor: Colors.red));
-                      }
-                    },
-                    child: Text("Login"),
-                  ),
-                )
-              ],
-            ),
-          )
-        ],
-      )
-    );
-  }
-
-
-  Widget registerProfile(BuildContext context){
-    ProfileController profileController = Provider.of<ProfileController>(context);
+  Widget loginView(BuildContext context) {
+    ProfileController profileController =
+        Provider.of<ProfileController>(context);
     return SafeArea(
         child: ListView(
           children: [
@@ -135,7 +54,95 @@ class ProfileView extends StatelessWidget {
                               maxLength: 20,
                               onChanged: (value) {
                                 profileController.username = value;
+                              },
+                            )
+                          ],
+                        )
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Card(
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Password"),
+                          Padding(
+                            padding: EdgeInsets.all(8),
+                            child: TextFormField(
+                              obscureText: true,
+                              enableSuggestions: false,
+                              autocorrect: false,
+                              onChanged: (value) {
+                                profileController.password = value;
                                 },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            ListTile(
+              title: Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(30),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Theme.of(context).primaryColor,
+                      ),
+                      key: Key("Submit Profile-Form"),
+                      onPressed: () {
+                        if (profileController.login()) {
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                              content: Text('Profile details changed')));
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                              content: Text('Password incorrect or fields empty'),
+                              backgroundColor: Colors.red));
+                        }
+                      },
+                      child: Text("Login"),
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        )
+    );
+  }
+
+  Widget registerProfile(BuildContext context) {
+    ProfileController profileController =
+        Provider.of<ProfileController>(context);
+    return SafeArea(
+        child: ListView(
+          children: [
+            Card(
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Username"),
+                            TextFormField(
+                              maxLength: 20,
+                              onChanged: (value) {
+                                profileController.username = value;
+                              },
                             )
                           ],
                         )
@@ -162,7 +169,7 @@ class ProfileView extends StatelessWidget {
                               autocorrect: false,
                               onChanged: (value) {
                                 profileController.newpassword = value;
-                              },
+                                },
                             ),
                           ),
                           Text("Repeat Password"),
@@ -195,10 +202,13 @@ class ProfileView extends StatelessWidget {
                       ),
                       key: Key("Submit Profile-Form"),
                       onPressed: () {
-                        if(profileController.register()){
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Profile details changed')));
-                        }else{
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Password incorrect or fields empty'), backgroundColor: Colors.red));
+                        if (profileController.register()) {
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                              content: Text('Profile details changed')));
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                              content: Text('Password incorrect or fields empty'),
+                              backgroundColor: Colors.red));
                         }
                       },
                       child: Text("Register"),
@@ -213,8 +223,8 @@ class ProfileView extends StatelessWidget {
   }
 
   Widget changeProfile(BuildContext context) {
-    ProfileController profileController = Provider.of<ProfileController>(
-        context);
+    ProfileController profileController =
+        Provider.of<ProfileController>(context);
 
     return SafeArea(
         child: ListView(
@@ -233,7 +243,7 @@ class ProfileView extends StatelessWidget {
                               maxLength: 20,
                               onChanged: (value) {
                                 profileController.username = value;
-                              },
+                                },
                             )
                           ],
                         )
@@ -284,7 +294,7 @@ class ProfileView extends StatelessWidget {
                               autocorrect: false,
                               onChanged: (value) {
                                 profileController.repeatNewPassword = value;
-                              },
+                                },
                             ),
                           ),
                         ],
@@ -301,21 +311,17 @@ class ProfileView extends StatelessWidget {
                     padding: EdgeInsets.all(30),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Theme
-                            .of(context)
-                            .primaryColor,
+                        primary: Theme.of(context).primaryColor,
                       ),
                       key: Key("Submit Profile-Form"),
                       onPressed: () {
                         if (profileController.changeProfile()) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text(
-                                  'Profile details changed')));
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                              content: Text('Profile details changed')));
                         } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text(
-                                  'Password incorrect or fields empty'),
-                                  backgroundColor: Colors.red));
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                              content: Text('Password incorrect or fields empty'),
+                              backgroundColor: Colors.red));
                         }
                       },
                       child: Text("Update profile"),

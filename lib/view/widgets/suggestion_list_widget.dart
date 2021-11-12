@@ -6,8 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SuggestionList extends StatelessWidget{
-
+class SuggestionList extends StatelessWidget {
   late List<SuggestionModel> suggestions;
   Function? onTab;
 
@@ -15,7 +14,8 @@ class SuggestionList extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    SettingsController settingsController = Provider.of<SettingsController>(context);
+    SettingsController settingsController =
+        Provider.of<SettingsController>(context);
 
     List<Widget> widgets = [];
 
@@ -23,7 +23,7 @@ class SuggestionList extends StatelessWidget{
       widgets.add(new Card(
         child: ListTile(
           onTap: () {
-            if(onTab!=null){
+            if (onTab != null) {
               onTab!(suggestion);
             }
           },
@@ -39,7 +39,6 @@ class SuggestionList extends StatelessWidget{
       ));
     });
 
-
     return Column(
       children: [
         NormalizedPadding(
@@ -48,11 +47,14 @@ class SuggestionList extends StatelessWidget{
               Text("All Entries:"),
               Spacer(),
               DropdownButton(
-                value: SortingType.enumToString(settingsController.browsingSort),
+                value:
+                    SortingType.enumToString(settingsController.browsingSort),
                 onChanged: (String? newValue) {
-                  settingsController.browsingSort = SortingType.stringToEnum(newValue!);
+                  settingsController.browsingSort =
+                      SortingType.stringToEnum(newValue!);
                 },
-                items: SortingType.sortingTypesStringList().map<DropdownMenuItem<String>>((String value) {
+                items: SortingType.sortingTypesStringList()
+                    .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),
@@ -64,9 +66,8 @@ class SuggestionList extends StatelessWidget{
         ),
         Expanded(
             child: ListView(
-              children: widgets,
-            )
-        ),
+          children: widgets,
+        )),
       ],
     );
   }

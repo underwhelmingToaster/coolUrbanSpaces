@@ -32,10 +32,10 @@ class MapDataController extends ChangeNotifier {
 
   List<Marker> get availableMarkers => _availableMarkers;
 
-  List<SuggestionModel> getSortedSuggestions(SortingTypes sortType){
+  List<SuggestionModel> getSortedSuggestions(SortingTypes sortType) {
     List<SuggestionModel> suggestions = _cachedSuggestions;
 
-    switch(sortType) {
+    switch (sortType) {
       case SortingTypes.NAME:
         suggestions.sort((a, b) => a.text.compareTo(b.text));
         break;
@@ -60,29 +60,28 @@ class MapDataController extends ChangeNotifier {
         key.toString().replaceAll("[<'", "").replaceAll("'>]", ""));
   }
 
-  void updateMarkers(){
-    Future<List<SuggestionModel>> suggestions = DataProvider.dataProvider.getAllSuggestions();
-    Stream<List<Marker>> updatedMarkers = Stream.fromFuture(suggestions)
-        .asyncMap<List<Marker>>((suggestionList) => Future.wait(
-          suggestionList.map<Future<Marker>>((e) async => suggestionToMarkers(e)
-          ),
-        ),
-      );
-    updatedMarkers.forEach((element) => {
-      availableMarkers = element,
-      notifyListeners()
-    });
+  void updateMarkers() {
+    Future<List<SuggestionModel>> suggestions =
+        DataProvider.dataProvider.getAllSuggestions();
+    Stream<List<Marker>> updatedMarkers =
+        Stream.fromFuture(suggestions).asyncMap<List<Marker>>(
+      (suggestionList) => Future.wait(
+        suggestionList.map<Future<Marker>>((e) async => suggestionToMarkers(e)),
+      ),
+    );
+    updatedMarkers
+        .forEach((element) => {availableMarkers = element, notifyListeners()});
 
     suggestions.then((value) => _cachedSuggestions = value);
     notifyListeners();
-    _updateSupported(0); //TODO: <-- get userID somehow? User needs a big refactor.
+    _updateSupported(
+        0); //TODO: <-- get userID somehow? User needs a big refactor.
   }
 
-
-  void setSelectedMarkerToId(int id){
+  void setSelectedMarkerToId(int id) {
     DataProvider.dataProvider.getSuggestion(id).then((value) => {
-      _lastSelect = value,
-    });
+          _lastSelect = value,
+        });
   }
 
   Marker suggestionToMarkers(SuggestionModel suggestion) {
@@ -93,38 +92,35 @@ class MapDataController extends ChangeNotifier {
         width: 80.0,
         height: 80.0,
         point: LatLng(suggestion.lat, suggestion.lng),
-        builder: (ctx) =>
-            Container(
-                child: icon
-            ),
+        builder: (ctx) => Container(child: icon),
         key: new Key(suggestion.id.toString()));
   }
 
-  void addSuggestion(SuggestionModel suggestion){
+  void addSuggestion(SuggestionModel suggestion) {
     _availableMarkers.add(suggestionToMarkers(suggestion));
     DataProvider.dataProvider.postSuggestion(suggestion);
     updateMarkers();
   }
 
-  void _updateSupported(int userID){
+  void _updateSupported(int userID) {
     _supportedSuggestions.clear();
     DataProvider.dataProvider.getSupported(userID).then((value) => {
-      for(SuggestionModel suggestion in _cachedSuggestions){
-        if(value.contains(suggestion.id)){
-          _supportedSuggestions.add(suggestion)
-        }
-      }
-    });
+          for (SuggestionModel suggestion in _cachedSuggestions)
+            {
+              if (value.contains(suggestion.id))
+                {_supportedSuggestions.add(suggestion)}
+            }
+        });
   }
 
-  void support(int userId, SuggestionModel suggestionModel){
+  void support(int userId, SuggestionModel suggestionModel) {
     DataProvider.dataProvider.postSupport(userId, suggestionModel.id as int);
     _supportedSuggestions.add(suggestionModel);
     _updateSupported(0); //TODO: GET USERID
     notifyListeners();
   }
 
-  bool doesSupport(int userId, SuggestionModel suggestionModel){
+  bool doesSupport(int userId, SuggestionModel suggestionModel) {
     return _supportedSuggestions.contains(suggestionModel);
   }
 }

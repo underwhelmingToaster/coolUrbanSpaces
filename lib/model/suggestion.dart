@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SuggestionModel {
-
   int? id;
   late String title;
   late String text;
@@ -10,25 +9,27 @@ class SuggestionModel {
   late double lat;
   late double lng;
 
-  SuggestionModel(this.title, this.text, this.type, this.lat, this.lng, [this.id]);
+  SuggestionModel(this.title, this.text, this.type, this.lat, this.lng,
+      [this.id]);
 
-  SuggestionModel.fromJson(Map<String, dynamic> json):
-      title = json['title'],
-      text = json['description'],
-      type = json['type'],
-      lat = json['lat'],
-      lng = json['lon'],
-      id = json['id'];
+  SuggestionModel.fromJson(Map<String, dynamic> json)
+      : title = json['title'],
+        text = json['description'],
+        type = json['type'],
+        lat = json['lat'],
+        lng = json['lon'],
+        id = json['id'];
 
   Map<String, dynamic> toJson() => {
-    'title' : title,
-    'description' : text,
-    'type' : type,
-    'lat' : lat,
-    'lon' : lng,
-  };
+        'title': title,
+        'description': text,
+        'type': type,
+        'lat': lat,
+        'lon': lng,
+      };
 
-  Icon getMarkerIcon(){ //FIXME: is it better if the Icon itself gets stored in model?
+  Icon getMarkerIcon() {
+    //FIXME: is it better if the Icon itself gets stored in model?
     switch (this.type) {
       case 0:
         return Icon(Icons.pin_drop, color: Colors.amber);

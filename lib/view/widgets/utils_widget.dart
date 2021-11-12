@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class NormalizedPadding extends StatelessWidget{
-
+class NormalizedPadding extends StatelessWidget {
   late final Widget child;
   final double offset = 10;
 
@@ -9,10 +8,6 @@ class NormalizedPadding extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.all(this.offset),
-        child: child
-    );
+    return Padding(padding: EdgeInsets.all(this.offset), child: child);
   }
-
 }
