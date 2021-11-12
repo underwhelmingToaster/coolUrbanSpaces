@@ -13,28 +13,36 @@ import 'package:latlong2/latlong.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 class InfoSuggestionView extends StatelessWidget{
+  late MapDataController mapDataController;
+
   @override
   Widget build(BuildContext context) {
 
+    this.mapDataController = Provider.of<MapDataController>(context);
+
+    bool showTab = false;
+    SuggestionModel? suggestion= mapDataController.lastSelect; //FIXME: Duplicate
+    if(suggestion!=null){
+      showTab = mapDataController.doesSupport(0, suggestion);
+    }
+
     return DefaultTabController(
-        length: 2,
+        length: (showTab == true ? 2 : 1),
         child: Scaffold(
             appBar: AppBar(
               backgroundColor: Theme.of(context).primaryColor,
               title: Text("Suggestion"),
               bottom: TabBar(
                 tabs: [
-                  Tab(icon: Icon(Icons.info)),
-                  Tab(icon: Icon(Icons.chat_bubble))
-                ],
+                  Tab(icon: Icon(Icons.info))]
+                  + (showTab == true ? [Tab(icon: Icon(Icons.chat_bubble))] : []),
               ),
             ),
             body: SafeArea(
                 child: TabBarView(
                   children: [
-                    overviewTab(context),
-                    chatTab(context),
-                  ],
+                    overviewTab(context)]
+                    + (showTab == true ? [chatTab(context)] : []),
                 )
             )
         )
@@ -42,7 +50,7 @@ class InfoSuggestionView extends StatelessWidget{
   }
 
   Widget overviewTab(BuildContext context){
-    MapDataController mapDataController = Provider.of<MapDataController>(context);
+
 
     String title = "";
     String desc = "";
