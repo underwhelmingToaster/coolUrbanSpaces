@@ -97,7 +97,7 @@ class InfoSuggestionView extends StatelessWidget {
                   visible: !mapDataController.doesSupport(0, suggestion!),
                   child: ElevatedButton(
                       onPressed: () {
-                        mapDataController.support(0, suggestion!)
+                        mapDataController.support(0, suggestion!);
                       },
                       child: Text("Support")),
                 ),
