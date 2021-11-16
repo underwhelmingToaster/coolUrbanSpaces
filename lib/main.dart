@@ -22,17 +22,16 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AddSuggestionController()),
-        ChangeNotifierProvider(create: (_) => MapDataController()),
-        ChangeNotifierProvider(create: (_) => SettingsController()),
-        ChangeNotifierProvider(create: (_) => ProfileController()),
-        ChangeNotifierProvider(create: (_) => ChatController()),
-      ],
+        providers: [
+          ChangeNotifierProvider(create: (_) => AddSuggestionController()),
+          ChangeNotifierProvider(create: (_) => MapDataController()),
+          ChangeNotifierProvider(create: (_) => SettingsController()),
+          ChangeNotifierProvider(create: (_) => ProfileController()),
+          ChangeNotifierProvider(create: (_) => ChatController()),
+        ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Cool Urban',
@@ -53,8 +52,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
-        )
-    );
+        ));
   }
 }
 
@@ -64,11 +62,12 @@ class StatefulMapFragment extends StatefulWidget {
 }
 
 class _MapFragment extends State<StatefulMapFragment> {
-
   @override
   Widget build(BuildContext context) {
-    MapDataController mapDataController = Provider.of<MapDataController>(context);
-    AddSuggestionController suggestionController = Provider.of<AddSuggestionController>(context);
+    MapDataController mapDataController =
+        Provider.of<MapDataController>(context);
+    AddSuggestionController suggestionController =
+        Provider.of<AddSuggestionController>(context);
 
     return Scaffold(
         drawer: Drawer(
@@ -76,45 +75,48 @@ class _MapFragment extends State<StatefulMapFragment> {
             padding: EdgeInsets.zero,
             children: [
               DrawerHeader(
-                decoration: BoxDecoration(color: Theme.of(context).primaryColor),
-                child: Text('CoolUrbanSpaces'),),
+                decoration:
+                    BoxDecoration(color: Theme.of(context).primaryColor),
+                child: Text('CoolUrbanSpaces'),
+              ),
               ListTile(
                 title: const Text('Map'),
                 onTap: () => Navigator.pop(context),
               ),
               ListTile(
                 title: const Text('Browse'),
-                onTap: () => Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => BrowsingView())),
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => BrowsingView())),
               ),
               ListTile(
                 title: const Text('Supported'),
-                onTap: () => Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => SupportView())),
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SupportView())),
               ),
               ListTile(
                 title: const Text('Profile'),
-                onTap: () => Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => ProfileView())),
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ProfileView())),
               ),
               ListTile(
                 title: const Text('Settings'),
-                onTap: () => Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => SettingsView())),
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SettingsView())),
               )
             ],
           ),
         ),
         appBar: AppBar(
-          leading: Builder(builder: (BuildContext context) {
-            return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: IconButton(
-                  icon: Image.asset("assets/images/Coolcity.png"),
-                  iconSize: 50,
-                  onPressed: () => Scaffold.of(context).openDrawer(),
-                )
-            );},
+          leading: Builder(
+            builder: (BuildContext context) {
+              return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: IconButton(
+                    icon: Image.asset("assets/images/Coolcity.png"),
+                    iconSize: 50,
+                    onPressed: () => Scaffold.of(context).openDrawer(),
+                  ));
+            },
           ),
           title: const Text('Cool Urban Spaces'),
           backgroundColor: Theme.of(context).primaryColor,
@@ -123,20 +125,18 @@ class _MapFragment extends State<StatefulMapFragment> {
           heroTag: "addButton",
           backgroundColor: Theme.of(context).primaryColor,
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(
-                builder: (context) => AddSuggestionView()));
-            },
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AddSuggestionView()));
+          },
           child: const Icon(Icons.add),
         ),
         body: new UrbanMapView(
-            displayedMarkers: mapDataController.availableMarkers,
+          displayedMarkers: mapDataController.availableMarkers,
           onLongPress: (lon, lat, _context) {
             suggestionController.setLocation(lat, lon);
 
             Navigator.push(_context,
-                MaterialPageRoute(
-                    builder: (context) => AddSuggestionView()
-                ));
+                MaterialPageRoute(builder: (context) => AddSuggestionView()));
           },
           onTab: (lon, lat, _context) {
             suggestionController.lat = lat;
@@ -145,13 +145,9 @@ class _MapFragment extends State<StatefulMapFragment> {
           onMarkerTab: (value, _context) {
             int id = mapDataController.cleanUpKey(value.key as Key);
             mapDataController.setSelectedMarkerToId(id);
-            Navigator.push(_context, MaterialPageRoute(
-                builder: (_context) => InfoSuggestionView()
-            ));
+            Navigator.push(_context,
+                MaterialPageRoute(builder: (_context) => InfoSuggestionView()));
           },
-        )
-    );
+        ));
   }
 }
-
-

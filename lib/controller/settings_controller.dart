@@ -1,8 +1,7 @@
 import 'package:cool_urban_spaces/controller/enum/sorting_type.dart';
 import 'package:flutter/cupertino.dart';
 
-class SettingsController extends ChangeNotifier{
-
+class SettingsController extends ChangeNotifier {
   SortingTypes _browsingSort = SortingTypes.NAME;
   bool _exampleSwitch = true;
 

@@ -10,24 +10,28 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:provider/provider.dart';
 import 'package:latlong2/latlong.dart';
 
-class AddSuggestionView extends StatelessWidget{
-
+class AddSuggestionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    AddSuggestionController suggestionController = Provider.of<AddSuggestionController>(context);
-    MapDataController mapDataController = Provider.of<MapDataController>(context);
+    AddSuggestionController suggestionController =
+        Provider.of<AddSuggestionController>(context);
+    MapDataController mapDataController =
+        Provider.of<MapDataController>(context);
 
-    LatLng startPosition = LatLng(suggestionController.lat, suggestionController.lon);
+    LatLng startPosition =
+        LatLng(suggestionController.lat, suggestionController.lon);
 
     List<Marker> markList = [];
     markList.add(
-        new Marker(
-          point: startPosition,
-          builder: (ctx) =>
-            Container(
-              child: Icon(Icons.add_location, color: Colors.red,),
-            ),
+      new Marker(
+        point: startPosition,
+        builder: (ctx) => Container(
+          child: Icon(
+            Icons.add_location,
+            color: Colors.red,
+          ),
         ),
+      ),
     );
 
     return Scaffold(
@@ -50,21 +54,20 @@ class AddSuggestionView extends StatelessWidget{
                 )
             ),
             NormalizedPadding(
-              child: TextFormField(
-                decoration: InputDecoration(
-                    labelText: "Title",
-                    hintText: "A short title",
-                    labelStyle: new TextStyle(color: Theme.of(context).primaryColor)
-                ),
-                inputFormatters: [LengthLimitingTextInputFormatter(50)],
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Please add a title";
-                  }
-                  return null;
-                  },
-                onChanged: (v) => suggestionController.title = v,
-              ),
+             child: TextFormField(
+               decoration: InputDecoration(
+                   labelText: "Title",
+                   hintText: "A short title",
+                   labelStyle: new TextStyle(color: Theme.of(context).primaryColor)),
+               inputFormatters: [LengthLimitingTextInputFormatter(50)],
+               validator: (value) {
+                 if (value == null || value.isEmpty) {
+                   return "Please add a title";
+                 }
+                 return null;
+               },
+               onChanged: (v) => suggestionController.title = v,
+             ),
             ),
             NormalizedPadding(
               child: TextFormField(
@@ -85,29 +88,21 @@ class AddSuggestionView extends StatelessWidget{
                 onChanged: (v) => suggestionController.desc = v,
               ),
             ),
-
-            Padding(padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
-                child: Text("Type of Suggestion:")
-            ),
+            Padding(
+                padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
+                child: Text("Type of Suggestion:")),
             NormalizedPadding(
               child: DropdownButton(
                 value: suggestionController.type,
                 isExpanded: true,
                 items: [
-                  DropdownMenuItem(
-                      child: Text("General"), value: 0),
-                  DropdownMenuItem(
-                      child: Text("Shading"), value: 1),
-                  DropdownMenuItem(
-                      child: Text("Seating"), value: 2),
-                  DropdownMenuItem(
-                      child: Text("Gardening"), value: 3),
-                  DropdownMenuItem(
-                      child: Text("Social"), value: 4),
-                  DropdownMenuItem(
-                      child: Text("Water"), value: 5),
-                  DropdownMenuItem(
-                      child: Text("Plants"), value: 6),
+                  DropdownMenuItem(child: Text("General"), value: 0),
+                  DropdownMenuItem(child: Text("Shading"), value: 1),
+                  DropdownMenuItem(child: Text("Seating"), value: 2),
+                  DropdownMenuItem(child: Text("Gardening"), value: 3),
+                  DropdownMenuItem(child: Text("Social"), value: 4),
+                  DropdownMenuItem(child: Text("Water"), value: 5),
+                  DropdownMenuItem(child: Text("Plants"), value: 6),
                 ],
                 onChanged: (v) => suggestionController.type = (v as int),
               ),
@@ -118,8 +113,9 @@ class AddSuggestionView extends StatelessWidget{
                   primary: Theme.of(context).primaryColor,
                 ),
                 onPressed: () {
-                  if(suggestionController.submit()) {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Processing Data')));
+                  if (suggestionController.submit()) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Processing Data')));
                     Navigator.pop(context);
                     SuggestionModel suggestion = new SuggestionModel(
                         suggestionController.title,
@@ -129,8 +125,10 @@ class AddSuggestionView extends StatelessWidget{
                         suggestionController.lon);
                     mapDataController.addSuggestion(suggestion);
                     suggestionController.reset();
-                  }else{
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Missing Data'), backgroundColor: Colors.red));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Missing Data'),
+                        backgroundColor: Colors.red));
                   }
                 },
                 child: const Text('Submit'),

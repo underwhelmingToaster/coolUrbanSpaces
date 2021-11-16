@@ -8,10 +8,14 @@ class ProfileController extends ChangeNotifier {
 
   List<String> _passwords = ["", "", ""]; //
 
-  bool register(){
-    String passwordHash = Crypt.sha256(_passwords[1], rounds: 1000, salt: salt).hash.toString();
-    String passwordHash2 = Crypt.sha256(_passwords[2], rounds: 1000, salt: salt).hash.toString();
-    if(username.isNotEmpty && passwordHash.isNotEmpty && passwordHash2.isNotEmpty) {
+  bool register() {
+    String passwordHash =
+        Crypt.sha256(_passwords[1], rounds: 1000, salt: salt).hash.toString();
+    String passwordHash2 =
+        Crypt.sha256(_passwords[2], rounds: 1000, salt: salt).hash.toString();
+    if (username.isNotEmpty &&
+        passwordHash.isNotEmpty &&
+        passwordHash2.isNotEmpty) {
       if (passwordHash2 == passwordHash) {
         // TODO: Further process password and username
         return true;
@@ -20,21 +24,28 @@ class ProfileController extends ChangeNotifier {
     return false;
   }
 
-  bool login(){
-    String passwordHash = Crypt.sha256(_passwords[0], rounds: 1000, salt: salt).hash.toString();
-    if(username.isNotEmpty && passwordHash.isNotEmpty){
+  bool login() {
+    String passwordHash =
+        Crypt.sha256(_passwords[0], rounds: 1000, salt: salt).hash.toString();
+    if (username.isNotEmpty && passwordHash.isNotEmpty) {
       // TODO: Further process password and username
       return true;
     }
     return false;
   }
 
-  bool changeProfile(){
-    String passwordHash = Crypt.sha256(_passwords[0], rounds: 1000, salt: salt).hash.toString();
-    String newPasswordHash = Crypt.sha256(_passwords[1], rounds: 1000, salt: salt).hash.toString();
-    String newPasswordHash2 = Crypt.sha256(_passwords[2], rounds: 1000, salt: salt).hash.toString();
-    if(username.isNotEmpty && passwordHash.isNotEmpty && newPasswordHash.isNotEmpty && newPasswordHash2.isNotEmpty){
-      if(newPasswordHash == newPasswordHash2){
+  bool changeProfile() {
+    String passwordHash =
+        Crypt.sha256(_passwords[0], rounds: 1000, salt: salt).hash.toString();
+    String newPasswordHash =
+        Crypt.sha256(_passwords[1], rounds: 1000, salt: salt).hash.toString();
+    String newPasswordHash2 =
+        Crypt.sha256(_passwords[2], rounds: 1000, salt: salt).hash.toString();
+    if (username.isNotEmpty &&
+        passwordHash.isNotEmpty &&
+        newPasswordHash.isNotEmpty &&
+        newPasswordHash2.isNotEmpty) {
+      if (newPasswordHash == newPasswordHash2) {
         // TODO: Further process password and username
         return true;
       }
@@ -42,7 +53,7 @@ class ProfileController extends ChangeNotifier {
     return false;
   }
 
-  void clearFields(){
+  void clearFields() {
     _passwords = ["", "", ""];
     notifyListeners();
   }

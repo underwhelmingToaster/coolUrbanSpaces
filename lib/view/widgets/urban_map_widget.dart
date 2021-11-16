@@ -4,7 +4,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:latlong2/latlong.dart';
 
-class UrbanMapView extends StatelessWidget{
+class UrbanMapView extends StatelessWidget {
   late bool isInteractable;
   late LatLng startingLocation;
   late double startZoom;
@@ -15,18 +15,16 @@ class UrbanMapView extends StatelessWidget{
 
   MapController mc = new MapController();
 
-  UrbanMapView(
-      {
-        required this.displayedMarkers,
-        this.isInteractable = true,
-        this.startZoom = 13.0,
-        LatLng? startLocation,
-        this.onLongPress,
-        this.onTab,
-        this.onMarkerTab,
-      }
-  ){
-    if(startLocation==null){
+  UrbanMapView({
+    required this.displayedMarkers,
+    this.isInteractable = true,
+    this.startZoom = 13.0,
+    LatLng? startLocation,
+    this.onLongPress,
+    this.onTab,
+    this.onMarkerTab,
+  }) {
+    if (startLocation == null) {
       startLocation = new LatLng(47.0, 8.0);
     }
     startingLocation = startLocation;
@@ -35,25 +33,24 @@ class UrbanMapView extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return FlutterMap(
-        options:
-        new MapOptions(
-          center: startingLocation,
-          zoom: startZoom,
-          controller: mc,
-          plugins: [
-            MarkerClusterPlugin(),
-          ],
-          onTap: (point) {
-            if(onTab!=null){
-              onTab!(point.longitude, point.latitude, context);
-            }
-          },
-          onLongPress: (point) {
-            if(onLongPress!=null){
-              onLongPress!(point.longitude, point.latitude, context);
-            }
-          },
-        ),
+      options: new MapOptions(
+        center: startingLocation,
+        zoom: startZoom,
+        controller: mc,
+        plugins: [
+          MarkerClusterPlugin(),
+        ],
+        onTap: (point) {
+          if (onTab != null) {
+            onTab!(point.longitude, point.latitude, context);
+          }
+        },
+        onLongPress: (point) {
+          if (onLongPress != null) {
+            onLongPress!(point.longitude, point.latitude, context);
+          }
+        },
+      ),
       layers: [
         new TileLayerOptions(
           urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -62,16 +59,14 @@ class UrbanMapView extends StatelessWidget{
         MarkerClusterLayerOptions(
           markers: this.displayedMarkers,
           onMarkerTap: (value) {
-            if(onMarkerTab!=null){
+            if (onMarkerTab != null) {
               onMarkerTab!(value, context);
             }
           },
           builder: (BuildContext context, List<Marker> markers) {
             return FloatingActionButton(
-                child: Text(markers.length.toString()),
-                onPressed: () { }
-                );
-            },
+                child: Text(markers.length.toString()), onPressed: () {});
+          },
         ),
       ],
     );
