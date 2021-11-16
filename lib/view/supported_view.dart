@@ -19,7 +19,7 @@ class SupportView extends StatelessWidget {
     List<Widget> widgets = [];
 
     suggestions = dataController.getSortedSuggestions(settingsController
-        .browsingSort); //FIXME: only get supported suggestions (adjust data)
+        .browsingSort);
 
     suggestions.forEach((suggestion) {
       widgets.add(new Card(
@@ -41,7 +41,7 @@ class SupportView extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).primaryColor,
-          title: Text("Browse"),
+          title: Text("Support"),
           actions: [
             IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
           ],
