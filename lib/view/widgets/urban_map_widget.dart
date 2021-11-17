@@ -9,7 +9,10 @@ class UrbanMapView extends StatelessWidget {
   late bool isInteractable;
   late LatLng startingLocation;
   late double startZoom;
+
   late List<Marker> displayedMarkers;
+  late List<Widget>? nonRotatedChildren;
+
   late Function? onLongPress;
   late Function? onTab;
   late Function? onMarkerTab;
@@ -24,6 +27,7 @@ class UrbanMapView extends StatelessWidget {
     this.onLongPress,
     this.onTab,
     this.onMarkerTab,
+    this.nonRotatedChildren,
   }) {
     if (startLocation == null) {
       startLocation = new LatLng(47.0, 8.0);
@@ -72,6 +76,7 @@ class UrbanMapView extends StatelessWidget {
           },
         ),
       ],
+      nonRotatedChildren: nonRotatedChildren ?? [],
     );
   }
 }
