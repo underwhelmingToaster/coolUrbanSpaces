@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -39,6 +40,7 @@ class UrbanMapView extends StatelessWidget {
         controller: mc,
         plugins: [
           MarkerClusterPlugin(),
+          LocationMarkerPlugin(),
         ],
         onTap: (point) {
           if (onTab != null) {
@@ -56,18 +58,13 @@ class UrbanMapView extends StatelessWidget {
           urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
           subdomains: ['a', 'b', 'c'],
         ),
-        MarkerClusterLayerOptions(
-          markers: this.displayedMarkers,
-          onMarkerTap: (value) {
-            if (onMarkerTab != null) {
-              onMarkerTab!(value, context);
-            }
-          },
-          builder: (BuildContext context, List<Marker> markers) {
-            return FloatingActionButton(
-                child: Text(markers.length.toString()), onPressed: () {});
-          },
+        LocationMarkerLayerOptions(
+          marker: DefaultLocationMarker(
+            color: Colors.blue,
+          )
         ),
+      ],
+      nonRotatedLayers: [
       ],
     );
   }

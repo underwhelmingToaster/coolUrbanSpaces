@@ -32,7 +32,7 @@ dependencies:
   flutter_map_marker_cluster: any
   flutter_svg: ^0.22.0
   provider: ^5.0.0
-  flutter_map_location: any
+  flutter_map_location_marker: any
   crypt: ^4.0.1
   flutter_chat_ui: ^1.4.1
   uuid: 3.0.4
