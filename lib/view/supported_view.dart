@@ -41,7 +41,7 @@ class SupportView extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).primaryColor,
-          title: Text("Support"),
+          title: Text("Supported by me"),
           actions: [
             IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
           ],

@@ -1,4 +1,5 @@
 import 'package:cool_urban_spaces/controller/add_suggestion_controller.dart';
+import 'package:cool_urban_spaces/controller/enum/suggestion_type.dart';
 import 'package:cool_urban_spaces/controller/map_data_controller.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:cool_urban_spaces/view/widgets/urban_map_widget.dart';
@@ -34,6 +35,16 @@ class AddSuggestionView extends StatelessWidget {
       ),
     );
 
+    List<DropdownMenuItem<int>> dropdown = [];
+    SuggestionTypes.values.forEach((element) {
+      dropdown.add(
+          new DropdownMenuItem<int>(
+            child: Text(SuggestionType.enumToString(element)),
+            value: element.index,
+          )
+      );
+    });
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
@@ -54,6 +65,35 @@ class AddSuggestionView extends StatelessWidget {
                 )
             ),
             NormalizedPadding(
+                child: Align(child: Text("Type of Suggestion:"), alignment: Alignment.topLeft,)),
+            NormalizedPadding(
+              child: DropdownButton<int>(
+                value: suggestionController.type,
+                isExpanded: true,
+                items: dropdown,
+                onChanged: (v) => suggestionController.type = (v as int),
+              ),
+            ),
+            NormalizedPadding(
+              child: TextFormField(
+                decoration: InputDecoration(
+                  labelText: "Description",
+                  hintText: "Describe your suggestion in more detail",
+                  labelStyle: new TextStyle(color: Theme.of(context).primaryColor),
+                ),
+                inputFormatters: [LengthLimitingTextInputFormatter(500)],
+                minLines: 1,
+                maxLines: 10,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Please describe your project";
+                  }
+                  return null;
+                },
+                onChanged: (v) => suggestionController.desc = v,
+              ),
+            ),
+            NormalizedPadding(
              child: TextFormField(
                decoration: InputDecoration(
                    labelText: "Title",
@@ -68,44 +108,6 @@ class AddSuggestionView extends StatelessWidget {
                },
                onChanged: (v) => suggestionController.title = v,
              ),
-            ),
-            NormalizedPadding(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: "Description",
-                  hintText: "Describe your suggestion.dart in more detail",
-                  labelStyle: new TextStyle(color: Theme.of(context).primaryColor),
-                ),
-                inputFormatters: [LengthLimitingTextInputFormatter(500)],
-                minLines: 4,
-                maxLines: 10,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Please describe your project";
-                  }
-                  return null;
-                },
-                onChanged: (v) => suggestionController.desc = v,
-              ),
-            ),
-            Padding(
-                padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
-                child: Text("Type of Suggestion:")),
-            NormalizedPadding(
-              child: DropdownButton(
-                value: suggestionController.type,
-                isExpanded: true,
-                items: [
-                  DropdownMenuItem(child: Text("General"), value: 0),
-                  DropdownMenuItem(child: Text("Shading"), value: 1),
-                  DropdownMenuItem(child: Text("Seating"), value: 2),
-                  DropdownMenuItem(child: Text("Gardening"), value: 3),
-                  DropdownMenuItem(child: Text("Social"), value: 4),
-                  DropdownMenuItem(child: Text("Water"), value: 5),
-                  DropdownMenuItem(child: Text("Plants"), value: 6),
-                ],
-                onChanged: (v) => suggestionController.type = (v as int),
-              ),
             ),
             NormalizedPadding(
               child: ElevatedButton(
@@ -127,7 +129,7 @@ class AddSuggestionView extends StatelessWidget {
                     suggestionController.reset();
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Missing Data'),
+                        content: Text('Please provide a short description'),
                         backgroundColor: Colors.red));
                   }
                 },

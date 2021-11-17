@@ -1,3 +1,5 @@
+import 'package:cool_urban_spaces/controller/enum/sorting_type.dart';
+import 'package:cool_urban_spaces/controller/enum/suggestion_type.dart';
 import 'package:flutter/cupertino.dart';
 
 class AddSuggestionController extends ChangeNotifier {
@@ -8,7 +10,10 @@ class AddSuggestionController extends ChangeNotifier {
   double _lon = 0;
 
   bool submit() {
-    if (title.isNotEmpty && desc.isNotEmpty) {
+    if (desc.isNotEmpty) {
+      if(title.isEmpty){
+        title = SuggestionType.intToString(type);
+      }
       return true;
     }
     return false;

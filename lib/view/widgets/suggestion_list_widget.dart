@@ -44,8 +44,8 @@ class SuggestionList extends StatelessWidget {
         NormalizedPadding(
           child: Row(
             children: [
-              Text("All Entries:"),
               Spacer(),
+              Align(child: Text("Order by: "), alignment: Alignment.centerRight,),
               DropdownButton(
                 value:
                     SortingType.enumToString(settingsController.browsingSort),

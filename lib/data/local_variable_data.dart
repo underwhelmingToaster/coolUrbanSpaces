@@ -58,4 +58,9 @@ class LocalDataProvider implements DataProvider {
   Future<void> postSupport(int userId, int suggestionId) async {
     _supported.add(suggestionId);
   }
+
+  @override
+  Future<void> deleteSupport(int userId, int suggestionId) async {
+    _supported.remove(suggestionId);
+  }
 }

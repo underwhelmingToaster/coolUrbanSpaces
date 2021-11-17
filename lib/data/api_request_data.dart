@@ -93,4 +93,10 @@ class ApiRequestData implements DataProvider {
     // TODO: implement postSupport
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> deleteSupport(int userId, int suggestionId) {
+    // TODO: implement deleteSupport
+    throw UnimplementedError();
+  }
 }

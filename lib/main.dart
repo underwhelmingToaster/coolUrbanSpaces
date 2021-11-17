@@ -68,16 +68,25 @@ class _MapFragment extends State<StatefulMapFragment> {
         Provider.of<MapDataController>(context);
     AddSuggestionController suggestionController =
         Provider.of<AddSuggestionController>(context);
+    ProfileController profileController = Provider.of<ProfileController>(context);
 
     return Scaffold(
         drawer: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
-              DrawerHeader(
-                decoration:
-                    BoxDecoration(color: Theme.of(context).primaryColor),
-                child: Text('CoolUrbanSpaces'),
+              UserAccountsDrawerHeader(
+                  accountName: Text(profileController.username),
+                  accountEmail: Text(""),
+                currentAccountPicture: Image.asset("assets/images/Coolcity.png"),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                ),
+                otherAccountsPictures: [
+                  IconButton(icon: Icon(Icons.settings), onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsView()));},
+                      splashColor: Colors.grey)
+                ],
               ),
               ListTile(
                 title: const Text('Map'),
@@ -96,13 +105,8 @@ class _MapFragment extends State<StatefulMapFragment> {
               ListTile(
                 title: const Text('Profile'),
                 onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileView())),W
+                    MaterialPageRoute(builder: (context) => ProfileView())),
               ),
-              ListTile(
-                title: const Text('Settings'),
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SettingsView())),
-              )
             ],
           ),
         ),
@@ -112,8 +116,7 @@ class _MapFragment extends State<StatefulMapFragment> {
               return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: IconButton(
-                    icon: Image.asset("assets/images/Coolcity.png"),
-                    iconSize: 50,
+                    icon: Icon(Icons.menu),
                     onPressed: () => Scaffold.of(context).openDrawer(),
                   ));
             },
