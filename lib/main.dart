@@ -89,14 +89,14 @@ class _MapFragment extends State<StatefulMapFragment> {
                     MaterialPageRoute(builder: (context) => BrowsingView())),
               ),
               ListTile(
-                title: const Text('Supported'),
+                title: const Text('Supported by me'),
                 onTap: () => Navigator.push(context,
                     MaterialPageRoute(builder: (context) => SupportView())),
               ),
               ListTile(
                 title: const Text('Profile'),
                 onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileView())),
+                    MaterialPageRoute(builder: (context) => ProfileView())),W
               ),
               ListTile(
                 title: const Text('Settings'),
