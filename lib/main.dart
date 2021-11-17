@@ -74,10 +74,18 @@ class _MapFragment extends State<StatefulMapFragment> {
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
-              DrawerHeader(
-                decoration:
-                    BoxDecoration(color: Theme.of(context).primaryColor),
-                child: Text('CoolUrbanSpaces'),
+              UserAccountsDrawerHeader(
+                  accountName: Text(""),
+                  accountEmail: Text(""),
+                currentAccountPicture: Image.asset("assets/images/Coolcity.png"),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                ),
+                otherAccountsPictures: [
+                  IconButton(icon: Icon(Icons.settings), onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsView()));},
+                      splashColor: Colors.grey)
+                ],
               ),
               ListTile(
                 title: const Text('Map'),
@@ -98,11 +106,6 @@ class _MapFragment extends State<StatefulMapFragment> {
                 onTap: () => Navigator.push(context,
                     MaterialPageRoute(builder: (context) => ProfileView())),
               ),
-              ListTile(
-                title: const Text('Settings'),
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SettingsView())),
-              )
             ],
           ),
         ),
