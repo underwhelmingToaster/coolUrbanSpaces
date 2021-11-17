@@ -58,13 +58,23 @@ class UrbanMapView extends StatelessWidget {
           urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
           subdomains: ['a', 'b', 'c'],
         ),
+        MarkerClusterLayerOptions(
+          markers: this.displayedMarkers,
+          onMarkerTap: (value) {
+            if (onMarkerTab != null) {
+              onMarkerTab!(value, context);
+            }
+          },
+          builder: (BuildContext context, List<Marker> markers) {
+            return FloatingActionButton(
+                child: Text(markers.length.toString()), onPressed: () {});
+          },
+        ),
         LocationMarkerLayerOptions(
           marker: DefaultLocationMarker(
             color: Colors.blue,
           )
         ),
-      ],
-      nonRotatedLayers: [
       ],
     );
   }
