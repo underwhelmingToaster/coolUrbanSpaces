@@ -105,7 +105,12 @@ class _MapFragment extends State<StatefulMapFragment> {
                   offset: -70,
                   fontSize: 10,
                 ),
-                onTap: () => Navigator.pop(context),
+                onTap: () {
+                  if(tutorialController.menuCounter == 1){
+                    tutorialController.menuCounter--;
+                  }
+                  Navigator.pop(context);
+                  },
               ),
               ListTile(
                 leading: Icon(Icons.search),
@@ -118,8 +123,13 @@ class _MapFragment extends State<StatefulMapFragment> {
                   offset: -70,
                   fontSize: 10,
                 ),
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => BrowsingView())),
+                onTap: () {
+                  if(tutorialController.menuCounter == 3){
+                    tutorialController.menuCounter--;
+                  }
+                  Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => BrowsingView()));
+                },
               ),
               ListTile(
                 leading: Icon(Icons.whatshot),
@@ -132,8 +142,13 @@ class _MapFragment extends State<StatefulMapFragment> {
                   offset: 10,
                   fontSize: 10,
                 ),
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SupportView())),
+                onTap: () {
+                  if(tutorialController.menuCounter == 2){
+                    tutorialController.menuCounter--;
+                  }
+                  Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SupportView()));
+                },
               ),
               ListTile(
                 title: const Text('Profile'),
