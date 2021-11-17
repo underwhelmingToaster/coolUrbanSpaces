@@ -71,6 +71,7 @@ class InfoSuggestionView extends StatelessWidget {
                 displayedMarkers: mapDataController.availableMarkers,
                 isInteractable: false,
                 startLocation: location,
+                startZoom: 18,
               ),
               height: 100,
             )
