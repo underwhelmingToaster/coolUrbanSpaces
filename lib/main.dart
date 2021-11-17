@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_tooltip/simple_tooltip.dart';
 
 import 'view/widgets/utils_widget.dart';
 
@@ -73,6 +74,8 @@ class _MapFragment extends State<StatefulMapFragment> {
     ProfileController profileController = Provider.of<ProfileController>(context);
     TutorialController tutorialController = Provider.of<TutorialController>(context);
 
+    //tutorial
+
     return Scaffold(
         drawer: Drawer(
           child: ListView(
@@ -92,16 +95,43 @@ class _MapFragment extends State<StatefulMapFragment> {
                 ],
               ),
               ListTile(
-                title: const Text('Map'),
+                leading: Icon(Icons.map),
+                title: ToolTip(
+                  child: const Text('Map'),
+                  text: "Here you can return to the main map. [Click me]",
+                  show: tutorialController.menuCounter == 1,
+                  onTap: () => tutorialController.menuCounter--,
+                  direction: TooltipDirection.right,
+                  offset: -70,
+                  fontSize: 10,
+                ),
                 onTap: () => Navigator.pop(context),
               ),
               ListTile(
-                title: const Text('Browse'),
+                leading: Icon(Icons.search),
+                title: ToolTip(
+                  child: const Text('Browse'),
+                  text: "Here you can browse through all available suggestions. [Click me]",
+                  show: tutorialController.menuCounter == 3,
+                  onTap: () => tutorialController.menuCounter--,
+                  direction: TooltipDirection.right,
+                  offset: -70,
+                  fontSize: 10,
+                ),
                 onTap: () => Navigator.push(context,
                     MaterialPageRoute(builder: (context) => BrowsingView())),
               ),
               ListTile(
-                title: const Text('Supported by me'),
+                leading: Icon(Icons.whatshot),
+                title: ToolTip(
+                  child: const Text('Supported by me'),
+                  text: "Here you can view all the suggestions you are currently supporting. [Click me]",
+                  show: tutorialController.menuCounter == 2,
+                  onTap: () => tutorialController.menuCounter--,
+                  direction: TooltipDirection.down,
+                  offset: 10,
+                  fontSize: 10,
+                ),
                 onTap: () => Navigator.push(context,
                     MaterialPageRoute(builder: (context) => SupportView())),
               ),
