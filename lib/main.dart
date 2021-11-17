@@ -96,7 +96,7 @@ class _MapFragment extends State<StatefulMapFragment> {
               ListTile(
                 title: const Text('Profile'),
                 onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileView())),W
+                    MaterialPageRoute(builder: (context) => ProfileView())),
               ),
               ListTile(
                 title: const Text('Settings'),
