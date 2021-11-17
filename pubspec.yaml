@@ -37,6 +37,7 @@ dependencies:
   flutter_chat_ui: ^1.4.1
   uuid: 3.0.4
   web_socket_channel: ^2.1.0
+  simple_tooltip: any
 
 
 dev_dependencies:
