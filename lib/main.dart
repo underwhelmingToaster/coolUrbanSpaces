@@ -68,6 +68,7 @@ class _MapFragment extends State<StatefulMapFragment> {
         Provider.of<MapDataController>(context);
     AddSuggestionController suggestionController =
         Provider.of<AddSuggestionController>(context);
+    ProfileController profileController = Provider.of<ProfileController>(context);
 
     return Scaffold(
         drawer: Drawer(
@@ -75,7 +76,7 @@ class _MapFragment extends State<StatefulMapFragment> {
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
-                  accountName: Text(""),
+                  accountName: Text(profileController.username),
                   accountEmail: Text(""),
                 currentAccountPicture: Image.asset("assets/images/Coolcity.png"),
                 decoration: BoxDecoration(

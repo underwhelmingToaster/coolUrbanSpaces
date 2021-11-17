@@ -39,8 +39,8 @@ class UrbanMapView extends StatelessWidget {
         zoom: startZoom,
         controller: mc,
         plugins: [
-          MarkerClusterPlugin(),
           LocationMarkerPlugin(),
+          MarkerClusterPlugin(),
         ],
         onTap: (point) {
           if (onTab != null) {
@@ -59,12 +59,12 @@ class UrbanMapView extends StatelessWidget {
           subdomains: ['a', 'b', 'c'],
         ),
         MarkerClusterLayerOptions(
-          markers: this.displayedMarkers,
           onMarkerTap: (value) {
             if (onMarkerTab != null) {
               onMarkerTab!(value, context);
             }
           },
+          markers: this.displayedMarkers,
           builder: (BuildContext context, List<Marker> markers) {
             return FloatingActionButton(
                 child: Text(markers.length.toString()), onPressed: () {});
