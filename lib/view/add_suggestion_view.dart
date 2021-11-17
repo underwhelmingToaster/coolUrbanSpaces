@@ -129,7 +129,7 @@ class AddSuggestionView extends StatelessWidget {
                     suggestionController.reset();
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Missing Data'),
+                        content: Text('Please provide a short description'),
                         backgroundColor: Colors.red));
                   }
                 },
