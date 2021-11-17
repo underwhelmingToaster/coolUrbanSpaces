@@ -74,8 +74,7 @@ class MapDataController extends ChangeNotifier {
 
     suggestions.then((value) => _cachedSuggestions = value);
     notifyListeners();
-    _updateSupported(
-        0); //TODO: <-- get userID somehow? User needs a big refactor.
+    //_updateSupported(0); //TODO: <-- get userID somehow? User needs a big refactor.
   }
 
   void setSelectedMarkerToId(int id) {
@@ -105,18 +104,15 @@ class MapDataController extends ChangeNotifier {
   void _updateSupported(int userID) {
     _supportedSuggestions.clear();
     DataProvider.dataProvider.getSupported(userID).then((value) => {
-          for (SuggestionModel suggestion in _cachedSuggestions)
-            {
-              if (value.contains(suggestion.id))
-                {_supportedSuggestions.add(suggestion)}
-            }
+      //TODO: check if is supported
+
         });
   }
 
   void support(int userId, SuggestionModel suggestionModel) {
     DataProvider.dataProvider.postSupport(userId, suggestionModel.id as int);
     _supportedSuggestions.add(suggestionModel);
-    _updateSupported(0); //TODO: GET USERID
+   //_updateSupported(0); //TODO: GET USERID
     notifyListeners();
   }
 

@@ -23,8 +23,8 @@ class SupportView extends StatelessWidget {
     List<SuggestionModel> suggestions = dataController.supportedSuggestions;
     List<Widget> widgets = [];
 
-    suggestions = dataController.getSortedSuggestions(settingsController
-        .browsingSort);
+    /*suggestions = dataController.getSortedSuggestions(settingsController
+        .browsingSort);*/
 
     suggestions.forEach((suggestion) {
       widgets.add(new Card(
