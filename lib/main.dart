@@ -112,8 +112,7 @@ class _MapFragment extends State<StatefulMapFragment> {
               return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: IconButton(
-                    icon: Image.asset("assets/images/Coolcity.png"),
-                    iconSize: 50,
+                    icon: Icon(Icons.menu),
                     onPressed: () => Scaffold.of(context).openDrawer(),
                   ));
             },
