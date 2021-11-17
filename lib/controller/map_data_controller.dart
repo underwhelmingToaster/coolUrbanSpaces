@@ -123,4 +123,10 @@ class MapDataController extends ChangeNotifier {
   bool doesSupport(int userId, SuggestionModel suggestionModel) {
     return _supportedSuggestions.contains(suggestionModel);
   }
+
+  void stopSupporting(int userId, SuggestionModel suggestionModel){
+    DataProvider.dataProvider.deleteSupport(userId, suggestionModel.id as int);
+    _supportedSuggestions.remove(suggestionModel);
+    notifyListeners();
+  }
 }

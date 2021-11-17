@@ -18,4 +18,6 @@ abstract class DataProvider {
   Future<List<int>> getSupported(int userId);
 
   Future<void> postSupport(int userId, int suggestionId);
+
+  Future<void> deleteSupport(int userId, int suggestionId);
 }

@@ -84,6 +84,16 @@ class InfoSuggestionView extends StatelessWidget {
                 title,
                 style: TextStyle(fontSize: 16),
               ),
+              Spacer(),
+              Visibility(
+                child: ElevatedButton(
+                  onPressed: () { mapDataController.stopSupporting(0, suggestion!); },
+                  child: Text("Stop Subscribing"),
+                  style: ButtonStyle(
+                  backgroundColor: MaterialStateColor.resolveWith((states) => Colors.red),
+                ),),
+                visible: mapDataController.doesSupport(0, suggestion!),
+              ),
             ],
           ),
         ),
