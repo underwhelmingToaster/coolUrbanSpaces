@@ -1,4 +1,12 @@
-enum SuggestionTypes { GENERAL, SHADING, SEATING, GARDENING, SOCIAL, WATER, PLANTS  }
+enum SuggestionTypes {
+  GENERAL,
+  SHADING,
+  SEATING,
+  GARDENING,
+  SOCIAL,
+  WATER,
+  PLANTS
+}
 
 class SuggestionType {
   static SuggestionTypes stringToEnum(String input) {
@@ -57,11 +65,11 @@ class SuggestionType {
     }
   }
 
-  static SuggestionTypes intToEnum(int i){
+  static SuggestionTypes intToEnum(int i) {
     return SuggestionTypes.values[i];
   }
 
-  static String intToString(int i){
+  static String intToString(int i) {
     return enumToString(intToEnum(i));
   }
 

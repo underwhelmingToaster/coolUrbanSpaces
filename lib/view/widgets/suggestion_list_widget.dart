@@ -45,7 +45,10 @@ class SuggestionList extends StatelessWidget {
           child: Row(
             children: [
               Spacer(),
-              Align(child: Text("Order by: "), alignment: Alignment.centerRight,),
+              Align(
+                child: Text("Order by: "),
+                alignment: Alignment.centerRight,
+              ),
               DropdownButton(
                 value:
                     SortingType.enumToString(settingsController.browsingSort),
@@ -65,9 +68,10 @@ class SuggestionList extends StatelessWidget {
           ),
         ),
         Expanded(
-            child: ListView(
-          children: widgets,
-        )),
+          child: ListView(
+            children: widgets,
+          ),
+        ),
       ],
     );
   }

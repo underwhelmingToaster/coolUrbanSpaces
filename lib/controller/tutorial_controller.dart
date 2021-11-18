@@ -4,14 +4,13 @@ import 'package:cool_urban_spaces/data/local_variable_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class TutorialController extends ChangeNotifier{
-
+class TutorialController extends ChangeNotifier {
   bool doneTutorial = false;
   String _key = "done_tutorial";
   bool initialCheck = true;
 
-  void check() async{
-    if(initialCheck){
+  void check() async {
+    if (initialCheck) {
       checkStorage();
       (DataProvider.dataProvider as LocalDataProvider).loadData();
       initialCheck = false;
@@ -24,15 +23,14 @@ class TutorialController extends ChangeNotifier{
   bool _showBackBrowseMessage = true;
   bool _showBackSupportMessage = true;
 
-  bool get showBackSupportMessage{
+  bool get showBackSupportMessage {
     return _showBackSupportMessage;
   }
 
-  set showBackSupportMessage(bool show){
+  set showBackSupportMessage(bool show) {
     _showBackSupportMessage = show;
     notifyListeners();
   }
-
 
   bool get showBackBrowseMessage {
     return _showBackBrowseMessage;
@@ -47,7 +45,7 @@ class TutorialController extends ChangeNotifier{
     return _showCreateNotice;
   }
 
-  set showCreateNotice(bool show){
+  set showCreateNotice(bool show) {
     _showCreateNotice = show;
     notifyListeners();
   }
@@ -56,22 +54,22 @@ class TutorialController extends ChangeNotifier{
     return _menuCounter;
   }
 
-  set menuCounter(int count){
+  set menuCounter(int count) {
     _menuCounter = count;
     writeTutorial(doneTutorial);
     notifyListeners();
   }
 
-  int get addSuggestionCounter{
+  int get addSuggestionCounter {
     return _addSuggestionCounter;
   }
 
-  set addSuggestionCounter(int count){
+  set addSuggestionCounter(int count) {
     _addSuggestionCounter = count;
     notifyListeners();
   }
 
-  void resetState(){
+  void resetState() {
     _showBackBrowseMessage = true;
     _showCreateNotice = true;
     _menuCounter = 3;
@@ -79,7 +77,7 @@ class TutorialController extends ChangeNotifier{
     notifyListeners();
   }
 
-  void deactivateAll(){
+  void deactivateAll() {
     _showBackSupportMessage = false;
     _showCreateNotice = false;
     _menuCounter = 0;
@@ -88,17 +86,17 @@ class TutorialController extends ChangeNotifier{
     notifyListeners();
   }
 
-  void checkStorage() async{
+  void checkStorage() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     doneTutorial = prefs.getBool('done_tutorial') ?? false;
-    if(doneTutorial){
+    if (doneTutorial) {
       deactivateAll();
-    }else{
+    } else {
       resetState();
     }
   }
 
-  void writeTutorial(bool done) async{
+  void writeTutorial(bool done) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool(_key, done);
   }

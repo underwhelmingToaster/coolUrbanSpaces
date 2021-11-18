@@ -14,17 +14,13 @@ import 'widgets/utils_widget.dart';
 class SupportView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    MapDataController dataController = Provider.of<MapDataController>(context);
-    SettingsController settingsController =
-        Provider.of<SettingsController>(context);
-
-    TutorialController tutorialController = Provider.of<TutorialController>(context);
+    MapDataController dataController =
+        Provider.of<MapDataController>(context);
+    TutorialController tutorialController =
+        Provider.of<TutorialController>(context);
 
     List<SuggestionModel> suggestions = dataController.supportedSuggestions;
     List<Widget> widgets = [];
-
-    /*suggestions = dataController.getSortedSuggestions(settingsController
-        .browsingSort);*/
 
     suggestions.forEach((suggestion) {
       widgets.add(new Card(

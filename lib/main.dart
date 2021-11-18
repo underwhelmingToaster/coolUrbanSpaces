@@ -24,7 +24,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -66,7 +65,6 @@ class StatefulMapFragment extends StatefulWidget {
 }
 
 class _MapFragment extends State<StatefulMapFragment> {
-
   bool _inital = true;
 
   @override
@@ -75,14 +73,15 @@ class _MapFragment extends State<StatefulMapFragment> {
         Provider.of<MapDataController>(context);
     AddSuggestionController suggestionController =
         Provider.of<AddSuggestionController>(context);
-    ProfileController profileController = Provider.of<ProfileController>(context);
-    TutorialController tutorialController = Provider.of<TutorialController>(context);
+    ProfileController profileController =
+        Provider.of<ProfileController>(context);
+    TutorialController tutorialController =
+        Provider.of<TutorialController>(context);
 
-    if(_inital){
+    if (_inital) {
       tutorialController.check();
       _inital = false;
     }
-
 
     //tutorial
 
@@ -92,15 +91,22 @@ class _MapFragment extends State<StatefulMapFragment> {
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
-                  accountName: Text(profileController.username),
-                  accountEmail: Text(""),
-                currentAccountPicture: Image.asset("assets/images/Coolcity.png"),
+                accountName: Text(profileController.username),
+                accountEmail: Text(""),
+                currentAccountPicture:
+                    Image.asset("assets/images/Coolcity.png"),
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,
                 ),
                 otherAccountsPictures: [
-                  IconButton(icon: Icon(Icons.settings), onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsView()));},
+                  IconButton(
+                      icon: Icon(Icons.settings),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SettingsView()));
+                      },
                       splashColor: Colors.grey)
                 ],
               ),
@@ -116,17 +122,18 @@ class _MapFragment extends State<StatefulMapFragment> {
                   fontSize: 10,
                 ),
                 onTap: () {
-                  if(tutorialController.menuCounter == 1){
+                  if (tutorialController.menuCounter == 1) {
                     tutorialController.menuCounter--;
                   }
                   Navigator.pop(context);
-                  },
+                },
               ),
               ListTile(
                 leading: Icon(Icons.search),
                 title: ToolTip(
                   child: const Text('Browse'),
-                  text: "Here you can browse through all available suggestions. [Click me]",
+                  text:
+                      "Here you can browse through all available suggestions. [Click me]",
                   show: tutorialController.menuCounter == 3,
                   onTap: () => tutorialController.menuCounter--,
                   direction: TooltipDirection.right,
@@ -134,18 +141,19 @@ class _MapFragment extends State<StatefulMapFragment> {
                   fontSize: 10,
                 ),
                 onTap: () {
-                  if(tutorialController.menuCounter == 3){
+                  if (tutorialController.menuCounter == 3) {
                     tutorialController.menuCounter--;
                   }
                   Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => BrowsingView()));
+                      MaterialPageRoute(builder: (context) => BrowsingView()));
                 },
               ),
               ListTile(
                 leading: Icon(Icons.whatshot),
                 title: ToolTip(
                   child: const Text('Supported by me'),
-                  text: "Here you can view all the suggestions you are currently supporting. [Click me]",
+                  text:
+                      "Here you can view all the suggestions you are currently supporting. [Click me]",
                   show: tutorialController.menuCounter == 2,
                   onTap: () => tutorialController.menuCounter--,
                   direction: TooltipDirection.down,
@@ -153,11 +161,11 @@ class _MapFragment extends State<StatefulMapFragment> {
                   fontSize: 10,
                 ),
                 onTap: () {
-                  if(tutorialController.menuCounter == 2){
+                  if (tutorialController.menuCounter == 2) {
                     tutorialController.menuCounter--;
                   }
                   Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SupportView()));
+                      MaterialPageRoute(builder: (context) => SupportView()));
                 },
               ),
               ListTile(
@@ -183,10 +191,10 @@ class _MapFragment extends State<StatefulMapFragment> {
           backgroundColor: Theme.of(context).primaryColor,
         ),
         floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AddSuggestionView()));
-              },
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AddSuggestionView()));
+          },
           child: Icon(Icons.add),
         ),
         body: new UrbanMapView(
@@ -212,17 +220,20 @@ class _MapFragment extends State<StatefulMapFragment> {
               visible: tutorialController.showCreateNotice,
               child: Container(
                 color: Colors.white60,
-                child: Center(child: ToolTip(
-                    child: ElevatedButton(
-                      child: Text("Get Started"),
-                      onPressed: () {
-                        tutorialController.showCreateNotice = false;
-                        mapDataController.updateMarkers();
-                      },
-                      style: ButtonStyle(backgroundColor: MaterialStateColor.resolveWith((states) => Theme.of(context).primaryColor))
-                    ),
-                    show: tutorialController.showCreateNotice,
-                    text: "To create a new suggestion press on a desired location for at least 2 seconds."),
+                child: Center(
+                  child: ToolTip(
+                      child: ElevatedButton(
+                          child: Text("Get Started"),
+                          onPressed: () {
+                            tutorialController.showCreateNotice = false;
+                            mapDataController.updateMarkers();
+                          },
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateColor.resolveWith(
+                                  (states) => Theme.of(context).primaryColor))),
+                      show: tutorialController.showCreateNotice,
+                      text:
+                          "To create a new suggestion press on a desired location for at least 2 seconds."),
                 ),
               ),
             ),

@@ -21,7 +21,8 @@ class AddSuggestionView extends StatelessWidget {
     MapDataController mapDataController =
         Provider.of<MapDataController>(context);
 
-    TutorialController tutorialController = Provider.of<TutorialController>(context);
+    TutorialController tutorialController =
+        Provider.of<TutorialController>(context);
 
     LatLng startPosition =
         LatLng(suggestionController.lat, suggestionController.lon);
@@ -41,12 +42,10 @@ class AddSuggestionView extends StatelessWidget {
 
     List<DropdownMenuItem<int>> dropdown = [];
     SuggestionTypes.values.forEach((element) {
-      dropdown.add(
-          new DropdownMenuItem<int>(
-            child: Text(SuggestionType.enumToString(element)),
-            value: element.index,
-          )
-      );
+      dropdown.add(new DropdownMenuItem<int>(
+        child: Text(SuggestionType.enumToString(element)),
+        value: element.index,
+      ));
     });
 
     return Scaffold(
@@ -69,93 +68,97 @@ class AddSuggestionView extends StatelessWidget {
                 )
             ),
             NormalizedPadding(
-                child: Align(child: Text("Type of Suggestion:"), alignment: Alignment.topLeft,)),
-            NormalizedPadding(
-              child: ToolTip(
-                child: DropdownButton<int>(
-                  value: suggestionController.type,
-                  isExpanded: true,
-                  items: dropdown,
-                  onChanged: (v)  {
-                    suggestionController.type = (v as int);
-                    if(tutorialController.addSuggestionCounter == 99){
-                      tutorialController.addSuggestionCounter = 2;
-                    }
-                  },
-                  onTap: () { if(tutorialController.addSuggestionCounter == 3){
-                    tutorialController.addSuggestionCounter = 99;
-                  }
-                  },
-                ),
-                text: "First of all select a fitting category for your suggestion.",
-                fontSize: 15,
-                show: tutorialController.addSuggestionCounter == 3,
-                direction: TooltipDirection.down,
-                onTap: () => tutorialController.addSuggestionCounter--,
-              )
+                child: Align(
+                  child: Text("Type of Suggestion:"),
+                  alignment: Alignment.topLeft,
+                )
             ),
             NormalizedPadding(
-              child: ToolTip(
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    labelText: "Description",
-                    hintText: "Describe your suggestion in more detail",
-                    labelStyle: new TextStyle(color: Theme.of(context).primaryColor),
+                child: ToolTip(
+                  child: DropdownButton<int>(
+                    value: suggestionController.type,
+                    isExpanded: true,
+                    items: dropdown,
+                    onChanged: (v) {
+                      suggestionController.type = (v as int);
+                      if (tutorialController.addSuggestionCounter == 99) {
+                        tutorialController.addSuggestionCounter = 2;
+                      }
+                    },
+                    onTap: () {
+                      if (tutorialController.addSuggestionCounter == 3) {
+                        tutorialController.addSuggestionCounter = 99;
+                      }
+                    },
                   ),
-                  inputFormatters: [LengthLimitingTextInputFormatter(500)],
-                  minLines: 1,
-                  maxLines: 10,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Please describe your project";
-                    }
-                    return null;
-                  },
-                  onEditingComplete: () {
-                    if(tutorialController.addSuggestionCounter == 2){
-                      tutorialController.addSuggestionCounter--;
-                    }
-                  },
-                  onChanged: (v) {
-                    suggestionController.desc = v;
-                  },
-                ),
-                text: "Explain your idea in more detail, so people can better understand what you're suggesting. [Click me]",
-                fontSize: 15,
-                show: tutorialController.addSuggestionCounter == 2,
-                direction: TooltipDirection.up,
-                onTap: () => tutorialController.addSuggestionCounter--,
-              )
+                  text: "First of all select a fitting category for your suggestion.",
+                  fontSize: 15,
+                  show: tutorialController.addSuggestionCounter == 3,
+                  direction: TooltipDirection.down,
+                  onTap: () => tutorialController.addSuggestionCounter--
+                )
             ),
             NormalizedPadding(
-             child: ToolTip(
-               child: TextFormField(
-                 decoration: InputDecoration(
-                     labelText: "Title",
-                     hintText: "A short title",
-                     labelStyle: new TextStyle(color: Theme.of(context).primaryColor)),
-                 inputFormatters: [LengthLimitingTextInputFormatter(50)],
-                 validator: (value) {
-                   if (value == null || value.isEmpty) {
-                     return "Please add a title";
-                   }
-                   return null;
-                   },
-                   onEditingComplete: () {
-                     if(tutorialController.addSuggestionCounter == 1){
-                       tutorialController.addSuggestionCounter--;
-                     }
-                   },
-                 onChanged: (v) {
-                   suggestionController.title = v;
-                 }
-                 ),
-               text: "[Optional] If you want you can give your suggestion a title. (This will help people to find your suggestion) If you're happy with the result you can click on 'Submit'.",
-               fontSize: 15,
-               show: tutorialController.addSuggestionCounter == 1,
-               direction: TooltipDirection.up,
-               onTap: () => tutorialController.addSuggestionCounter--,
-             )
+                child: ToolTip(
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      labelText: "Description",
+                      hintText: "Describe your suggestion in more detail",
+                      labelStyle: new TextStyle(color: Theme.of(context).primaryColor),
+                    ),
+                    inputFormatters: [LengthLimitingTextInputFormatter(500)],
+                    minLines: 1,
+                    maxLines: 10,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Please describe your project";
+                      }
+                      return null;
+                    },
+                    onEditingComplete: () {
+                      if (tutorialController.addSuggestionCounter == 2) {
+                        tutorialController.addSuggestionCounter--;
+                      }
+                    },
+                    onChanged: (v) {
+                      suggestionController.desc = v;
+                    },
+                  ),
+                  text: "Explain your idea in more detail, so people can better understand what you're suggesting. [Click me]",
+                  fontSize: 15,
+                  show: tutorialController.addSuggestionCounter == 2,
+                  direction: TooltipDirection.up,
+                  onTap: () => tutorialController.addSuggestionCounter--
+                )
+            ),
+            NormalizedPadding(
+                child: ToolTip(
+                  child: TextFormField(
+                      decoration: InputDecoration(
+                          labelText: "Title",
+                          hintText: "A short title",
+                          labelStyle: new TextStyle(color: Theme.of(context).primaryColor)),
+                      inputFormatters: [LengthLimitingTextInputFormatter(50)],
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please add a title";
+                        }
+                        return null;
+                      },
+                      onEditingComplete: () {
+                        if (tutorialController.addSuggestionCounter == 1) {
+                          tutorialController.addSuggestionCounter--;
+                        }
+                      },
+                      onChanged: (v) {
+                        suggestionController.title = v;
+                      }),
+                  text: "[Optional] If you want you can give your suggestion a title. (This will help people to find your suggestion) If you're happy with the result you can click on 'Submit'.",
+                  fontSize: 15,
+                  show: tutorialController.addSuggestionCounter == 1,
+                  direction: TooltipDirection.up,
+                  onTap: () => tutorialController.addSuggestionCounter--
+                )
             ),
             NormalizedPadding(
               child: ElevatedButton(
@@ -181,7 +184,7 @@ class AddSuggestionView extends StatelessWidget {
                         backgroundColor: Colors.red));
                   }
                   tutorialController.addSuggestionCounter = 0;
-                  },
+                },
                 child: const Text('Submit'),
               ),
             )

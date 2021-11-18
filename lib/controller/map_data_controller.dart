@@ -104,15 +104,14 @@ class MapDataController extends ChangeNotifier {
   void _updateSupported(int userID) {
     _supportedSuggestions.clear();
     DataProvider.dataProvider.getSupported(userID).then((value) => {
-      //TODO: check if is supported
-
+          //TODO: check if is supported
         });
   }
 
   void support(int userId, SuggestionModel suggestionModel) {
     DataProvider.dataProvider.postSupport(userId, suggestionModel.id as int);
     _supportedSuggestions.add(suggestionModel);
-   //_updateSupported(0); //TODO: GET USERID
+    //_updateSupported(0); //TODO: GET USERID
     notifyListeners();
   }
 
@@ -120,7 +119,7 @@ class MapDataController extends ChangeNotifier {
     return _supportedSuggestions.contains(suggestionModel);
   }
 
-  void stopSupporting(int userId, SuggestionModel suggestionModel){
+  void stopSupporting(int userId, SuggestionModel suggestionModel) {
     DataProvider.dataProvider.deleteSupport(userId, suggestionModel.id as int);
     _supportedSuggestions.remove(suggestionModel);
     notifyListeners();

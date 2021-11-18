@@ -43,7 +43,10 @@ class InfoSuggestionView extends StatelessWidget {
                 child: TabBarView(
               children: [overviewTab(context)] +
                   (showTab == true ? [chatTab(context)] : []),
-            ))));
+                )
+            )
+        )
+    );
   }
 
   Widget overviewTab(BuildContext context) {
@@ -87,11 +90,14 @@ class InfoSuggestionView extends StatelessWidget {
               Spacer(),
               Visibility(
                 child: ElevatedButton(
-                  onPressed: () { mapDataController.stopSupporting(0, suggestion!); },
+                  onPressed: () {
+                    mapDataController.stopSupporting(0, suggestion!);
+                  },
                   child: Text("Stop Subscribing"),
                   style: ButtonStyle(
-                  backgroundColor: MaterialStateColor.resolveWith((states) => Colors.red),
-                ),),
+                    backgroundColor: MaterialStateColor.resolveWith((states) => Colors.red),
+                  ),
+                ),
                 visible: mapDataController.doesSupport(0, suggestion!),
               ),
             ],
@@ -101,8 +107,8 @@ class InfoSuggestionView extends StatelessWidget {
           child: ListView(
             children: [
               Card(
-                  child:
-                      Padding(padding: EdgeInsets.all(20), child: Text(desc))),
+                  child: Padding(padding: EdgeInsets.all(20), child: Text(desc))
+              ),
               Center(
                 child: Visibility(
                   visible: !mapDataController.doesSupport(0, suggestion!),
@@ -121,7 +127,8 @@ class InfoSuggestionView extends StatelessWidget {
   }
 
   Widget chatTab(BuildContext context) {
-    ChatController chatController = Provider.of<ChatController>(context);
+    ChatController chatController =
+        Provider.of<ChatController>(context);
     ProfileController profileController =
         Provider.of<ProfileController>(context);
     MapDataController suggestionController =

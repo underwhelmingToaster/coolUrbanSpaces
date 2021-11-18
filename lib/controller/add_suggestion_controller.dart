@@ -11,7 +11,7 @@ class AddSuggestionController extends ChangeNotifier {
 
   bool submit() {
     if (desc.isNotEmpty) {
-      if(title.isEmpty){
+      if (title.isEmpty) {
         title = SuggestionType.intToString(type);
       }
       return true;

@@ -18,11 +18,13 @@ class BrowsingView extends StatelessWidget {
     SettingsController settingsController =
         Provider.of<SettingsController>(context);
 
-    TutorialController tutorialController = Provider.of<TutorialController>(context);
+    TutorialController tutorialController =
+        Provider.of<TutorialController>(context);
 
     List<SuggestionModel> suggestions = dataController.cachedSuggestions;
 
-    suggestions = dataController.getSortedSuggestions(settingsController.browsingSort);
+    suggestions =
+        dataController.getSortedSuggestions(settingsController.browsingSort);
 
     return SafeArea(
         child: Scaffold(
@@ -41,7 +43,7 @@ class BrowsingView extends StatelessWidget {
               IconButton(
                   onPressed: () {
                     print("NOT IMPLEMENTED");
-                  },
+                    },
                   icon: const Icon(Icons.search)),
             ],
           ),

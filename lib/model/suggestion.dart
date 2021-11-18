@@ -26,7 +26,7 @@ class SuggestionModel {
         'type': type,
         'lat': lat,
         'lon': lng,
-        'id' : id,
+        'id': id,
       };
 
   Icon getMarkerIcon() {

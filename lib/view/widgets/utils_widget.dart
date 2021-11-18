@@ -15,7 +15,6 @@ class NormalizedPadding extends StatelessWidget {
 }
 
 class ToolTip extends StatelessWidget {
-
   late Widget child;
   late String text;
   late Widget? content;
@@ -26,20 +25,37 @@ class ToolTip extends StatelessWidget {
 
   bool show;
 
-  ToolTip({required this.child, this.text = "", this.content, this.show = true, this.direction = TooltipDirection.up, this.offset = 0.0, this.fontSize = 20, this.onTap});
-  
+  ToolTip(
+      {
+        required this.child,
+        this.text = "",
+        this.content,
+        this.show = true,
+        this.direction = TooltipDirection.up,
+        this.offset = 0.0,
+        this.fontSize = 20,
+        this.onTap
+      });
+
   @override
   Widget build(BuildContext context) {
     return SimpleTooltip(
       tooltipTap: () {
-        if(onTap !=null){
+        if (onTap != null) {
           onTap!();
         }
       },
       child: child,
       borderColor: Theme.of(context).primaryColor,
       backgroundColor: Colors.white,
-      content: content ?? Text(text, style: TextStyle(fontSize: fontSize, color: Colors.black87, decoration: TextDecoration.none),),
+      content: content ??
+          Text(
+            text,
+            style: TextStyle(
+                fontSize: fontSize,
+                color: Colors.black87,
+                decoration: TextDecoration.none),
+          ),
       show: show,
       tooltipDirection: direction,
       arrowTipDistance: offset,

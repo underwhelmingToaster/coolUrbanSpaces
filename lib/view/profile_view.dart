@@ -110,7 +110,7 @@ class ProfileView extends StatelessWidget {
                               content: Text('Password incorrect or fields empty'),
                               backgroundColor: Colors.red));
                         }
-                      },
+                        },
                       child: Text("Login"),
                     ),
                   )
@@ -169,7 +169,7 @@ class ProfileView extends StatelessWidget {
                               autocorrect: false,
                               onChanged: (value) {
                                 profileController.newpassword = value;
-                                },
+                              },
                             ),
                           ),
                           Text("Repeat Password"),
@@ -243,7 +243,7 @@ class ProfileView extends StatelessWidget {
                               maxLength: 20,
                               onChanged: (value) {
                                 profileController.username = value;
-                                },
+                              },
                             )
                           ],
                         )
@@ -294,7 +294,7 @@ class ProfileView extends StatelessWidget {
                               autocorrect: false,
                               onChanged: (value) {
                                 profileController.repeatNewPassword = value;
-                                },
+                              },
                             ),
                           ),
                         ],

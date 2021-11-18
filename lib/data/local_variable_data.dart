@@ -68,19 +68,18 @@ class LocalDataProvider implements DataProvider {
     _supported.remove(suggestionId);
   }
 
-  void writeToConsole() async{
+  void writeToConsole() async {
     String json = jsonEncode(_localSuggestions);
     print(json);
   }
 
-  void loadData() async{
+  void loadData() async {
     String json = await rootBundle.loadString('assets/data/suggestions.json');
     List<dynamic> decodedJson = jsonDecode(json);
     print(decodedJson);
     print("a");
     decodedJson.forEach((value) {
-        _localSuggestions.add(SuggestionModel.fromJson(value));
+      _localSuggestions.add(SuggestionModel.fromJson(value));
     });
   }
-
 }
