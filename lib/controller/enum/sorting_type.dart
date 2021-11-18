@@ -1,3 +1,4 @@
+
 /// Stores the different ways the suggestions can be sorted.
 enum SortingTypes { NAME, ID, TYPE }
 

@@ -8,8 +8,8 @@ import 'package:provider/provider.dart';
 
 /// Provides a list that can hold [SuggestionModel]
 class SuggestionList extends StatelessWidget {
-  late List<SuggestionModel> suggestions;
-  Function? onTab;
+  late final List<SuggestionModel> suggestions;
+  final Function? onTab;
 
   SuggestionList({required this.suggestions, this.onTab});
 
