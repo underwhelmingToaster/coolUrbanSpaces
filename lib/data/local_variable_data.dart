@@ -4,6 +4,7 @@ import 'package:cool_urban_spaces/data/abstract_data.dart';
 import 'package:cool_urban_spaces/model/message.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
 
+/// This is a [DataProvider] implementation which should ONLY be used for TESTING!!
 class LocalDataProvider implements DataProvider {
   static final LocalDataProvider _requestData = LocalDataProvider._internal();
 

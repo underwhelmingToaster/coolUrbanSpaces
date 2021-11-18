@@ -12,6 +12,7 @@ import 'package:uuid/uuid.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
+/// Provides Information about the last selected Suggestion
 class InfoSuggestionView extends StatelessWidget {
   late MapDataController mapDataController;
   late SuggestionModel? suggestion;
@@ -46,6 +47,7 @@ class InfoSuggestionView extends StatelessWidget {
             ))));
   }
 
+  /// Provides the overviewTab
   Widget overviewTab(BuildContext context) {
     String title = "";
     String desc = "";

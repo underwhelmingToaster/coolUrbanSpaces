@@ -1,3 +1,4 @@
+/// User Model
 class UserModel {
   int? id;
   late String name;

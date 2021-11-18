@@ -15,8 +15,6 @@ class SupportView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MapDataController dataController = Provider.of<MapDataController>(context);
-    SettingsController settingsController =
-        Provider.of<SettingsController>(context);
 
     TutorialController tutorialController = Provider.of<TutorialController>(context);
 

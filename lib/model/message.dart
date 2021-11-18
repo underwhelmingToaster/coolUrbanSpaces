@@ -1,5 +1,7 @@
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 
+/// Message Model
 class MessageModel {
   late String uuid;
   late String authorName;
@@ -21,6 +23,7 @@ class MessageModel {
         'createdAt': createdAt,
       };
 
+  /// Converts [MessageModel] to a [TextMessage]
   types.TextMessage toMessage() {
     return types.TextMessage(
         id: this.uuid,
@@ -29,6 +32,7 @@ class MessageModel {
         createdAt: this.createdAt);
   }
 
+  /// Converts [TextMessage] to [MessageModel].
   MessageModel.fromMessage(types.TextMessage message) {
     this.uuid = message.id;
     this.authorName = message.author.id;

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_tooltip/simple_tooltip.dart';
 
+/// Provides a unified Padding to parameterize it.
 class NormalizedPadding extends StatelessWidget {
   late final Widget child;
   final double offset = 10;
@@ -14,17 +15,18 @@ class NormalizedPadding extends StatelessWidget {
   }
 }
 
+/// Provides a ToolTip Widget
 class ToolTip extends StatelessWidget {
 
-  late Widget child;
-  late String text;
-  late Widget? content;
-  late TooltipDirection direction;
-  late double offset;
-  late double fontSize;
-  late Function? onTap;
+  late final Widget child;
+  late final String text;
+  late final Widget? content;
+  late final TooltipDirection direction;
+  late final double offset;
+  late final double fontSize;
+  late final Function? onTap;
 
-  bool show;
+  final bool show;
 
   ToolTip({required this.child, this.text = "", this.content, this.show = true, this.direction = TooltipDirection.up, this.offset = 0.0, this.fontSize = 20, this.onTap});
   

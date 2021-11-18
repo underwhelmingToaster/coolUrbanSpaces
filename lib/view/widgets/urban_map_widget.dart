@@ -5,19 +5,20 @@ import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:latlong2/latlong.dart';
 
+/// Provides a MapWidget
 class UrbanMapView extends StatelessWidget {
-  late bool isInteractable;
-  late LatLng startingLocation;
-  late double startZoom;
+  late final bool isInteractable;
+  late final LatLng startingLocation;
+  late final double startZoom;
 
-  late List<Marker> displayedMarkers;
-  late List<Widget>? nonRotatedChildren;
+  late final List<Marker> displayedMarkers;
+  late final List<Widget>? nonRotatedChildren;
 
-  late Function? onLongPress;
-  late Function? onTab;
-  late Function? onMarkerTab;
+  late final Function? onLongPress;
+  late final Function? onTab;
+  late final Function? onMarkerTab;
 
-  MapController mc = new MapController();
+  final MapController mc = new MapController();
 
   UrbanMapView({
     required this.displayedMarkers,
