@@ -82,7 +82,10 @@ class AddSuggestionView extends StatelessWidget {
                       tutorialController.addSuggestionCounter = 2;
                     }
                   },
-                  onTap: () { tutorialController.addSuggestionCounter = 99; },
+                  onTap: () { if(tutorialController.addSuggestionCounter == 3){
+                    tutorialController.addSuggestionCounter = 99;
+                  }
+                  },
                 ),
                 text: "First of all select a fitting category for your suggestion.",
                 fontSize: 15,

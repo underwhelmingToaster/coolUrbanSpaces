@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cool_urban_spaces/data/abstract_data.dart';
 import 'package:cool_urban_spaces/model/message.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
+import 'package:flutter/services.dart';
 
 class LocalDataProvider implements DataProvider {
   static final LocalDataProvider _requestData = LocalDataProvider._internal();
@@ -71,4 +72,15 @@ class LocalDataProvider implements DataProvider {
     String json = jsonEncode(_localSuggestions);
     print(json);
   }
+
+  void loadData() async{
+    String json = await rootBundle.loadString('assets/data/suggestions.json');
+    List<dynamic> decodedJson = jsonDecode(json);
+    print(decodedJson);
+    print("a");
+    decodedJson.forEach((value) {
+        _localSuggestions.add(SuggestionModel.fromJson(value));
+    });
+  }
+
 }

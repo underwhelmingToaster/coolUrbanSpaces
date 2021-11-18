@@ -46,12 +46,12 @@ class UrbanMapView extends StatelessWidget {
           LocationMarkerPlugin(),
           MarkerClusterPlugin(),
         ],
-        onTap: (point) {
+        onTap: (a, point) {
           if (onTab != null) {
             onTab!(point.longitude, point.latitude, context);
           }
         },
-        onLongPress: (point) {
+        onLongPress: (a, point) {
           if (onLongPress != null) {
             onLongPress!(point.longitude, point.latitude, context);
           }

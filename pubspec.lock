@@ -138,7 +138,7 @@ packages:
       name: flutter_compass
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.1"
+    version: "0.7.0"
   flutter_link_previewer:
     dependency: transitive
     description:
@@ -159,14 +159,14 @@ packages:
       name: flutter_map
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.1"
+    version: "0.14.0"
   flutter_map_location_marker:
     dependency: "direct main"
     description:
       name: flutter_map_location_marker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0-nullsafety.0"
+    version: "1.0.0"
   flutter_map_marker_cluster:
     dependency: "direct main"
     description:
@@ -204,14 +204,14 @@ packages:
       name: geolocator
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.6.1"
+    version: "7.7.1"
   geolocator_android:
     dependency: transitive
     description:
       name: geolocator_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "2.1.0"
   geolocator_apple:
     dependency: transitive
     description:
@@ -281,7 +281,7 @@ packages:
       name: latlong2
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.0"
+    version: "0.8.1"
   linkify:
     dependency: transitive
     description:

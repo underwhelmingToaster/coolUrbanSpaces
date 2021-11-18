@@ -24,6 +24,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -65,6 +66,9 @@ class StatefulMapFragment extends StatefulWidget {
 }
 
 class _MapFragment extends State<StatefulMapFragment> {
+
+  bool _inital = true;
+
   @override
   Widget build(BuildContext context) {
     MapDataController mapDataController =
@@ -73,6 +77,12 @@ class _MapFragment extends State<StatefulMapFragment> {
         Provider.of<AddSuggestionController>(context);
     ProfileController profileController = Provider.of<ProfileController>(context);
     TutorialController tutorialController = Provider.of<TutorialController>(context);
+
+    if(_inital){
+      tutorialController.check();
+      _inital = false;
+    }
+
 
     //tutorial
 
@@ -205,7 +215,10 @@ class _MapFragment extends State<StatefulMapFragment> {
                 child: Center(child: ToolTip(
                     child: ElevatedButton(
                       child: Text("Get Started"),
-                      onPressed: () { tutorialController.showCreateNotice = false; },
+                      onPressed: () {
+                        tutorialController.showCreateNotice = false;
+                        mapDataController.updateMarkers();
+                      },
                       style: ButtonStyle(backgroundColor: MaterialStateColor.resolveWith((states) => Theme.of(context).primaryColor))
                     ),
                     show: tutorialController.showCreateNotice,

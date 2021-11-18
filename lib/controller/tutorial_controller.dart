@@ -1,3 +1,6 @@
+import 'package:cool_urban_spaces/controller/map_data_controller.dart';
+import 'package:cool_urban_spaces/data/abstract_data.dart';
+import 'package:cool_urban_spaces/data/local_variable_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -7,9 +10,10 @@ class TutorialController extends ChangeNotifier{
   String _key = "done_tutorial";
   bool initialCheck = true;
 
-  TutorialController(){
+  void check() async{
     if(initialCheck){
       checkStorage();
+      (DataProvider.dataProvider as LocalDataProvider).loadData();
       initialCheck = false;
     }
   }
