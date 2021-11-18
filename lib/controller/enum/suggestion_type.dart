@@ -1,5 +1,9 @@
+import 'package:cool_urban_spaces/controller/enum/sorting_type.dart';
+
+/// This enum stores all the different suggestion types
 enum SuggestionTypes { GENERAL, SHADING, SEATING, GARDENING, SOCIAL, WATER, PLANTS  }
 
+/// Utility class for [SuggestionTypes]
 class SuggestionType {
   static SuggestionTypes stringToEnum(String input) {
     switch (input) {
@@ -29,6 +33,7 @@ class SuggestionType {
     }
   }
 
+  /// Converts [SuggestionTypes] to [String]
   static String enumToString(SuggestionTypes type) {
     switch (type) {
       case SuggestionTypes.GENERAL:
@@ -57,14 +62,17 @@ class SuggestionType {
     }
   }
 
+  /// Returns the relative [SuggestionTypes] to its position in [Enum.values]
   static SuggestionTypes intToEnum(int i){
     return SuggestionTypes.values[i];
   }
 
+  /// Converts a [int] to [SuggestionTypes] and returns it as a [string]
   static String intToString(int i){
     return enumToString(intToEnum(i));
   }
 
+  /// Returns [SuggestionTypes] as a string [List]
   static List<String> sortingTypesStringList() {
     List<String> list = [];
     SuggestionTypes.values.forEach((element) {

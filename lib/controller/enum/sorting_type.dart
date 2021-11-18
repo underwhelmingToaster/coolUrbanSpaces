@@ -1,6 +1,9 @@
+/// Stores the different ways the suggestions can be sorted.
 enum SortingTypes { NAME, ID, TYPE }
 
+/// Utility Class that provides utility methods for the [SortingTypes] Enum.
 class SortingType {
+  /// Converts a string to [SortingTypes] enum.
   static SortingTypes stringToEnum(String input) {
     switch (input) {
       case "Name":
@@ -17,6 +20,8 @@ class SortingType {
     }
   }
 
+  // TODO: Is there a better way to achieve this? Maybe a static list?
+  /// Converts a [SortingTypes] enum to a string
   static String enumToString(SortingTypes type) {
     switch (type) {
       case SortingTypes.TYPE:
@@ -30,6 +35,7 @@ class SortingType {
     }
   }
 
+  /// Returns [SortingTypes] as a string [List]
   static List<String> sortingTypesStringList() {
     List<String> list = [];
     SortingTypes.values.forEach((element) {
