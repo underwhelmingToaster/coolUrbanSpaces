@@ -5,9 +5,13 @@ class TutorialController extends ChangeNotifier{
 
   bool doneTutorial = false;
   String _key = "done_tutorial";
+  bool initialCheck = true;
 
   TutorialController(){
-    checkStorage();
+    if(initialCheck){
+      checkStorage();
+      initialCheck = false;
+    }
   }
 
   bool _showCreateNotice = true;
