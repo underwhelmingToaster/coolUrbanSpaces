@@ -11,6 +11,7 @@ import 'package:simple_tooltip/simple_tooltip.dart';
 
 import 'info_suggestion_view.dart';
 
+/// Browse View List all currently cached Suggestions
 class BrowsingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

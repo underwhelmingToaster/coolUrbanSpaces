@@ -6,6 +6,7 @@ import 'package:cool_urban_spaces/model/message.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
 import 'package:http/http.dart' as http;
 
+/// This is a [DataProvider] implementation which should be used for productional use
 class ApiRequestData implements DataProvider {
   static final ApiRequestData _requestData = ApiRequestData._internal();
 

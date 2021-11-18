@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:simple_tooltip/simple_tooltip.dart';
 
+/// Is used to add new Suggestions
 class AddSuggestionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

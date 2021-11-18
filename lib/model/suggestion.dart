@@ -1,6 +1,8 @@
+import 'package:cool_urban_spaces/view/widgets/urban_map_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/// Suggestion Model
 class SuggestionModel {
   int? id;
   late String title;
@@ -29,6 +31,7 @@ class SuggestionModel {
         'id' : id,
       };
 
+  /// returns the icon which should be displayed on [UrbanMapView]
   Icon getMarkerIcon() {
     //FIXME: is it better if the Icon itself gets stored in model?
     switch (this.type) {
