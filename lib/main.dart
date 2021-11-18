@@ -168,11 +168,6 @@ class _MapFragment extends State<StatefulMapFragment> {
                       MaterialPageRoute(builder: (context) => SupportView()));
                 },
               ),
-              ListTile(
-                title: const Text('Profile'),
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileView())),
-              ),
             ],
           ),
         ),

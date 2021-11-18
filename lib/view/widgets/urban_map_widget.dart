@@ -22,7 +22,7 @@ class UrbanMapView extends StatelessWidget {
   UrbanMapView({
     required this.displayedMarkers,
     this.isInteractable = true,
-    this.startZoom = 13.0,
+    this.startZoom = 15.0,
     LatLng? startLocation,
     this.onLongPress,
     this.onTab,
@@ -30,10 +30,11 @@ class UrbanMapView extends StatelessWidget {
     this.nonRotatedChildren,
   }) {
     if (startLocation == null) {
-      startLocation = new LatLng(47.0, 8.0);
+      startLocation = new LatLng(47.2246, 8.8173);
     }
     startingLocation = startLocation;
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +42,8 @@ class UrbanMapView extends StatelessWidget {
       options: new MapOptions(
         center: startingLocation,
         zoom: startZoom,
+        maxZoom: 19,
+        minZoom: 8,
         controller: mc,
         plugins: [
           LocationMarkerPlugin(),
@@ -59,7 +62,7 @@ class UrbanMapView extends StatelessWidget {
       ),
       layers: [
         new TileLayerOptions(
-          urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          urlTemplate: "http://tile.osm.ch/osm-swiss-style/{z}/{x}/{y}.png",
           subdomains: ['a', 'b', 'c'],
         ),
         LocationMarkerLayerOptions(),
