@@ -1,6 +1,8 @@
 import 'package:crypt/crypt.dart';
 import 'package:flutter/cupertino.dart';
+//TODO: REWORK THE ENTIRE PROFILE SYSTEM... ITS NOT WORTH THE STRUGGLE :IIIIIII
 
+/// Is the Provider Class which provides User information
 class ProfileController extends ChangeNotifier {
   final String salt = "I'm very salty";
 

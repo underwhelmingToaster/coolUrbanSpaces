@@ -1,6 +1,8 @@
+import 'package:cool_urban_spaces/view/widgets/utils_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Is the Provider Class which is responsible to handel all the "show" [bool] which are needed in [ToolTip]
 class TutorialController extends ChangeNotifier{
 
   bool doneTutorial = false;
@@ -63,6 +65,7 @@ class TutorialController extends ChangeNotifier{
     notifyListeners();
   }
 
+  /// resets alls values in this provider to its initial state.
   void resetState(){
     _showBackBrowseMessage = true;
     _showCreateNotice = true;
@@ -71,6 +74,7 @@ class TutorialController extends ChangeNotifier{
     notifyListeners();
   }
 
+  /// deactivates all the tutorials
   void deactivateAll(){
     _showBackSupportMessage = false;
     _showCreateNotice = false;
@@ -80,6 +84,7 @@ class TutorialController extends ChangeNotifier{
     notifyListeners();
   }
 
+  /// Checks the persistent storage if the tutorial was ever completed
   void checkStorage() async{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     doneTutorial = prefs.getBool('done_tutorial') ?? false;
@@ -90,6 +95,7 @@ class TutorialController extends ChangeNotifier{
     }
   }
 
+  /// Sets the "was the tutorial completed" [bool] in the persistent memory to a [done]
   void writeTutorial(bool done) async{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool(_key, done);

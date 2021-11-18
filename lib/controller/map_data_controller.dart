@@ -8,7 +8,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:latlong2/latlong.dart';
 
-/// /// Is the Provider Class which is responsible for the date used in [UrbanMapView]
+/// Is the Provider Class which is responsible for the data used in [UrbanMapView]
 class MapDataController extends ChangeNotifier {
   List<Marker> _availableMarkers = [];
   List<SuggestionModel> _cachedSuggestions = [];
@@ -83,13 +83,14 @@ class MapDataController extends ChangeNotifier {
     //_updateSupported(0); //TODO: <-- get userID somehow? User needs a big refactor.
   }
 
-  ///
+  /// writes the [SuggestionModel] with the id [id] into [_lastSelect]
   void setSelectedMarkerToId(int id) {
     DataProvider.dataProvider.getSuggestion(id).then((value) => {
           _lastSelect = value,
         });
   }
 
+  /// Converts [SuggestionModel] into [Marker].
   Marker suggestionToMarkers(SuggestionModel suggestion) {
     Widget icon = SvgPicture.asset("icons/shade.svg");
     icon = suggestion.getMarkerIcon();
@@ -102,6 +103,7 @@ class MapDataController extends ChangeNotifier {
         key: new Key(suggestion.id.toString()));
   }
 
+  /// Adds a new suggestion to the local cache and writes it to db via [DataProvider]
   void addSuggestion(SuggestionModel suggestion) {
     _availableMarkers.add(suggestionToMarkers(suggestion));
     DataProvider.dataProvider.postSuggestion(suggestion);
@@ -116,6 +118,7 @@ class MapDataController extends ChangeNotifier {
         });
   }
 
+  /// Adds [suggestionModel] to the list of supported [SuggestionModel]s
   void support(int userId, SuggestionModel suggestionModel) {
     DataProvider.dataProvider.postSupport(userId, suggestionModel.id as int);
     _supportedSuggestions.add(suggestionModel);
@@ -123,10 +126,13 @@ class MapDataController extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Returns true when [suggestionModel] is supported by the user with the id [userId]
   bool doesSupport(int userId, SuggestionModel suggestionModel) {
     return _supportedSuggestions.contains(suggestionModel);
   }
 
+
+  /// Removes [supportedSuggestions] of the list of supported [SuggestionModel]s
   void stopSupporting(int userId, SuggestionModel suggestionModel){
     DataProvider.dataProvider.deleteSupport(userId, suggestionModel.id as int);
     _supportedSuggestions.remove(suggestionModel);
