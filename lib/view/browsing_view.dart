@@ -17,8 +17,7 @@ class BrowsingView extends StatelessWidget {
 
     List<SuggestionModel> suggestions = dataController.cachedSuggestions;
 
-    suggestions =
-        dataController.getSortedSuggestions(settingsController.browsingSort);
+    suggestions = dataController.getSortedSuggestions(settingsController.browsingSort);
 
     return SafeArea(
         child: Scaffold(

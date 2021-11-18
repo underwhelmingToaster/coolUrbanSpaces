@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cool_urban_spaces/data/abstract_data.dart';
 import 'package:cool_urban_spaces/model/message.dart';
 import 'package:cool_urban_spaces/model/suggestion.dart';
@@ -26,6 +28,7 @@ class LocalDataProvider implements DataProvider {
       suggestion.id = _localSuggestions.length;
     }
     _localSuggestions.add(suggestion);
+    writeToConsole();
   }
 
   @override
@@ -62,5 +65,10 @@ class LocalDataProvider implements DataProvider {
   @override
   Future<void> deleteSupport(int userId, int suggestionId) async {
     _supported.remove(suggestionId);
+  }
+
+  void writeToConsole() async{
+    String json = jsonEncode(_localSuggestions);
+    print(json);
   }
 }
